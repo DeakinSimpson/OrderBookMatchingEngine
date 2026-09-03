@@ -60,18 +60,24 @@ public:
       , bids_{}
   {  }
 
-  void AddOrder() 
+  void AddOrder(Order order) 
   {
-    // TODO: implement add order
+    if (order.GetSide() == Side::Ask) {
+      asks_.insert(std::pair(order.GetPrice(), order));
+    } else {
+      bids_.insert(std::pair(order.GetPrice(), order));
+    }
   }
 
 private:
-  std::map<Order, Price> asks_;
-  std::map<Order, Price> bids_;
+  std::map<Price, Order> asks_;
+  std::map<Price, Order> bids_;
 };
 
 int main () {
   OrderBook orderBook {};
+  Order order { 0, Side::Ask, 10, 5, OrderType::LimitOrder };
+  orderBook.AddOrder(order);
 
   return 0;
 }
