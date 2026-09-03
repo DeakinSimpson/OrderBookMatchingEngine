@@ -40,7 +40,13 @@ public:
   OrderType GetOrderType() { return orderType_; }
   
   // TODO: add check for overfill
-  void Fil(Quantity quantity) { quantity_ -= quantity; }
+  void Fill(Quantity quantity) 
+  { 
+    if (quantity > quantity_) {
+      std::cerr << "Cant Fill Order for More than its Quantity" << std::endl;
+    }
+    quantity_ -= quantity; 
+  }
 
 private:
   OrderId id_;
@@ -59,7 +65,7 @@ public:
       : asks_{}
       , bids_{}
   {  }
-
+  
   void AddOrder(Order order) 
   {
     if (order.GetSide() == Side::Ask) {
@@ -68,7 +74,9 @@ public:
       bids_.insert(std::pair(order.GetPrice(), order));
     }
   }
-
+  
+  // checks if a order was made on a side with a price wether it would match
+  // within the current orderbook
   bool CanMatch(Side side, Price price) {
     if (side == Side::Bid) {
       if (asks_.empty()) { return false; }  // cant match stock if there is none
@@ -86,6 +94,8 @@ public:
   }
 
 private:
+  // TODO: experiment with different data structures and convert Order to
+  // pointers
   std::map<Price, Order, std::greater<Price>> asks_;  // highest ask at top
   std::map<Price, Order, std::less<Price>> bids_;     // lowest bid at top
 };
