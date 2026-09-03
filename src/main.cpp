@@ -69,15 +69,32 @@ public:
     }
   }
 
+  bool CanMatch(Side side, Price price) {
+    if (side == Side::Bid) {
+      if (asks_.empty()) { return false; }  // cant match stock if there is none
+      
+      const auto& level { asks_.begin() };
+      // return if the price they are bidding is less then the lowest ask
+      return price >= level->first;
+    } else {
+      // is there any bids?
+      if (bids_.empty()) { return false;}
+
+      const auto& level { bids_.begin() };
+      return price <= level->first;
+    }
+  }
+
 private:
-  std::map<Price, Order> asks_;
-  std::map<Price, Order> bids_;
+  std::map<Price, Order, std::greater<Price>> asks_;  // highest ask at top
+  std::map<Price, Order, std::less<Price>> bids_;     // lowest bid at top
 };
 
 int main () {
   OrderBook orderBook {};
   Order order { 0, Side::Ask, 10, 5, OrderType::LimitOrder };
   orderBook.AddOrder(order);
+  std::cout << orderBook.CanMatch(Side::Bid, 15) << std::endl;
 
   return 0;
 }
