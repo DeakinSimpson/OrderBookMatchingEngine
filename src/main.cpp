@@ -1,6 +1,5 @@
-#include <cfloat>
 #include <iostream>
-#include <sys/types.h>
+#include <map>
 
 enum class OrderType
 {
@@ -39,6 +38,9 @@ public:
   Price GetPrice() { return price_; }
   Quantity GetQuantity() { return quantity_; }
   OrderType GetOrderType() { return orderType_; }
+  
+  // TODO: add check for overfill
+  void Fil(Quantity quantity) { quantity_ -= quantity; }
 
 private:
   OrderId id_;
@@ -48,8 +50,28 @@ private:
   OrderType orderType_;
 };
 
+// orderbook class that holds the asks and bids, also performs the order
+// matching
+class OrderBook
+{
+public:
+  OrderBook() 
+      : asks_{}
+      , bids_{}
+  {  }
+
+  void AddOrder() 
+  {
+    // TODO: implement add order
+  }
+
+private:
+  std::map<Order, Price> asks_;
+  std::map<Order, Price> bids_;
+};
+
 int main () {
-  std::cout << "Hello Test!" << std::endl;
+  OrderBook orderBook {};
 
   return 0;
 }
