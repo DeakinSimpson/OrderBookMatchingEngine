@@ -100,7 +100,7 @@ public:
       while (askPriceLevel->second.size() && bidPriceLevel->second.size()) {
         // FIFO, get fist value of vector
         auto& bid { bidPriceLevel->second.front() };
-        auto& ask { bidPriceLevel->second.front() };
+        auto& ask { askPriceLevel->second.front() };
 
         // get the min quantity, cant fill a quantity larger then the min
         Quantity quantity { std::min(bid.GetQuantity(), ask.GetQuantity())};
@@ -157,8 +157,10 @@ private:
 
 int main () {
   OrderBook orderBook {};
-  Order order { 0, Side::Ask, 10, 5, OrderType::LimitOrder };
-  orderBook.AddOrder(order);
-
+  Order order1 { 0, Side::Ask, 10, 5, OrderType::LimitOrder };
+  Order order2 { 0, Side::Bid, 9, 7, OrderType::LimitOrder };
+  orderBook.AddOrder(order1);
+  orderBook.AddOrder(order2);
+  orderBook.MatchOrders();
   return 0;
 }
