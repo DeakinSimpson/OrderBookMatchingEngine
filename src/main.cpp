@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <vector>
 
 enum class OrderType
 {
@@ -56,6 +57,8 @@ private:
   OrderType orderType_;
 };
 
+using Orders = std::vector<Order>;
+
 // orderbook class that holds the asks and bids, also performs the order
 // matching
 class OrderBook
@@ -69,12 +72,23 @@ public:
   void AddOrder(Order order) 
   {
     if (order.GetSide() == Side::Ask) {
-      asks_.insert(std::pair(order.GetPrice(), order));
+      // get the orders for that price
+      auto& orders { asks_[order.GetPrice()] };
+      orders.push_back(order);
+
     } else {
-      bids_.insert(std::pair(order.GetPrice(), order));
+      auto& orders { bids_[order.GetPrice()] };
+      orders.push_back(order);
     }
   }
   
+
+private:
+  // TODO: experiment with different data structures and convert Order to
+  // pointers
+  std::map<Price, Orders, std::greater<Price>> asks_;  // highest ask at top
+  std::map<Price, Orders, std::less<Price>> bids_;     // lowest bid at top
+                                                       
   // checks if a order was made on a side with a price wether it would match
   // within the current orderbook
   bool CanMatch(Side side, Price price) {
@@ -93,18 +107,12 @@ public:
     }
   }
 
-private:
-  // TODO: experiment with different data structures and convert Order to
-  // pointers
-  std::map<Price, Order, std::greater<Price>> asks_;  // highest ask at top
-  std::map<Price, Order, std::less<Price>> bids_;     // lowest bid at top
 };
 
 int main () {
   OrderBook orderBook {};
   Order order { 0, Side::Ask, 10, 5, OrderType::LimitOrder };
   orderBook.AddOrder(order);
-  std::cout << orderBook.CanMatch(Side::Bid, 15) << std::endl;
 
   return 0;
 }
