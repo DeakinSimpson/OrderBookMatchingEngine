@@ -81,7 +81,54 @@ public:
       orders.push_back(order);
     }
   }
-  
+
+  void MatchOrders() {
+  // loop through each bid and ask Price
+    while (true) {
+      // if there are no bids or asks then there is nothing to match
+      if (bids_.empty() || asks_.empty())
+        { break; }
+
+      const auto& askPriceLevel { asks_.begin() };
+      const auto& bidPriceLevel { bids_.begin() };
+
+      // if the best ask is higher then the best bid no orders can match
+      if (bidPriceLevel->first > askPriceLevel->first)
+        { break; }
+
+      // loop through each bid and ask and try to match at this level
+      while (askPriceLevel->second.size() && bidPriceLevel->second.size()) {
+        // FIFO, get fist value of vector
+        auto& bid { bidPriceLevel->second.front() };
+        auto& ask { bidPriceLevel->second.front() };
+
+        // get the min quantity, cant fill a quantity larger then the min
+        Quantity quantity { std::min(bid.GetQuantity(), ask.GetQuantity())};
+
+        bid.Fill(quantity);
+        ask.Fill(quantity);
+        
+        // if there is no more quantity remove it from the vector
+        if (bid.GetQuantity() == 0) {
+          bidPriceLevel->second.erase(bidPriceLevel->second.begin());
+        }
+
+        if (ask.GetQuantity() == 0) {
+          askPriceLevel->second.erase(askPriceLevel->second.begin());
+        }
+
+        // check if the entire price level is empty now
+        if (bidPriceLevel->second.empty()) {
+          bids_.erase(bidPriceLevel->first);
+        }
+
+        if (askPriceLevel->second.empty()) {
+          asks_.erase(askPriceLevel->first);
+        }
+      }
+    }
+  }
+
 
 private:
   // TODO: experiment with different data structures and convert Order to
@@ -106,7 +153,6 @@ private:
       return price <= level->first;
     }
   }
-
 };
 
 int main () {
