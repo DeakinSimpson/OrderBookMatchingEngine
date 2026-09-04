@@ -9,30 +9,36 @@ enum class Side
 {
   Bid,
   Ask,
+  None,
+};
+
+enum class TradeType
+{
+  Add,
+  Cancel,
+  Modify,
+  None,
 };
 
 using OrderId = uint64_t;
 using Price = int64_t;    
 using Quantity = uint32_t;  // cant have negative stock
-using Time = uint64_t;                            
 
 class Order
 {
 public:
   Order(OrderId id, Side side, Price price,
-    Quantity quantity, Time time)
+    Quantity quantity)
       : id_{ id }
       , side_{ side }
       , price_{ price }
       , quantity_{ quantity }
-      , time_{ time }
   {  };
 
   OrderId GetId() { return id_; }
   Side GetSide() { return side_; }
   Price GetPrice() { return price_; }
   Quantity GetQuantity() { return quantity_; }
-  Time GetTime() { return time_; }
   
   // TODO: add check for overfill
   void Fill(Quantity quantity) 
@@ -48,7 +54,6 @@ private:
   Side side_;
   Price price_;
   Quantity quantity_;
-  Time time_;
 };
 
 using Orders = std::vector<Order>;
@@ -147,5 +152,14 @@ private:
       return price <= level->first;
     }
   }
+};
+
+struct TradeInfo
+{
+  OrderId orderID;
+  Side side;
+  Price price;
+  Quantity quantity;
+  TradeType tradeType;
 };
 

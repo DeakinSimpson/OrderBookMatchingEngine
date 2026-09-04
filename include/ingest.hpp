@@ -22,7 +22,7 @@ public:
 
   bool IsEOF() { return fs.eof(); }
 
-  Order GetOrder() {
+  TradeInfo GetOrder() {
     // get the next line
     std::string line;
     std::getline(fs, line);
@@ -31,14 +31,14 @@ public:
     std::stringstream lineStream(line);
     std::string cell;
     
-    std::getline(lineStream, cell, ',');
-    uint64_t ts_recv { std::stoull(cell) };
+    std::getline(lineStream, cell, ','); // skip ts_event
+    // uint64_t ts_recv { std::stoull(cell) };
     std::getline(lineStream, cell, ','); // skip ts_event
     std::getline(lineStream, cell, ','); // skip rtype
     std::getline(lineStream, cell, ','); // skip publisher_id                           
     std::getline(lineStream, cell, ','); // skip instument_id
     std::getline(lineStream, cell, ','); 
-    // char action { cell[0] };
+    char action { cell[0] };
     std::getline(lineStream, cell, ',');
     char side { cell[0] };
     std::getline(lineStream, cell, ',');
@@ -52,15 +52,20 @@ public:
     std::getline(lineStream, cell, ','); // skip ts_in_delta
     std::getline(lineStream, cell, ','); // skip sequence
     
-    Side side_ {};
+    Side side_ = [side]() {
+      if (side == 'A') { return Side::Ask; }
+      if (side == 'B') { return Side::Bid; }
+      return Side::None;
+    }(); // adding () immediatly executes the lambda
 
-    if (side == 'A') {
-      side_ = Side::Ask;
-    } else if (side == 'B') {
-      side_ = Side::Bid;
-    }
-
-    return { order_id, side_, price, size, ts_recv};
+    TradeType tradeType_ = [action]() {
+      if (action == 'A') return TradeType::Add;
+      if (action == 'C') return TradeType::Cancel;
+      if (action == 'M') return TradeType::Modify;
+      return TradeType::None;
+    }();
+    
+    return { order_id, side_, price, size, tradeType_ };
   } 
 
 private:
