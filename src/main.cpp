@@ -20,7 +20,7 @@ enum class Side
 };
 
 using OrderId = int;
-using Price = int;              
+using Price = float;              
 using Quantity = unsigned int;  // cant have negative stock
 
 class Order
@@ -164,7 +164,7 @@ int main () {
 
   for (OrderId id = 0; id < 100; ++id) {
     Side side = (id % 2 == 0) ? Side::Ask : Side::Bid;
-    Price price = 10 + (id % 5);           // spreads prices 10-14
+    Price price = (Price) 10 + static_cast<Price>(id % 5);           // spreads prices 10-14
     Quantity quantity = static_cast<Quantity>((id % 10) + 1); // quantities 1-10
     orders.emplace_back(id, side, price, quantity, OrderType::LimitOrder);
   }
