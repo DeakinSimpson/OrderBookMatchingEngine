@@ -1,18 +1,9 @@
 #pragma once
 
+#include <cstdint>
 #include <iostream>
 #include <map>
 #include <vector>
-
-enum class OrderType
-{
-  MarketOrder,
-  LimitOrder,
-  // TODO: Implement Later
-  StopMarketOrder,
-  StopLimitOrder,
-  TrailingStopOrder,
-};
 
 enum class Side
 {
@@ -20,27 +11,28 @@ enum class Side
   Ask,
 };
 
-using OrderId = int;
-using Price = float;              
-using Quantity = unsigned int;  // cant have negative stock
+using OrderId = uint64_t;
+using Price = int64_t;    
+using Quantity = uint32_t;  // cant have negative stock
+using Time = uint64_t;                            
 
 class Order
 {
 public:
   Order(OrderId id, Side side, Price price,
-    Quantity quantity, OrderType orderType)
+    Quantity quantity, Time time)
       : id_{ id }
       , side_{ side }
       , price_{ price }
       , quantity_{ quantity }
-      , orderType_{ orderType }
+      , time_{ time }
   {  };
 
   OrderId GetId() { return id_; }
   Side GetSide() { return side_; }
   Price GetPrice() { return price_; }
   Quantity GetQuantity() { return quantity_; }
-  OrderType GetOrderType() { return orderType_; }
+  Time GetTime() { return time_; }
   
   // TODO: add check for overfill
   void Fill(Quantity quantity) 
@@ -56,7 +48,7 @@ private:
   Side side_;
   Price price_;
   Quantity quantity_;
-  OrderType orderType_;
+  Time time_;
 };
 
 using Orders = std::vector<Order>;

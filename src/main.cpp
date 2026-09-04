@@ -12,7 +12,7 @@ int main () {
     Side side = (id % 2 == 0) ? Side::Ask : Side::Bid;
     Price price = (Price) 10 + static_cast<Price>(id % 5);           // spreads prices 10-14
     Quantity quantity = static_cast<Quantity>((id % 10) + 1); // quantities 1-10
-    orders.emplace_back(id, side, price, quantity, OrderType::LimitOrder);
+    orders.emplace_back(id, side, price, quantity, 0);
   }
   
   auto addStart { std::chrono::high_resolution_clock::now() };
