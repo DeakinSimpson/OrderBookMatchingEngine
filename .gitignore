@@ -70,3 +70,7 @@ Testing/
 
 # clang cofig
 .clangd
+
+# test data
+data/
+
