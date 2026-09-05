@@ -6,6 +6,7 @@
 
 ## Raw Benchmark Data
 ### v0.1.0
+```
 Run on (12 X 4641.18 MHz CPU s)
 CPU Caches:
 L1 Data 32 KiB (x6)
@@ -22,3 +23,4 @@ BM_MATCHORDERS/1000         61955 ns        61945 ns        11266
 BM_MATCHORDERS/10000       765959 ns       765924 ns          876
 BM_MATCHORDERS/100000    10058590 ns     10057819 ns           68
 BM_MATCHORDERS/1000000  133998258 ns    133988507 ns            5
+```
