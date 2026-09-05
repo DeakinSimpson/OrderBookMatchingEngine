@@ -5,15 +5,13 @@
 #include <map>
 #include <vector>
 
-enum class Side
-{
+enum class Side {
   Bid,
   Ask,
   None,
 };
 
-enum class TradeType
-{
+enum class TradeType {
   Add,
   Cancel,
   Modify,
