@@ -74,3 +74,7 @@ Testing/
 # test data
 data/
 
+# cmake folders
+cmake-build-debug
+cmake-build-release
+

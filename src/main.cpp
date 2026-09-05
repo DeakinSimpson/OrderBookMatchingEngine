@@ -5,9 +5,12 @@
 int main () {
   FileIterator fi { "data/ingest/xnas-itch-20260831.mbo.csv" };
 
-  TradeInfo tradeInfoTest {fi.GetOrder()};
+  OrderBook orderBook {};
 
-  std::cout << tradeInfoTest.orderID << std::endl;
+  while (!fi.IsEOF()) {
+    Trade trade {fi.GetTradeInfo()};
+    trade.MakeTrade(orderBook);
+  }
 
   return 0;
 }

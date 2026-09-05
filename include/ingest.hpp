@@ -22,7 +22,7 @@ public:
 
   bool IsEOF() { return fs.eof(); }
 
-  TradeInfo GetOrder() {
+  TradeInfo GetTradeInfo() {
     // get the next line
     std::string line;
     std::getline(fs, line);
