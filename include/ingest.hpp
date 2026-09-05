@@ -25,7 +25,9 @@ public:
   TradeInfo GetTradeInfo() {
     // get the next line
     std::string line;
-    std::getline(fs, line);
+    if (!std::getline(fs, line)) {
+      return { 0, Side::None, 0, 0, TradeType::None };
+    }
     
     // convert the line string to a string stream
     std::stringstream lineStream(line);
@@ -42,7 +44,7 @@ public:
     std::getline(lineStream, cell, ',');
     char side { cell[0] };
     std::getline(lineStream, cell, ',');
-    int64_t price { std::stoll(cell) };
+    double price { std::stod(cell) };
     std::getline(lineStream, cell, ',');
     uint32_t size { static_cast<uint32_t>(std::stoul(cell)) };
     std::getline(lineStream, cell, ','); // skip channel_id

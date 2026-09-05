@@ -1,5 +1,3 @@
-#include <chrono>
-#include <iostream>
 #include "orderbook.hpp"
 #include "ingest.hpp"
 int main () {
@@ -10,6 +8,7 @@ int main () {
   while (!fi.IsEOF()) {
     Trade trade {fi.GetTradeInfo()};
     trade.MakeTrade(orderBook);
+    orderBook.MatchOrders();
   }
 
   return 0;
