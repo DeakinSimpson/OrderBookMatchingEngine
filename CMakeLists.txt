@@ -15,3 +15,19 @@ target_compile_options(OBME PRIVATE
   -Wall -Wextra -Weffc++ -Wconversion 
   -Wsign-conversion -Werror -pedantic-errors -ggdb
 )
+
+# add the google benchmark
+include(FetchContent)
+FetchContent_Declare(
+        googlebenchmark
+        GIT_REPOSITORY https://github.com/google/benchmark.git
+        GIT_TAG v1.9.1
+)
+# ignore googles own testing
+set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googlebenchmark)
+
+add_executable(orderbook_bench
+        benchmarks/orderbook_benchmark.cpp)
+target_include_directories(orderbook_bench PRIVATE include)
+target_link_libraries(orderbook_bench PRIVATE benchmark::benchmark)

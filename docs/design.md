@@ -9,4 +9,4 @@ for this as i will need to keep track of orders that have been filled or partial
 because there are many cases where someone tries to cancel an order that has already been filled.
 
 The next implementation that I will be implementing is a refactor of the engine to be more efficient
-and to increase readibility.
+and to increase readability.
