@@ -78,3 +78,6 @@ data/
 cmake-build-debug
 cmake-build-release
 
+# cmake
+.idea
+
