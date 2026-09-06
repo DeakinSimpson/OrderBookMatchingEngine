@@ -125,41 +125,6 @@ public:
     }
   }
 
-  // // TODO: fix this entire lookup, extremely inefficient
-  // void CancelOrder(OrderId orderID, Quantity quantity) {
-  //   for (auto& [price, orders] : bids_) {
-  //     for (size_t i = 0; i < orders.size(); ++i) {
-  //       if (orders[i].GetId() == orderID) {
-  //         orders[i].Fill(quantity);
-  //         if (orders[i].GetQuantity() == 0) {
-  //           orders.erase(orders.begin() + static_cast<long>(i));
-  //         }
-  //         if (orders.empty()) {
-  //           bids_.erase(price);
-  //         }
-  //         return;
-  //       }
-  //     }
-  //   }
-  //
-  //   for (auto& [price, orders] : asks_) {
-  //     for (size_t i = 0; i < orders.size(); ++i) {
-  //       if (orders[i].GetId() == orderID) {
-  //         orders[i].Fill(quantity);
-  //         if (orders[i].GetQuantity() == 0) {
-  //           orders.erase(orders.begin() + static_cast<long>(i));
-  //         }
-  //         if (orders.empty()) {
-  //           asks_.erase(price);
-  //         }
-  //         return;
-  //       }
-  //     }
-  //   }
-  //   std::cout << "Order Not Found: Order Canceled "<< orderID << std::endl;
-  // }
-
-
 private:
   // TODO: experiment with different data structures and convert Order to
   // pointers

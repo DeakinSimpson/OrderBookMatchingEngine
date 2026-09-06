@@ -3,7 +3,6 @@ This is a market by order orderbook matching engine. It takes in orders, inputs 
 orderbook and then performs order matching to match bids and asks. It uses First in First Price-Time
 priority, meaning, that the best bidder or asker is prioritized and then the time that the order came
 in is used to break the tie, in the common event that 2 or more orders have the same bid or ask price.
-## Project Background
 
 ## How to Run:
 To Run the project we start by building:
