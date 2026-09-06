@@ -89,7 +89,7 @@ public:
       const auto& bidPriceLevel { bids_.begin() };
 
       // if the best ask is higher then the best bid no orders can match
-      if (bidPriceLevel->first > askPriceLevel->first)
+      if (bidPriceLevel->first < askPriceLevel->first)
         { break; }
 
       // loop through each bid and ask and try to match at this level
@@ -125,11 +125,14 @@ public:
     }
   }
 
+  OrderId GetBestBid() { return bids_.begin()->second.front().GetPrice(); }
+  OrderId GetBestAsk() { return asks_.begin()->second.front().GetPrice(); }
+
 private:
   // TODO: experiment with different data structures and convert Order to
   // pointers
-  std::map<Price, Orders, std::greater<Price>> asks_;  // highest ask at top
-  std::map<Price, Orders, std::less<Price>> bids_;     // lowest bid at top
+  std::map<Price, Orders, std::less<Price>> asks_;  // highest ask at top
+  std::map<Price, Orders, std::greater<Price>> bids_;     // lowest bid at top
                                                        
   // checks if a order was made on a side with a price wether it would match
   // within the current orderbook
