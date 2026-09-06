@@ -25,9 +25,19 @@ To Run a benchmark we simply use the following command:
 ```
 ./cmake-build-release/orderbook-bench
 ```
+## How to Test
+To test, we first must build the project:
+```
+cmake -B cmake-build-release
+cmake --build cmake-build-release
+```
+Then we can simply run the ctest
+```
+ctest --test-dir cmake-build-release
+```
 ## Information on the Project
 ### Benchmarks
-To find the garenteed most up to date benchmarks as well as all previous benchmarks [view here](./docs/benchmarks/benchmarks.md)
+To find the parented most up-to-date benchmarks as well as all previous benchmarks [view here](./docs/benchmarks/benchmarks.md)
 
 ### Design Decisions
 For a history of design decisions and why they were made [view here](./docs/design.md)

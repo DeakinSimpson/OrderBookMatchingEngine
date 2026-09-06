@@ -9,7 +9,6 @@ TEST(OrderBookTest, PriceTimePriority) {
   Order order1 { 0, Side::Ask, 101.0, 10 };
   Order order2 { 1, Side::Ask, 100.0, 10 };
   Order order3 { 2, Side::Bid, 101.0, 10 };
-  Order order4 { 3, Side::Bid, 99, 10};
 
   orderBook.AddOrder(order1);
   orderBook.AddOrder(order2);
@@ -17,7 +16,83 @@ TEST(OrderBookTest, PriceTimePriority) {
 
   orderBook.MatchOrders();
 
-  std::cout << "Best Ask TEST: " << orderBook.GetBestAsk() << std::endl;
-
   EXPECT_EQ(orderBook.GetBestAsk(), 101.0);
+}
+
+TEST(OrderBookTest, DontMatchIfBestAskNotMet) {
+  OrderBook orderBook {};
+  Order order1 { 0, Side::Ask, 100.0, 10 };
+  Order order2 { 0, Side::Bid, 99.0, 10 };
+
+  orderBook.AddOrder(order1);
+  orderBook.AddOrder(order2);
+
+  orderBook.MatchOrders();
+
+  EXPECT_EQ(orderBook.GetBestAsk(), 100.0);
+}
+
+TEST(OrderBookTest, AskWithHigherQuantityKept) {
+  OrderBook orderBook {};
+  Order order1 { 0, Side::Ask, 100.0, 10 };
+  Order order2 { 1, Side::Bid, 100.0, 15 };
+
+  orderBook.AddOrder(order1);
+  orderBook.AddOrder(order2);
+
+  orderBook.MatchOrders();
+
+  EXPECT_EQ(orderBook.GetBestBid(), 100.0);
+}
+
+TEST(OrderBookTest, BidWithHigherQuantityKept) {  OrderBook orderBook {};
+  Order order1 { 0, Side::Ask, 100.0, 15 };
+  Order order2 { 1, Side::Bid, 100.0, 10 };
+
+  orderBook.AddOrder(order1);
+  orderBook.AddOrder(order2);
+
+  orderBook.MatchOrders();
+
+  EXPECT_EQ(orderBook.GetBestAsk(), 100.0);
+
+}
+
+TEST(OrderBookTest, AskDeletedWhenFilled) {
+  OrderBook orderBook {};
+  Order order1 { 0, Side::Ask, 100.0, 10 };
+  Order order2 { 1, Side::Bid, 100.0, 15 };
+
+  orderBook.AddOrder(order1);
+  orderBook.AddOrder(order2);
+
+  orderBook.MatchOrders();
+
+  EXPECT_EQ(orderBook.GetBestAsk(), 0.0);
+
+}
+
+TEST(OrderBookTest, BidDeletedWhenFilled) {
+  OrderBook orderBook {};
+  Order order1 { 0, Side::Ask, 100.0, 15 };
+  Order order2 { 1, Side::Bid, 100.0, 10 };
+
+  orderBook.AddOrder(order1);
+  orderBook.AddOrder(order2);
+
+  orderBook.MatchOrders();
+
+  EXPECT_EQ(orderBook.GetBestBid(), 0.0);
+}
+
+TEST(OrderBookTest, GetBestBidOnEmptyOrderBook) {
+  OrderBook orderBook {};
+
+  EXPECT_EQ(orderBook.GetBestBid(), 0.0);
+}
+
+TEST(OrderBookTest, GetBestAskOnEmptyOrderBook) {
+  OrderBook orderBook {};
+
+  EXPECT_EQ(orderBook.GetBestAsk(), 0.0);
 }

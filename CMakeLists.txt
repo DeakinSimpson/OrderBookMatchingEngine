@@ -43,3 +43,8 @@ add_executable(engine_tests
 target_include_directories(engine_tests PRIVATE include)
 target_link_libraries(engine_tests gtest_main)
 
+# integrates gtest with ctest
+enable_testing()
+include(GoogleTest)
+gtest_discover_tests(engine_tests)
+

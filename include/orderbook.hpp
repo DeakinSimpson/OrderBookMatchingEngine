@@ -125,8 +125,14 @@ public:
     }
   }
 
-  OrderId GetBestBid() { return bids_.begin()->second.front().GetPrice(); }
-  OrderId GetBestAsk() { return asks_.begin()->second.front().GetPrice(); }
+  Price GetBestBid() {
+    if (bids_.empty()) { return 0; }
+    return bids_.begin()->second.front().GetPrice();
+  }
+  Price GetBestAsk() {
+    if (asks_.empty()) { return 0; }
+    return asks_.begin()->second.front().GetPrice();
+  }
 
 private:
   // TODO: experiment with different data structures and convert Order to
