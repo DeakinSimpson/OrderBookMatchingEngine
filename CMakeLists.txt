@@ -30,6 +30,8 @@ FetchContent_Declare(
 
 # ignore googles own testing
 set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
+# ignore WERROR for google as it was causing compile errors on my windows device
+set(BENCHMARK_ENABLE_WERROR OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googlebenchmark googletest)
 
 add_executable(engine_bench

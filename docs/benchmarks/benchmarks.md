@@ -2,7 +2,7 @@
 ## Benchmark Data by Version
 | Version | Improvement |  Type | Average Time (ns) |
 | --- | --- | --- | --- |
-| 0.1.0 | None (Initial) | MatchOrders() | 133 |
+| 0.1.0 | None (Initial) | MatchOrders() | 198 |
 
 ## Raw Benchmark Data
 ### v0.1.0
