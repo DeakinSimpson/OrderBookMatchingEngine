@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <iostream>
 #include <map>
+#include <memory>
+#include <unordered_map>
 #include <vector>
 
 enum class Side {
@@ -53,6 +55,9 @@ private:
   Price price_;
   Quantity quantity_;
 };
+
+using OrderPointer = std::shared_ptr<Order>;
+using OrderPointers = std::vector<OrderPointer>;
 
 using Orders = std::vector<Order>;
 
@@ -135,11 +140,22 @@ public:
   }
 
 private:
+  struct OrderEntry {
+    OrderPointer order_ {};
+    OrderPointers::iterator memLocation_;
+  };
+
+
+
   // TODO: experiment with different data structures and convert Order to
   // pointers
   std::map<Price, Orders, std::less<Price>> asks_;  // highest ask at top
   std::map<Price, Orders, std::greater<Price>> bids_;     // lowest bid at top
-                                                       
+  // keep track of orders by ID, to get their location and quickly modify
+  // this is to reduce latency for future Cancel and Modify functions
+  std::unordered_map<OrderId, OrderEntry> orders_;
+
+
   // checks if a order was made on a side with a price wether it would match
   // within the current orderbook
   bool CanMatch(Side side, Price price) {
