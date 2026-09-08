@@ -27,27 +27,21 @@ using Quantity = uint32_t;  // cant have negative stock
 class Order
 {
 public:
-  Order(OrderId id, Side side, Price price,
-    Quantity quantity)
+  Order(const OrderId id, const Side side, Price const price,
+    const Quantity quantity)
       : id_{ id }
       , side_{ side }
       , price_{ price }
       , quantity_{ quantity }
   {  };
 
-  OrderId GetId() { return id_; }
-  Side GetSide() { return side_; }
-  Price GetPrice() { return price_; }
-  Quantity GetQuantity() { return quantity_; }
-  
-  // TODO: add check for overfill
-  void Fill(Quantity quantity) 
-  { 
-    if (quantity > quantity_) {
-      std::cerr << "Cant Fill Order for More than its Quantity" << std::endl;
-    }
-    quantity_ -= quantity; 
-  }
+  // [[nodiscard]] means that we cant call this as a no return function
+  [[nodiscard]] OrderId GetId() const { return id_; }
+  [[nodiscard]] Side GetSide() const { return side_; }
+  [[nodiscard]] Price GetPrice() const { return price_; }
+  [[nodiscard]] Quantity GetQuantity() const { return quantity_; }
+
+  void Fill(Quantity quantity);
 
 private:
   OrderId id_;
@@ -71,81 +65,17 @@ public:
       , bids_{}
   {  }
   
-  void AddOrder(Order order) 
-  {
-    if (order.GetSide() == Side::Ask) {
-      // get the orders for that price
-      auto& orders { asks_[order.GetPrice()] };
-      orders.push_back(order);
-    } else {
-      auto& orders { bids_[order.GetPrice()] };
-      orders.push_back(order);
-    }
-  }
+  void AddOrder(const Order &order);
+  void MatchOrders();
 
-  void MatchOrders() {
-  // loop through each bid and ask Price
-    while (true) {
-      // if there are no bids or asks then there is nothing to match
-      if (bids_.empty() || asks_.empty())
-        { break; }
-
-      const auto& askPriceLevel { asks_.begin() };
-      const auto& bidPriceLevel { bids_.begin() };
-
-      // if the best ask is higher then the best bid no orders can match
-      if (bidPriceLevel->first < askPriceLevel->first)
-        { break; }
-
-      // loop through each bid and ask and try to match at this level
-      while (askPriceLevel->second.size() && bidPriceLevel->second.size()) {
-        // FIFO, get fist value of vector
-        auto& bid { bidPriceLevel->second.front() };
-        auto& ask { askPriceLevel->second.front() };
-
-        // get the min quantity, cant fill a quantity larger then the min
-        Quantity quantity { std::min(bid.GetQuantity(), ask.GetQuantity())};
-
-        bid.Fill(quantity);
-        ask.Fill(quantity);
-        
-        // if there is no more quantity remove it from the vector
-        if (bid.GetQuantity() == 0) {
-          bidPriceLevel->second.erase(bidPriceLevel->second.begin());
-        }
-
-        if (ask.GetQuantity() == 0) {
-          askPriceLevel->second.erase(askPriceLevel->second.begin());
-        }
-
-        // check if the entire price level is empty now
-        if (bidPriceLevel->second.empty()) {
-          bids_.erase(bidPriceLevel->first);
-        }
-
-        if (askPriceLevel->second.empty()) {
-          asks_.erase(askPriceLevel->first);
-        }
-      }
-    }
-  }
-
-  Price GetBestBid() {
-    if (bids_.empty()) { return 0; }
-    return bids_.begin()->second.front().GetPrice();
-  }
-  Price GetBestAsk() {
-    if (asks_.empty()) { return 0; }
-    return asks_.begin()->second.front().GetPrice();
-  }
+  Price GetBestBid() const;
+  Price GetBestAsk() const;
 
 private:
   struct OrderEntry {
     OrderPointer order_ {};
     OrderPointers::iterator memLocation_;
   };
-
-
 
   // TODO: experiment with different data structures and convert Order to
   // pointers
@@ -155,24 +85,7 @@ private:
   // this is to reduce latency for future Cancel and Modify functions
   std::unordered_map<OrderId, OrderEntry> orders_;
 
-
-  // checks if a order was made on a side with a price wether it would match
-  // within the current orderbook
-  bool CanMatch(Side side, Price price) {
-    if (side == Side::Bid) {
-      if (asks_.empty()) { return false; }  // cant match stock if there is none
-      
-      const auto& level { asks_.begin() };
-      // return if the price they are bidding is less then the lowest ask
-      return price >= level->first;
-    } else {
-      // is there any bids?
-      if (bids_.empty()) { return false;}
-
-      const auto& level { bids_.begin() };
-      return price <= level->first;
-    }
-  }
+  bool CanMatch(Side side, Price price);
 };
 
 struct TradeInfo
@@ -189,21 +102,9 @@ class Trade
   TradeInfo tradeInfo_;
 
 public:
-  explicit Trade(TradeInfo tradeInfo) : tradeInfo_{tradeInfo} {  }
-  TradeInfo GetTradeInfo() const { return tradeInfo_; }
+  explicit Trade(const TradeInfo& tradeInfo) : tradeInfo_{tradeInfo} {  }
+  [[nodiscard]] TradeInfo GetTradeInfo() const { return tradeInfo_; }
 
-  void MakeTrade(OrderBook& orderBook) {
-    if (tradeInfo_.tradeType == TradeType::Add) {
-      orderBook.AddOrder({
-        tradeInfo_.orderID,
-        tradeInfo_.side,
-        tradeInfo_.price,
-        tradeInfo_.quantity
-      });
-      return;
-    }
-    // if trade type is none skip
-  }
-
+  void MakeTrade(OrderBook& orderBook) const;
 };
 

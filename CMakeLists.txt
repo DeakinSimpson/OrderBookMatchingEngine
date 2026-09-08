@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(OBME 
   src/main.cpp
+        src/ingest.cpp
+        src/orderbook.cpp
 )
 
 target_include_directories(OBME PRIVATE include)

@@ -20,22 +20,14 @@ static void BM_MATCHORDERS(benchmark::State& state) {
 
     // create bids from 100 -> 100 + numOrders -1
     for (int i {}; i < numOrders; ++i) {
-      BMOrderBook.AddOrder({
-        static_cast<OrderId>(i),
-        Side::Bid,
-        static_cast<Price>(100 + i),
-        10
-      });
+      BMOrderBook.AddOrder({static_cast<OrderId>(i), Side::Bid,
+                            static_cast<Price>(100 + i), 10});
     }
 
     // create asks from 100 -> 100 + numOrders -1
     for (int i {}; i < numOrders; ++i) {
-      BMOrderBook.AddOrder({
-        static_cast<OrderId>(numOrders + i),
-        Side::Ask,
-        static_cast<Price>(100 + i),
-        10
-      });
+      BMOrderBook.AddOrder({static_cast<OrderId>(numOrders + i), Side::Ask,
+                            static_cast<Price>(100 + i), 10});
     }
 
     // NOTE: Every order will be filled as they are identical bids and asks
