@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(OBME 
-  src/main.cpp
-        src/ingest.cpp
-        src/orderbook.cpp
+    src/main.cpp
+    src/ingest.cpp
+    src/orderbook.cpp
 )
 
 target_include_directories(OBME PRIVATE include)
@@ -37,13 +37,19 @@ set(BENCHMARK_ENABLE_WERROR OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googlebenchmark googletest)
 
 add_executable(engine_bench
-        benchmarks/orderbook_benchmark.cpp)
+        benchmarks/orderbook_benchmark.cpp
+        src/ingest.cpp
+        src/orderbook.cpp
+)
 target_include_directories(engine_bench PRIVATE include)
 target_link_libraries(engine_bench PRIVATE benchmark::benchmark)
 
 # --- add google testing ---
 add_executable(engine_tests
-        tests/orderbook_test.cpp)
+        tests/orderbook_test.cpp
+        src/orderbook.cpp
+        src/ingest.cpp
+)
 target_include_directories(engine_tests PRIVATE include)
 target_link_libraries(engine_tests gtest_main)
 
