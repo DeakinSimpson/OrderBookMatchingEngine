@@ -15,14 +15,14 @@ void Order::Fill(const Quantity quantity)
 }
 
 // --- OrderBook ---
-void OrderBook::AddOrder(const Order& order)
+void OrderBook::AddOrder(const OrderPointer& order)
 {
-  if (order.GetSide() == Side::Ask) {
+  if (order->GetSide() == Side::Ask) {
     // get the orders for that price
-    auto& orders { asks_[order.GetPrice()] };
+    auto& orders { asks_[order->GetPrice()] };
     orders.push_back(order);
   } else {
-    auto& orders { bids_[order.GetPrice()] };
+    auto& orders { bids_[order->GetPrice()] };
     orders.push_back(order);
   }
 }

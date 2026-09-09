@@ -65,7 +65,7 @@ public:
       , bids_{}
   {  }
   
-  void AddOrder(const Order &order);
+  void AddOrder(const OrderPointer& order);
   void MatchOrders();
 
   Price GetBestBid() const;
@@ -79,8 +79,8 @@ private:
 
   // TODO: experiment with different data structures and convert Order to
   // pointers
-  std::map<Price, Orders, std::less<Price>> asks_;  // highest ask at top
-  std::map<Price, Orders, std::greater<Price>> bids_;     // lowest bid at top
+  std::map<Price, OrderPointers, std::less<Price>> asks_;  // highest ask at top
+  std::map<Price, OrderPointers, std::greater<Price>> bids_;     // lowest bid at top
   // keep track of orders by ID, to get their location and quickly modify
   // this is to reduce latency for future Cancel and Modify functions
   std::unordered_map<OrderId, OrderEntry> orders_;
