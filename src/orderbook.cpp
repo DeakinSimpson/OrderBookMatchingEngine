@@ -77,13 +77,13 @@ void OrderBook::MatchOrders()
 Price OrderBook::GetBestBid() const
 {
   if (bids_.empty()) { return 0; }
-  return bids_.begin()->second.front().GetPrice();
+  return bids_.begin()->second.front()->GetPrice();
 }
 
 Price OrderBook::GetBestAsk() const
 {
   if (asks_.empty()) { return 0; }
-  return asks_.begin()->second.front().GetPrice();
+  return asks_.begin()->second.front()->GetPrice();
 }
 
 // checks if a order was made on a side with a price wether it would match
