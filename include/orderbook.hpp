@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <iostream>
+#include <list>
 #include <map>
 #include <memory>
 #include <unordered_map>
@@ -50,10 +51,14 @@ private:
   Quantity quantity_;
 };
 
+/*
+ * Original thought was to use std::vector as it has better cache locality,
+ * and O(1) random access whereas list has O(n), however because vector
+ * invalidates iterators where there is a insertion or deletion i have chosen
+ * to use list instead
+ */
 using OrderPointer = std::shared_ptr<Order>;
-using OrderPointers = std::vector<OrderPointer>;
-
-using Orders = std::vector<Order>;
+using OrderPointers = std::list<OrderPointer>;
 
 /*
  * We need a CancelStatus because a cancel order failing is not a failure in
@@ -74,9 +79,11 @@ public:
   OrderBook() 
       : asks_{}
       , bids_{}
+      , orders_{}
   {  }
   
   void AddOrder(const OrderPointer& order);
+  CancelStatus CancelOrder(OrderId orderID, Quantity quantity);
   void MatchOrders();
 
   Price GetBestBid() const;
@@ -94,10 +101,9 @@ private:
   std::map<Price, OrderPointers, std::greater<Price>> bids_;     // lowest bid at top
   // keep track of orders by ID, to get their location and quickly modify
   // this is to reduce latency for future Cancel and Modify functions
-  std::unordered_map<OrderId, OrderEntry> orders_;
+  std::unordered_map<OrderId, std::shared_ptr<OrderEntry>> orders_;
 
   bool CanMatch(Side side, Price price);
-  CancelStatus CancelOrder(OrderId orderID, Quantity quantity);
 };
 
 struct TradeInfo

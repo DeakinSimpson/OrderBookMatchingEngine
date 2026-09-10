@@ -17,6 +17,8 @@ void Order::Fill(const Quantity quantity)
 // --- OrderBook ---
 void OrderBook::AddOrder(const OrderPointer& order)
 {
+  if (orders_.contains(order->GetId())) { return; }
+
   if (order->GetSide() == Side::Ask) {
     /*
      * 1. Get the price of the order
@@ -25,23 +27,30 @@ void OrderBook::AddOrder(const OrderPointer& order)
      * 4. get the iterator of the last element (the one we just inserted)
      * 5. add the order ID and the iterator tot he orders_ hashtable
      */
-    const Price price { order->GetPrice() };
-    auto& orders { asks_[price] };
+    auto& orders { asks_[order->GetPrice()] };
     orders.push_back(order);
 
-    OrderPointers::iterator iterator {
-      std::next(orders.begin(), orders.size() - 1)
+    const OrderPointers::iterator iterator {
+      std::next(orders.begin(), static_cast<ptrdiff_t>(orders.size() - 1))
     };
-    orders_.insert({order->GetId(), {order, iterator}});
+
+    orders_.insert({
+      order->GetId(),
+      std::make_shared<OrderEntry>(OrderEntry{order, iterator})
+    });
   } else {
     // same as above for bids_
-    const Price price { order->GetPrice() };
-    auto& orders { bids_[price] };
+    auto& orders { bids_[order->GetPrice()] };
     orders.push_back(order);
 
     OrderPointers::iterator iterator {
-      std::next(orders.begin(), orders.size() - 1)
+      std::next(orders.begin(), static_cast<ptrdiff_t>(orders.size() - 1))
     };
+
+    orders_.insert({
+      order->GetId(),
+      std::make_shared<OrderEntry>(OrderEntry{order, iterator})
+    });
   }
 }
 
@@ -73,21 +82,23 @@ void OrderBook::MatchOrders()
 
       // if there is no more quantity remove it from the vector
       if (bid->GetQuantity() == 0) {
+        orders_.erase(bid->GetId());
         bids.erase(bids.begin());
       }
 
       if (ask->GetQuantity() == 0) {
+        orders_.erase(ask->GetId());
         asks.erase(asks.begin());
       }
+    }
 
-      // check if the entire price level is empty now
-      if (bids.empty()) {
-        bids_.erase(bidPrice);
-      }
+    // check if the entire price level is empty now
+    if (bids.empty()) {
+      bids_.erase(bidPrice);
+    }
 
-      if (asks.empty()) {
-        asks_.erase(askPrice);
-      }
+    if (asks.empty()) {
+      asks_.erase(askPrice);
     }
   }
 }
@@ -130,7 +141,11 @@ CancelStatus OrderBook::CancelOrder(
   // cant cancel order that does not exist
   if (!orders_.contains(orderID)) { return CancelStatus::Fail; }
 
-  auto& [order, iterator] { orders_.at(orderID) };
+  auto entry { orders_.at(orderID) }; // copies pointers
+  auto& order { entry->order_ };
+  auto& iterator { entry->iterator_ };
+
+  // std::cout << "order object made" << std::endl;
 
   // if the cancel amount is less then the total amount we can fill and return
   if (quantity < order->GetQuantity()) {
@@ -141,35 +156,50 @@ CancelStatus OrderBook::CancelOrder(
   /*
    * Get the return status before removing the item (cant get overfill if gone)
    */
-  CancelStatus returnStatus;
-  if (quantity == order->GetQuantity()) {
-    returnStatus = CancelStatus::Success;
-  } else {
-    returnStatus = CancelStatus::OverFill;
-  }
+  CancelStatus returnStatus = (quantity == order->GetQuantity())
+    ? CancelStatus::Success
+    : CancelStatus::OverFill;
+
+  orders_.erase(orderID);
 
   /*
    * Remove from Ask or Bid side
    */
+  Price price { order->GetPrice() };
   if (order->GetSide() == Side::Ask) {
-    asks_[order->GetPrice()].erase(iterator);
-    orders_.erase(order->GetPrice());
-    return returnStatus;
+    // std::cout << "Ask" << std::endl;
+    // remove from asks_ vector
+    auto& asks { asks_.at(price) };
+    // std::cout << "asks size: " << asks.size() << std::endl;
+    asks.erase(iterator);
+    // std::cout << "erase from asks vector" << std::endl;
+
+    // remove from bids_ price level if empty
+    if (asks.empty())
+      asks_.erase(price);
   } else {
-    bids_[order->GetPrice()].erase(iterator);
-    orders_.erase(order->GetPrice());
-    return returnStatus;
+    // remove from bids_ vector
+    auto& bids { bids_.at(price) };
+    bids.erase(iterator);
+
+    // remove from bids_ price level if empty
+    if (bids.empty())
+      bids_.erase(price);
   }
+
+  return returnStatus;
 }
 
 // --- Trade ---
 void Trade::MakeTrade(OrderBook& orderBook) const
 {
-  if (tradeInfo_.tradeType == TradeType::Add) {
+  if (tradeInfo_.tradeType == TradeType::Add){
+    // std::cout << "Add Order: " << tradeInfo_.orderID << std::endl;
     orderBook.AddOrder(ToOrderPointer());
-    return;
+  } else if (tradeInfo_.tradeType == TradeType::Cancel) {
+    // std::cout << "Cancel Order: " << tradeInfo_.orderID << std::endl;
+    orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
   }
-  // if trade type is none skip
 }
 
 OrderPointer Trade::ToOrderPointer() const
