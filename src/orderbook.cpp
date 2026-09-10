@@ -123,6 +123,45 @@ bool OrderBook::CanMatch(const Side side, const Price price)
   }
 }
 
+CancelStatus OrderBook::CancelOrder(
+  const OrderId orderID,
+  const Quantity quantity)
+{
+  // cant cancel order that does not exist
+  if (!orders_.contains(orderID)) { return CancelStatus::Fail; }
+
+  auto& [order, iterator] { orders_.at(orderID) };
+
+  // if the cancel amount is less then the total amount we can fill and return
+  if (quantity < order->GetQuantity()) {
+    order->Fill(quantity);
+    return CancelStatus::Success;
+  }
+
+  /*
+   * Get the return status before removing the item (cant get overfill if gone)
+   */
+  CancelStatus returnStatus;
+  if (quantity == order->GetQuantity()) {
+    returnStatus = CancelStatus::Success;
+  } else {
+    returnStatus = CancelStatus::OverFill;
+  }
+
+  /*
+   * Remove from Ask or Bid side
+   */
+  if (order->GetSide() == Side::Ask) {
+    asks_[order->GetPrice()].erase(iterator);
+    orders_.erase(order->GetPrice());
+    return returnStatus;
+  } else {
+    bids_[order->GetPrice()].erase(iterator);
+    orders_.erase(order->GetPrice());
+    return returnStatus;
+  }
+}
+
 // --- Trade ---
 void Trade::MakeTrade(OrderBook& orderBook) const
 {

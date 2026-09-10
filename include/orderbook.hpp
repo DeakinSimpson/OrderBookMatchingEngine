@@ -55,6 +55,17 @@ using OrderPointers = std::vector<OrderPointer>;
 
 using Orders = std::vector<Order>;
 
+/*
+ * We need a CancelStatus because a cancel order failing is not a failure in
+ * the code, if someone tries to cancel their order but the matching engine
+ * matches the order first, then the cancel order must fail gracefully
+ */
+enum class CancelStatus {
+  Success,
+  OverFill,
+  Fail,
+};
+
 // orderbook class that holds the asks and bids, also performs the order
 // matching
 class OrderBook
@@ -86,6 +97,7 @@ private:
   std::unordered_map<OrderId, OrderEntry> orders_;
 
   bool CanMatch(Side side, Price price);
+  CancelStatus CancelOrder(OrderId orderID, Quantity quantity);
 };
 
 struct TradeInfo
