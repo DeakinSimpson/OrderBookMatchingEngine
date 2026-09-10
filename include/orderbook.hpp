@@ -104,6 +104,7 @@ class Trade
 public:
   explicit Trade(const TradeInfo& tradeInfo) : tradeInfo_{tradeInfo} {  }
   [[nodiscard]] TradeInfo GetTradeInfo() const { return tradeInfo_; }
+  [[nodiscard]] OrderPointer ToOrderPointer() const;
 
   void MakeTrade(OrderBook& orderBook) const;
 };

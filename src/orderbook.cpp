@@ -66,17 +66,17 @@ void OrderBook::MatchOrders()
       auto& ask { asks.front() };
 
       // get the min quantity, cant fill a quantity larger then the min
-      Quantity quantity { std::min(bid.GetQuantity(), ask.GetQuantity())};
+      Quantity quantity { std::min(bid->GetQuantity(), ask->GetQuantity())};
 
-      bid.Fill(quantity);
-      ask.Fill(quantity);
+      bid->Fill(quantity);
+      ask->Fill(quantity);
 
       // if there is no more quantity remove it from the vector
-      if (bid.GetQuantity() == 0) {
+      if (bid->GetQuantity() == 0) {
         bids.erase(bids.begin());
       }
 
-      if (ask.GetQuantity() == 0) {
+      if (ask->GetQuantity() == 0) {
         asks.erase(asks.begin());
       }
 
@@ -127,9 +127,18 @@ bool OrderBook::CanMatch(const Side side, const Price price)
 void Trade::MakeTrade(OrderBook& orderBook) const
 {
   if (tradeInfo_.tradeType == TradeType::Add) {
-    orderBook.AddOrder(&{tradeInfo_.orderID, tradeInfo_.side, tradeInfo_.price,
-                        tradeInfo_.quantity});
+    orderBook.AddOrder(ToOrderPointer());
     return;
   }
   // if trade type is none skip
+}
+
+OrderPointer Trade::ToOrderPointer() const
+{
+  return std::make_shared<Order>(Order{
+    tradeInfo_.orderID,
+    tradeInfo_.side,
+    tradeInfo_.price,
+    tradeInfo_.quantity
+  });
 }
