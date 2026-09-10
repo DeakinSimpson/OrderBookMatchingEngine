@@ -141,11 +141,9 @@ CancelStatus OrderBook::CancelOrder(
   // cant cancel order that does not exist
   if (!orders_.contains(orderID)) { return CancelStatus::Fail; }
 
-  auto entry { orders_.at(orderID) }; // copies pointers
-  auto& order { entry->order_ };
-  auto& iterator { entry->iterator_ };
-
-  // std::cout << "order object made" << std::endl;
+  const auto entry { orders_.at(orderID) }; // copies pointers
+  const auto & order { entry->order_ };
+  const auto & iterator { entry->iterator_ };
 
   // if the cancel amount is less then the total amount we can fill and return
   if (quantity < order->GetQuantity()) {
@@ -163,28 +161,21 @@ CancelStatus OrderBook::CancelOrder(
   orders_.erase(orderID);
 
   /*
-   * Remove from Ask or Bid side
+   * Remove from Sides list, then if the list is empty, remove price level
    */
   Price price { order->GetPrice() };
-  if (order->GetSide() == Side::Ask) {
-    // std::cout << "Ask" << std::endl;
-    // remove from asks_ vector
-    auto& asks { asks_.at(price) };
-    // std::cout << "asks size: " << asks.size() << std::endl;
-    asks.erase(iterator);
-    // std::cout << "erase from asks vector" << std::endl;
+  if (order->GetSide() == Side::Ask)
+  {
+    auto& orders { asks_.at(price) };
+    orders.erase(iterator);
 
-    // remove from bids_ price level if empty
-    if (asks.empty())
-      asks_.erase(price);
-  } else {
-    // remove from bids_ vector
-    auto& bids { bids_.at(price) };
-    bids.erase(iterator);
+    if (orders.empty()) { asks_.erase(price); }
+  } else
+  {
+    auto& orders { bids_.at(price) };
+    orders.erase(iterator);
 
-    // remove from bids_ price level if empty
-    if (bids.empty())
-      bids_.erase(price);
+    if (orders.empty()) { bids_.erase(price); }
   }
 
   return returnStatus;
@@ -194,10 +185,8 @@ CancelStatus OrderBook::CancelOrder(
 void Trade::MakeTrade(OrderBook& orderBook) const
 {
   if (tradeInfo_.tradeType == TradeType::Add){
-    // std::cout << "Add Order: " << tradeInfo_.orderID << std::endl;
     orderBook.AddOrder(ToOrderPointer());
   } else if (tradeInfo_.tradeType == TradeType::Cancel) {
-    // std::cout << "Cancel Order: " << tradeInfo_.orderID << std::endl;
     orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
   }
 }
