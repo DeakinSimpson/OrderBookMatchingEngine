@@ -18,12 +18,30 @@ void Order::Fill(const Quantity quantity)
 void OrderBook::AddOrder(const OrderPointer& order)
 {
   if (order->GetSide() == Side::Ask) {
-    // get the orders for that price
-    auto& orders { asks_[order->GetPrice()] };
+    /*
+     * 1. Get the price of the order
+     * 2. get the orders vector for that price level
+     * 3. push back the new order (FIFO)
+     * 4. get the iterator of the last element (the one we just inserted)
+     * 5. add the order ID and the iterator tot he orders_ hashtable
+     */
+    const Price price { order->GetPrice() };
+    auto& orders { asks_[price] };
     orders.push_back(order);
+
+    OrderPointers::iterator iterator {
+      std::next(orders.begin(), orders.size() - 1)
+    };
+    orders_.insert({order->GetId(), {order, iterator}});
   } else {
-    auto& orders { bids_[order->GetPrice()] };
+    // same as above for bids_
+    const Price price { order->GetPrice() };
+    auto& orders { bids_[price] };
     orders.push_back(order);
+
+    OrderPointers::iterator iterator {
+      std::next(orders.begin(), orders.size() - 1)
+    };
   }
 }
 
@@ -109,7 +127,7 @@ bool OrderBook::CanMatch(const Side side, const Price price)
 void Trade::MakeTrade(OrderBook& orderBook) const
 {
   if (tradeInfo_.tradeType == TradeType::Add) {
-    orderBook.AddOrder({tradeInfo_.orderID, tradeInfo_.side, tradeInfo_.price,
+    orderBook.AddOrder(&{tradeInfo_.orderID, tradeInfo_.side, tradeInfo_.price,
                         tradeInfo_.quantity});
     return;
   }

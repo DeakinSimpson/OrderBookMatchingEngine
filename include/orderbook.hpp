@@ -74,7 +74,7 @@ public:
 private:
   struct OrderEntry {
     OrderPointer order_ {};
-    OrderPointers::iterator memLocation_;
+    OrderPointers::iterator iterator_;
   };
 
   // TODO: experiment with different data structures and convert Order to
