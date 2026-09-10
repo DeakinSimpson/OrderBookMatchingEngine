@@ -10,9 +10,9 @@ TEST(OrderBookTest, PriceTimePriority) {
   Order order2 { 1, Side::Ask, 100.0, 10 };
   Order order3 { 2, Side::Bid, 101.0, 10 };
 
-  orderBook.AddOrder(order1);
-  orderBook.AddOrder(order2);
-  orderBook.AddOrder(order3);
+  orderBook.AddOrder(std::make_shared<Order>(order1));
+  orderBook.AddOrder(std::make_shared<Order>(order2));
+  orderBook.AddOrder(std::make_shared<Order>(order3));
 
   orderBook.MatchOrders();
 
@@ -24,8 +24,8 @@ TEST(OrderBookTest, DontMatchIfBestAskNotMet) {
   Order order1 { 0, Side::Ask, 100.0, 10 };
   Order order2 { 0, Side::Bid, 99.0, 10 };
 
-  orderBook.AddOrder(order1);
-  orderBook.AddOrder(order2);
+  orderBook.AddOrder(std::make_shared<Order>(order1));
+  orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
@@ -37,8 +37,8 @@ TEST(OrderBookTest, AskWithHigherQuantityKept) {
   Order order1 { 0, Side::Ask, 100.0, 10 };
   Order order2 { 1, Side::Bid, 100.0, 15 };
 
-  orderBook.AddOrder(order1);
-  orderBook.AddOrder(order2);
+  orderBook.AddOrder(std::make_shared<Order>(order1));
+  orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
@@ -49,8 +49,8 @@ TEST(OrderBookTest, BidWithHigherQuantityKept) {  OrderBook orderBook {};
   Order order1 { 0, Side::Ask, 100.0, 15 };
   Order order2 { 1, Side::Bid, 100.0, 10 };
 
-  orderBook.AddOrder(order1);
-  orderBook.AddOrder(order2);
+  orderBook.AddOrder(std::make_shared<Order>(order1));
+  orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
@@ -63,8 +63,8 @@ TEST(OrderBookTest, AskDeletedWhenFilled) {
   Order order1 { 0, Side::Ask, 100.0, 10 };
   Order order2 { 1, Side::Bid, 100.0, 15 };
 
-  orderBook.AddOrder(order1);
-  orderBook.AddOrder(order2);
+  orderBook.AddOrder(std::make_shared<Order>(order1));
+  orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
@@ -77,8 +77,8 @@ TEST(OrderBookTest, BidDeletedWhenFilled) {
   Order order1 { 0, Side::Ask, 100.0, 15 };
   Order order2 { 1, Side::Bid, 100.0, 10 };
 
-  orderBook.AddOrder(order1);
-  orderBook.AddOrder(order2);
+  orderBook.AddOrder(std::make_shared<Order>(order1));
+  orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
