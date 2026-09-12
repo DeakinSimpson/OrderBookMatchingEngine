@@ -110,3 +110,11 @@ TEST(OrderBookTest, CancelOrderAfterFullyCanceled) {
   EXPECT_EQ(status1, CancelStatus::Success);
   EXPECT_EQ(status2, CancelStatus::Fail);
 }
+
+TEST(OrderBookTest, CancelOrderThatNeverExisted) {
+  OrderBook orderbook;
+
+  const CancelStatus status { orderbook.CancelOrder(0, 10) };
+
+  EXPECT_EQ(status, CancelStatus::Fail);
+}
