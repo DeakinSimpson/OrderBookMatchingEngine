@@ -118,3 +118,43 @@ TEST(OrderBookTest, CancelOrderThatNeverExisted) {
 
   EXPECT_EQ(status, CancelStatus::Fail);
 }
+
+TEST(OrderBookTest, CancelOrderUnderCancel) {
+  OrderBook orderbook {};
+
+  Order order { 0, Side::Ask, 10, 10  };
+
+  orderbook.AddOrder(std::make_shared<Order>(order));
+
+  CancelStatus status { orderbook.CancelOrder(0, 5) };
+
+  EXPECT_EQ(status, CancelStatus::Success);
+}
+
+TEST(OrderBookTest, CancelOrderExactCancel) {
+  OrderBook orderbook {};
+
+  Order order { 0, Side::Ask, 10, 10  };
+
+  orderbook.AddOrder(std::make_shared<Order>(order));
+
+  CancelStatus status { orderbook.CancelOrder(0, 10) };
+
+  EXPECT_EQ(status, CancelStatus::Success);
+}
+
+TEST(OrderBookTest, CancelOrderOverCancel) {
+  OrderBook orderbook {};
+
+  Order order { 0, Side::Ask, 10, 10  };
+
+  orderbook.AddOrder(std::make_shared<Order>(order));
+
+  CancelStatus status { orderbook.CancelOrder(0, 15) };
+
+  // returns the overfill code
+  EXPECT_EQ(status, CancelStatus::OverFill);
+
+  // removes the order from the order book successfull
+  EXPECT_EQ(orderbook.GetBestAsk(), 0);
+}
