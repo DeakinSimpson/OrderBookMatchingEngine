@@ -48,8 +48,58 @@ static void BM_MATCHORDERS(benchmark::State& state) {
   }
 }
 
+/*
+ * Benchmark to test the MatchOrders() function
+ */
+static void BM_CANCELORDERS(benchmark::State& state) {
+  // get the number of orders as the range of the input state
+  const int numOrders { static_cast<int>(state.range(0)) };
+
+  // loop through from 0-maxrange of the input state
+  for (auto _ : state) {
+    // pause the timing for the setup
+    state.PauseTiming();
+
+    OrderBook BMOrderBook {};
+
+    for (int i {}; i < numOrders; ++i) {
+      BMOrderBook.AddOrder(std::make_shared<Order>(Order{
+        static_cast<OrderId>(i),
+        Side::Bid,
+        static_cast<Price>(100 + i),
+        10
+      }));
+    }
+
+    for (int i {}; i < numOrders; ++i) {
+      BMOrderBook.AddOrder(std::make_shared<Order>(Order{
+        static_cast<OrderId>(numOrders + i),
+        Side::Ask,
+        static_cast<Price>(100 + i),
+        10
+      }));
+    }
+
+    // start timing again
+    state.ResumeTiming();
+
+    for (int i {}; i < numOrders * 2; ++i) {
+      // get a mix between underfill and overfill
+      BMOrderBook.CancelOrder(i, (9 + (i % 3)));
+    }
+  }
+}
+
 // test different benchmark ranges
 BENCHMARK(BM_MATCHORDERS)
+  -> Arg(10)
+  -> Arg(100)
+  -> Arg(1000)
+  -> Arg(10000)
+  -> Arg(100000)
+  -> Arg(1000000);
+
+BENCHMARK(BM_CANCELORDERS)
   -> Arg(10)
   -> Arg(100)
   -> Arg(1000)

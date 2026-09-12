@@ -32,3 +32,17 @@ This is what initially contributed to CancelOrder and ModifyOrder being left uni
 
 Regardless, this improvement to the underlying data structure of the program is laying the foundation
 for the rest of the Matching engine.
+
+## Order ID Hashmap Data Structure / CancelOrder (v0.3.0)
+During v0.2.0 I had not thought very deeply into the data structure, I originally wanted to use a 
+std::vector as the data structure for the Order-ID hashmap (orders_), however this was a mistake.
+The mistake that was made was using std::vector instead of std::list, this is because std::vector,
+ when having an element erased, causes the iterator (used in OrderEntry) to be invalidated. This
+meant that when i was initially implementing CancelOrder, once a order was cancelled, subsequent
+CancelOrder calls to that price level would fail as the iterator that I was using to get it's
+location from within the vector was invalid.
+
+I had then decided to move towards a std::list, the downside of using a list is that getting an
+element at the end required the traversal across the entire list giving an O(n) for CancelOrder and
+later, ModifyOrder operations. This is however directly mitigated by the use of an iterator, giving
+us the O(1) CancelOrder and later ModifyOrder operations. 
