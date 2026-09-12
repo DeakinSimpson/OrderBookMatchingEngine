@@ -1,0 +1,432 @@
+perf-exec;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_execve;[kernel.kallsyms]`do_execveat_common.isra.0;[kernel.kallsyms]`bprm_execve;[kernel.kallsyms]`bprm_execve.part.0;[kernel.kallsyms]`exec_binprm;[kernel.kallsyms]`load_elf_binary;[kernel.kallsyms]`begin_new_exec;[kernel.kallsyms]`perf_event_exec;[kernel.kallsyms]`perf_event_enable_on_exec;[kernel.kallsyms]`ctx_resched 1
+perf-exec;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_execve;[kernel.kallsyms]`do_execveat_common.isra.0;[kernel.kallsyms]`bprm_execve;[kernel.kallsyms]`bprm_execve.part.0;[kernel.kallsyms]`exec_binprm;[kernel.kallsyms]`load_elf_binary;[kernel.kallsyms]`begin_new_exec;[kernel.kallsyms]`perf_event_exec;[kernel.kallsyms]`perf_event_enable_on_exec;[kernel.kallsyms]`ctx_resched;[kernel.kallsyms]`x86_pmu_enable;[kernel.kallsyms]`amd_pmu_enable_all;[kernel.kallsyms]`x86_pmu_enable_event 1
+perf-exec;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_execve;[kernel.kallsyms]`do_execveat_common.isra.0;[kernel.kallsyms]`bprm_execve;[kernel.kallsyms]`bprm_execve.part.0;[kernel.kallsyms]`exec_binprm;[kernel.kallsyms]`load_elf_binary;[kernel.kallsyms]`begin_new_exec;[kernel.kallsyms]`perf_event_exec;[kernel.kallsyms]`perf_event_addr_filters_exec 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline 495
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 23
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::basic_istream& std::getline 18
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libc.so.6`malloc 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libc.so.6`__memmove_avx_unaligned_erms 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libc.so.6`__memchr_avx2 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`malloc@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::locale::id::_M_id 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libc.so.6`__mpn_lshift 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::locale::locale 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libc.so.6`__memchr_avx2 8
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::istream::sentry::sentry 8
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 8
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libc.so.6`__memmove_avx_unaligned_erms 7
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libc.so.6`__GI_____strtod_l_internal 6
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::locale::locale 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::locale::id::_M_id 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libc.so.6`malloc 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libc.so.6`__isoc23_strtoul 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_create 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`memcpy@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::ios_base::~ios_base 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::basic_ios::init 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libc.so.6`str_to_mpn.isra.0 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`[unknown] 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::basic_istream& std::getline 19
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__memmove_avx_unaligned_erms 12
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__memchr_avx2 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::locale::operator= 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__GI_____strtod_l_internal 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;[unknown]`[unknown];libc.so.6`__memchr_avx2 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;[unknown]`[unknown];libc.so.6`__memmove_avx_unaligned_erms 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::ios_base::_M_init 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__GI_____strtoull_l_internal 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::locale::~locale 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`memcpy@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::istream::sentry::sentry 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`strlen@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::ios_base::ios_base 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_pbump 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`cfree@GLIBC_2.2.5 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`memchr@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__basic_file::xsgetn 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`str_to_mpn.isra.0 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`operator delete 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__syscall_cancel 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::basic_ios::init 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_istream& std::getline 97
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent 10
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent;[kernel.kallsyms]`dput;[kernel.kallsyms]`dput.part.0 5
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent;[kernel.kallsyms]`dput;[kernel.kallsyms]`__rcu_read_unlock 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent;[kernel.kallsyms]`dput;[kernel.kallsyms]`lockref_put_return 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent;[kernel.kallsyms]`lockref_get_not_zero 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent;[kernel.kallsyms]`fsnotify 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent;[kernel.kallsyms]`dget_parent 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`__fsnotify_parent;[kernel.kallsyms]`dget_parent;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler;[kernel.kallsyms]`tick_do_update_jiffies64;[kernel.kallsyms]`update_wall_time;[kernel.kallsyms]`read_tsc 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`copy_page_to_iter;[kernel.kallsyms]`_copy_to_iter 12
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`touch_atime;[kernel.kallsyms]`atime_needs_update 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`touch_atime;[kernel.kallsyms]`atime_needs_update;[kernel.kallsyms]`current_time 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`touch_atime;[kernel.kallsyms]`make_vfsuid 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`atime_needs_update 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`dput 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`__x64_sys_read 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`fpregs_assert_state_consistent 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSRETQ_unsafe_stack 15
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`srso_alias_safe_ret 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`syscall_return_via_sysret 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libstdc++.so.6.0.35`std::basic_istream& std::getline;[kernel.kallsyms]`entry_SYSCALL_64 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__GI_____strtod_l_internal 52
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__memmove_avx_unaligned_erms 37
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__memchr_avx2 28
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::istream::sentry::sentry 23
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__GI_____strtoull_l_internal 20
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`cfree@GLIBC_2.2.5 14
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`str_to_mpn.isra.0 13
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::ios_base::_M_init 10
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[unknown]`[unknown];libc.so.6`__memmove_avx_unaligned_erms 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::~locale 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::id::_M_id 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[unknown]`[unknown];libc.so.6`strlen@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[unknown]`[unknown];libc.so.6`__memchr_avx2 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`round_and_return 7
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::locale::locale 7
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_ios::init 7
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 6
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`malloc 5
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__mpn_lshift 5
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`memchr@plt 4
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`schedule 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0;[kernel.kallsyms]`switch_fpu_return;[kernel.kallsyms]`restore_fpregs_from_fpstate 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`memcpy@plt 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::locale::id::_M_id 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__isoc23_strtoul 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`operator new 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::locale::operator= 3
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_create 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__mpn_construct_double 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`operator delete 2
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::_Rb_tree_insert_and_rebalance 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libc.so.6`__memmove_chk_avx_unaligned_erms 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::locale::~locale 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`malloc@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_pbump 1
+OBME;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::_Rb_tree_rebalance_for_erase 1
+OBME;libc.so.6`__memmove_avx_unaligned_erms 949
+OBME;libc.so.6`__memmove_avx_unaligned_erms;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`_raw_spin_unlock_irqrestore 1
+OBME;libc.so.6`__memmove_avx_unaligned_erms;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0;[kernel.kallsyms]`switch_fpu_return;[kernel.kallsyms]`restore_fpregs_from_fpstate 1
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::id::_M_id 19
+OBME;[unknown]`[unknown];[unknown]`[unknown];libc.so.6`__memmove_avx_unaligned_erms 14
+OBME;[unknown]`[unknown];[unknown]`[unknown];libc.so.6`__memchr_avx2 11
+OBME;[unknown]`[unknown];[unknown]`[unknown];libc.so.6`malloc 9
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::~locale 6
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::istream::sentry::sentry 5
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 4
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 4
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::ios_base::ios_base 3
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_create 3
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`operator new 3
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 3
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::locale 3
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`[unknown] 3
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::operator= 3
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`malloc@plt 2
+OBME;[unknown]`[unknown];[unknown]`[unknown];libc.so.6`__strlen_avx2 2
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::ios_base::_M_init 1
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::_Rb_tree_rebalance_for_erase 1
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::basic_ios::init 1
+OBME;[unknown]`[unknown];[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 1
+OBME;[unknown]`[unknown];[unknown]`[unknown];libc.so.6`__GI_____strtoull_l_internal 1
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::basic_istream& std::getline 73
+OBME;[unknown]`[unknown];libc.so.6`__GI_____strtod_l_internal 32
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 25
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::istream::sentry::sentry 21
+OBME;[unknown]`[unknown];libc.so.6`__GI_____strtoull_l_internal 20
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::ios_base::_M_init 15
+OBME;[unknown]`[unknown];OBME`vtable for std::__cxx11::basic_stringstream;libc.so.6`__memmove_avx_unaligned_erms 7
+OBME;[unknown]`[unknown];OBME`vtable for std::__cxx11::basic_stringstream;libstdc++.so.6.0.35`std::istream::sentry::sentry 3
+OBME;[unknown]`[unknown];OBME`vtable for std::__cxx11::basic_stringstream;libc.so.6`__memchr_avx2 3
+OBME;[unknown]`[unknown];OBME`vtable for std::__cxx11::basic_stringstream;libc.so.6`malloc 1
+OBME;[unknown]`[unknown];OBME`vtable for std::__cxx11::basic_stringstream;libstdc++.so.6.0.35`memchr@plt 1
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 14
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 14
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::basic_ios::init 12
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::locale 8
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`operator new 5
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 1
+OBME;[unknown]`[unknown];libc.so.6`__memmove_avx_unaligned_erms 5
+OBME;[unknown]`[unknown];libc.so.6`str_to_mpn.isra.0 4
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::id::_M_id 2
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 2
+OBME;[unknown]`[unknown];OBME`FileIterator::GetTradeInfo 1
+OBME;[unknown]`[unknown];OBME`main 1
+OBME;[unknown]`[unknown];libc.so.6`malloc 1
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`[unknown] 1
+OBME;[unknown]`[unknown];libstdc++.so.6.0.35`std::basic_filebuf::underflow 1
+OBME;[unknown]`[unknown];libc.so.6`__memchr_avx2 1
+OBME;[unknown]`[unknown];libc.so.6`round_and_return 1
+OBME;libc.so.6`__GI_____strtod_l_internal 234
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::basic_istream& std::getline 17
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__GI_____strtoull_l_internal 15
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__memmove_avx_unaligned_erms 10
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__memchr_avx2 10
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`cfree@GLIBC_2.2.5 7
+OBME;libc.so.6`__GI_____strtod_l_internal;[unknown]`[unknown];libc.so.6`__memmove_avx_unaligned_erms 3
+OBME;libc.so.6`__GI_____strtod_l_internal;[unknown]`[unknown];libc.so.6`__memchr_avx2 3
+OBME;libc.so.6`__GI_____strtod_l_internal;[unknown]`[unknown];libstdc++.so.6.0.35`std::istream::sentry::sentry 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::istream::sentry::sentry 5
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`[unknown];libc.so.6`__memmove_avx_unaligned_erms 2
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`[unknown];libc.so.6`cfree@GLIBC_2.2.5 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`[unknown];libc.so.6`malloc 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`[unknown];libstdc++.so.6.0.35`operator delete 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`str_to_mpn.isra.0 2
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`str_to_mpn.isra.0;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`str_to_mpn.isra.0;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0;[kernel.kallsyms]`switch_fpu_return;[kernel.kallsyms]`restore_fpregs_from_fpstate 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 4
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__GI_____strtod_l_internal 3
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::ios_base::_M_dispose_callbacks 3
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__isoc23_strtoul 2
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__mpn_construct_double 2
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`round_and_return 2
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__mpn_lshift 2
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`operator delete 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::locale::locale 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`memchr@plt 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::ios_base::~ios_base 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::ios_base::_M_init 1
+OBME;libc.so.6`__GI_____strtod_l_internal;libc.so.6`__memmove_chk_avx_unaligned_erms 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init 30
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_istream& std::getline 65
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init 5
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::basic_istream& std::getline 15
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libc.so.6`__GI_____strtod_l_internal 6
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 5
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::locale::locale;libc.so.6`__memmove_avx_unaligned_erms 3
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::locale::locale;libstdc++.so.6.0.35`std::istream::sentry::sentry 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::locale::locale;libc.so.6`__memchr_avx2 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libc.so.6`__memmove_avx_unaligned_erms 3
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libc.so.6`__memchr_avx2 2
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::istream::sentry::sentry 2
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libc.so.6`__GI_____strtoull_l_internal 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::ios_base::ios_base 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::locale::~locale 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`memcpy@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::locale::operator= 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::istream::sentry::sentry 17
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libc.so.6`__GI_____strtod_l_internal 16
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 7
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;libc.so.6`__memmove_avx_unaligned_erms 2
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;libc.so.6`__memchr_avx2 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler;[kernel.kallsyms]`update_process_times;[kernel.kallsyms]`sched_tick;[kernel.kallsyms]`native_read_msr 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;libc.so.6`__mpn_lshift 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;libstdc++.so.6.0.35`std::locale::id::_M_id 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;libstdc++.so.6.0.35`memcpy@plt 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 10
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::init 3
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libc.so.6`__memmove_avx_unaligned_erms 3
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libc.so.6`str_to_mpn.isra.0 2
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 2
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libc.so.6`__memchr_avx2 2
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libc.so.6`__GI_____strtoull_l_internal 2
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`operator new 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::locale::locale 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 1
+OBME;libc.so.6`__GI_____strtoull_l_internal 158
+OBME;libstdc++.so.6.0.35`std::istream::sentry::sentry 135
+OBME;libc.so.6`__memchr_avx2 125
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 111
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 1
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`str_to_mpn.isra.0 1
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::ios_base::_M_init 1
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::ios_base::_M_dispose_callbacks 1
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::basic_istream& std::getline 1
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::locale::locale 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read 2
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read 7
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read 3
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`copy_page_to_iter 3
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`copy_page_to_iter;[kernel.kallsyms]`_copy_to_iter 32
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`filemap_get_pages 4
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`filemap_get_pages;[kernel.kallsyms]`filemap_get_read_batch 5
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`filemap_get_pages;[kernel.kallsyms]`filemap_get_read_batch;[kernel.kallsyms]`xas_load 5
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`filemap_get_pages;[kernel.kallsyms]`__rcu_read_unlock 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`touch_atime 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`touch_atime;[kernel.kallsyms]`make_vfsgid 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`touch_atime;[kernel.kallsyms]`current_time 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`srso_alias_return_thunk 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`rw_verify_area 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`rw_verify_area;[kernel.kallsyms]`security_file_permission 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`rw_verify_area;[kernel.kallsyms]`security_file_permission;[kernel.kallsyms]`apparmor_file_permission 3
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`rw_verify_area;[kernel.kallsyms]`security_file_permission;[kernel.kallsyms]`apparmor_file_permission;[kernel.kallsyms]`begin_current_label_crit_section 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`rw_verify_area;[kernel.kallsyms]`security_file_permission;[kernel.kallsyms]`apparmor_file_permission;[kernel.kallsyms]`aa_file_perm 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`ext4_file_read_iter 6
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`fdget_pos 4
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_execve;[kernel.kallsyms]`do_execveat_common.isra.0;[kernel.kallsyms]`bprm_execve;[kernel.kallsyms]`bprm_execve.part.0;[kernel.kallsyms]`exec_binprm;[kernel.kallsyms]`load_elf_binary;[kernel.kallsyms]`begin_new_exec;[kernel.kallsyms]`__set_task_comm;[kernel.kallsyms]`perf_event_comm;[kernel.kallsyms]`perf_event_comm_event.constprop.0;[kernel.kallsyms]`perf_iterate_sb.constprop.0;[kernel.kallsyms]`perf_iterate_ctx;[kernel.kallsyms]`__perf_event__output_id_sample 1
+OBME;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_execve;[kernel.kallsyms]`do_execveat_common.isra.0;[kernel.kallsyms]`bprm_execve;[kernel.kallsyms]`bprm_execve.part.0;[kernel.kallsyms]`exec_binprm;[kernel.kallsyms]`load_elf_binary;[kernel.kallsyms]`elf_load;[kernel.kallsyms]`vm_munmap;[kernel.kallsyms]`__vm_munmap 1
+OBME;libc.so.6`str_to_mpn.isra.0 63
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 58
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`std::basic_istream& std::getline 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline 5
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libc.so.6`malloc;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libc.so.6`malloc;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`schedule;[kernel.kallsyms]`__schedule;[kernel.kallsyms]`finish_task_switch.isra.0 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libc.so.6`malloc;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0;[kernel.kallsyms]`switch_fpu_return;[kernel.kallsyms]`restore_fpregs_from_fpstate 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`memcpy@plt 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate;libc.so.6`str_to_mpn.isra.0 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__memmove_avx_unaligned_erms;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__memmove_avx_unaligned_erms;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`schedule;[kernel.kallsyms]`__schedule;[kernel.kallsyms]`finish_task_switch.isra.0 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__memmove_avx_unaligned_erms;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0;[kernel.kallsyms]`switch_fpu_return;[kernel.kallsyms]`restore_fpregs_from_fpstate 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`__GI_____strtoull_l_internal 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libstdc++.so.6.0.35`std::istream::sentry::sentry 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append;libc.so.6`cfree@GLIBC_2.2.5 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_istream& std::getline 2
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_read;[kernel.kallsyms]`ksys_read;[kernel.kallsyms]`vfs_read;[kernel.kallsyms]`ext4_file_read_iter;[kernel.kallsyms]`generic_file_read_iter;[kernel.kallsyms]`filemap_read;[kernel.kallsyms]`copy_page_to_iter;[kernel.kallsyms]`_copy_to_iter 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::basic_filebuf::underflow;libstdc++.so.6.0.35`std::__basic_file::xsgetn;libc.so.6`read;libc.so.6`__syscall_cancel;[kernel.kallsyms]`entry_SYSRETQ_unsafe_stack 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`std::ios_base::ios_base 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_istream& std::getline;libstdc++.so.6.0.35`malloc@plt 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`schedule;[kernel.kallsyms]`__schedule;[kernel.kallsyms]`finish_task_switch.isra.0;[kernel.kallsyms]`perf_ctx_enable 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`schedule;[kernel.kallsyms]`srso_alias_safe_ret 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0;[kernel.kallsyms]`restore_fpregs_from_fpstate 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::istream::sentry::sentry 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::basic_ios::init;libstdc++.so.6.0.35`std::basic_istream& std::getline 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libc.so.6`__GI_____strtod_l_internal;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libc.so.6`__GI_____strtod_l_internal;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`schedule;[kernel.kallsyms]`__schedule;[kernel.kallsyms]`finish_task_switch.isra.0 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libc.so.6`__GI_____strtod_l_internal;[kernel.kallsyms]`asm_sysvec_reschedule_ipi;[kernel.kallsyms]`sysvec_reschedule_ipi;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0;[kernel.kallsyms]`switch_fpu_return;[kernel.kallsyms]`restore_fpregs_from_fpstate 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::ios_base::ios_base 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libc.so.6`__GI_____strtod_l_internal;libstdc++.so.6.0.35`std::basic_istream& std::getline 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libc.so.6`__GI_____strtoull_l_internal 4
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 4
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_mutate 2
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libc.so.6`str_to_mpn.isra.0 2
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_pbump 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler;[kernel.kallsyms]`tick_do_update_jiffies64;[kernel.kallsyms]`update_wall_time;[kernel.kallsyms]`__timekeeping_advance;[kernel.kallsyms]`timekeeping_update_from_shadow;[kernel.kallsyms]`raw_notifier_call_chain;[kernel.kallsyms]`notifier_call_chain 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`memchr@plt 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;OBME`FileIterator::GetTradeInfo;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 1
+OBME;OBME`_start;libc.so.6`__libc_start_main@@GLIBC_2.34;libc.so.6`__libc_start_call_main;OBME`main;libstdc++.so.6.0.35`std::locale::id::_M_id 1
+OBME;libstdc++.so.6.0.35`operator new 18
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`malloc 10
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`__memchr_avx2 6
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`__memmove_avx_unaligned_erms 5
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`__libc_malloc2;libc.so.6`_int_malloc;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`lock_vma_under_rcu;[kernel.kallsyms]`mas_walk 1
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`__libc_malloc2;libc.so.6`_int_malloc;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`__pte_alloc;[kernel.kallsyms]`pte_alloc_one;[kernel.kallsyms]`lruvec_stat_mod_folio 1
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`__libc_malloc2;libc.so.6`_int_malloc;libc.so.6`__default_morecore@GLIBC_2.2.5;libc.so.6`__sbrk;libc.so.6`__brk;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_brk;[kernel.kallsyms]`__do_sys_brk;[kernel.kallsyms]`do_brk_flags;[kernel.kallsyms]`vma_merge_new_range;[kernel.kallsyms]`vma_expand;[kernel.kallsyms]`commit_merge;[kernel.kallsyms]`mas_store_prealloc;[kernel.kallsyms]`mas_wr_store_entry;[kernel.kallsyms]`mas_wr_slot_store;[kernel.kallsyms]`mas_update_gap.part.0;[kernel.kallsyms]`mas_leaf_max_gap 1
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`__libc_malloc2;libstdc++.so.6.0.35`std::basic_istream& std::getline 1
+OBME;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::basic_istream& std::getline 2
+OBME;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 1
+OBME;libstdc++.so.6.0.35`operator new;libc.so.6`__mpn_lshift 1
+OBME;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`std::locale::locale 1
+OBME;libstdc++.so.6.0.35`operator new;libstdc++.so.6.0.35`[unknown] 1
+OBME;libc.so.6`cfree@GLIBC_2.2.5 43
+OBME;libstdc++.so.6.0.35`std::ios_base::_M_init 36
+OBME;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::basic_istream& std::getline 2
+OBME;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::istream::sentry::sentry 2
+OBME;libstdc++.so.6.0.35`std::ios_base::_M_init;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 1
+OBME;libstdc++.so.6.0.35`std::basic_ios::_M_cache_locale 40
+OBME;libstdc++.so.6.0.35`std::locale::locale 31
+OBME;libstdc++.so.6.0.35`std::locale::locale;libc.so.6`__memchr_avx2 2
+OBME;libstdc++.so.6.0.35`std::locale::locale;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 2
+OBME;libstdc++.so.6.0.35`std::locale::locale;libstdc++.so.6.0.35`std::locale::operator= 1
+OBME;libstdc++.so.6.0.35`std::locale::locale;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_create 1
+OBME;libstdc++.so.6.0.35`std::locale::locale;libc.so.6`__memmove_avx_unaligned_erms 1
+OBME;libstdc++.so.6.0.35`std::locale::~locale 36
+OBME;libstdc++.so.6.0.35`std::locale::id::_M_id 36
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault 4
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`alloc_anon_folio 3
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`alloc_anon_folio;[kernel.kallsyms]`vma_alloc_folio_noprof;[kernel.kallsyms]`alloc_pages_mpol;[kernel.kallsyms]`__alloc_frozen_pages_noprof;[kernel.kallsyms]`get_page_from_freelist;[kernel.kallsyms]`post_alloc_hook;[kernel.kallsyms]`kernel_init_pages 5
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`alloc_anon_folio;[kernel.kallsyms]`vma_alloc_folio_noprof;[kernel.kallsyms]`alloc_pages_mpol;[kernel.kallsyms]`__alloc_frozen_pages_noprof;[kernel.kallsyms]`get_page_from_freelist;[kernel.kallsyms]`rmqueue.isra.0;[kernel.kallsyms]`rmqueue_pcplist;[kernel.kallsyms]`__rmqueue_pcplist 2
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`alloc_anon_folio;[kernel.kallsyms]`vma_alloc_folio_noprof;[kernel.kallsyms]`alloc_pages_mpol;[kernel.kallsyms]`__alloc_frozen_pages_noprof;[kernel.kallsyms]`get_page_from_freelist;[kernel.kallsyms]`rmqueue.isra.0;[kernel.kallsyms]`__rmqueue_pcplist 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`alloc_anon_folio;[kernel.kallsyms]`vma_alloc_folio_noprof;[kernel.kallsyms]`alloc_pages_mpol;[kernel.kallsyms]`_find_first_bit 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`alloc_anon_folio;[kernel.kallsyms]`vma_alloc_folio_noprof;[kernel.kallsyms]`__alloc_frozen_pages_noprof 2
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`alloc_anon_folio;[kernel.kallsyms]`vma_alloc_folio_noprof;[kernel.kallsyms]`get_vma_policy 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`folio_add_lru_vma;[kernel.kallsyms]`folio_add_lru;[kernel.kallsyms]`__folio_batch_add_and_move;[kernel.kallsyms]`folio_batch_move_lru 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`folio_add_lru_vma;[kernel.kallsyms]`folio_add_lru;[kernel.kallsyms]`__folio_batch_add_and_move;[kernel.kallsyms]`folio_batch_move_lru;[kernel.kallsyms]`lru_add;[kernel.kallsyms]`lru_gen_add_folio 2
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`folio_add_lru_vma;[kernel.kallsyms]`folio_add_lru;[kernel.kallsyms]`__folio_batch_add_and_move;[kernel.kallsyms]`srso_alias_safe_ret 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`folio_add_new_anon_rmap;[kernel.kallsyms]`__folio_mod_stat;[kernel.kallsyms]`lruvec_stat_mod_folio 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_anonymous_page;[kernel.kallsyms]`_raw_spin_lock 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`__handle_mm_fault;[kernel.kallsyms]`handle_pte_fault;[kernel.kallsyms]`do_fault;[kernel.kallsyms]`folio_prealloc;[kernel.kallsyms]`vma_alloc_folio_noprof;[kernel.kallsyms]`alloc_pages_mpol;[kernel.kallsyms]`__alloc_frozen_pages_noprof;[kernel.kallsyms]`get_page_from_freelist;[kernel.kallsyms]`post_alloc_hook;[kernel.kallsyms]`kernel_init_pages 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`handle_mm_fault;[kernel.kallsyms]`handle_pte_fault 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`do_user_addr_fault;[kernel.kallsyms]`lock_vma_under_rcu;[kernel.kallsyms]`mas_walk 1
+OBME;[kernel.kallsyms]`asm_exc_page_fault;[kernel.kallsyms]`exc_page_fault;[kernel.kallsyms]`irqentry_exit;[kernel.kallsyms]`arch_exit_to_user_mode_prepare.isra.0 1
+OBME;libc.so.6`malloc 29
+OBME;libc.so.6`round_and_return 27
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base 11
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;[unknown]`[unknown];libc.so.6`__memchr_avx2 2
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;[unknown]`[unknown];libstdc++.so.6.0.35`std::ios_base::ios_base 1
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;[unknown]`[unknown];libstdc++.so.6.0.35`operator new 1
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;[unknown]`[unknown];libstdc++.so.6.0.35`std::ios_base::_M_init 1
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;[unknown]`[unknown];libstdc++.so.6.0.35`std::locale::id::_M_id 1
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;libstdc++.so.6.0.35`std::basic_istream& std::getline 2
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;libstdc++.so.6.0.35`std::ios_base::_M_init 1
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;libstdc++.so.6.0.35`operator new 1
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;libstdc++.so.6.0.35`std::locale::operator= 1
+OBME;libstdc++.so.6.0.35`std::ios_base::~ios_base;libstdc++.so.6.0.35`std::ios_base::ios_base 1
+OBME;libstdc++.so.6.0.35`std::ios_base::ios_base 22
+OBME;libc.so.6`__mpn_lshift 20
+OBME;libstdc++.so.6.0.35`std::locale::operator= 16
+OBME;libstdc++.so.6.0.35`std::locale::operator=;[kernel.kallsyms]`entry_SYSCALL_64 1
+OBME;libstdc++.so.6.0.35`memchr@plt 14
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_create 14
+OBME;libstdc++.so.6.0.35`operator delete 13
+OBME;libstdc++.so.6.0.35`std::ios_base::_M_dispose_callbacks 12
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_pbump 11
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_pbump;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler;[kernel.kallsyms]`tick_do_update_jiffies64;[kernel.kallsyms]`update_wall_time;[kernel.kallsyms]`__timekeeping_advance;[kernel.kallsyms]`timekeeping_update_from_shadow;[kernel.kallsyms]`raw_notifier_call_chain;[kvm]`pvclock_gtod_notify 1
+OBME;libstdc++.so.6.0.35`[unknown] 11
+OBME;libstdc++.so.6.0.35`std::__cxx11::basic_stringbuf::_M_sync 10
+OBME;libstdc++.so.6.0.35`std::ios_base::_M_call_callbacks 9
+OBME;OBME`FileIterator::GetTradeInfo 8
+OBME;libstdc++.so.6.0.35`memcpy@plt 8
+OBME;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt 1
+OBME;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler 1
+OBME;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler;[kernel.kallsyms]`update_process_times;[kernel.kallsyms]`task_tick_fair 1
+OBME;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler;[kernel.kallsyms]`update_process_times;[kernel.kallsyms]`sched_tick;[kernel.kallsyms]`perf_event_task_tick;[kernel.kallsyms]`perf_adjust_freq_unthr_context;[kernel.kallsyms]`perf_adjust_freq_unthr_events;[kernel.kallsyms]`perf_ibs_stop 1
+OBME;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_nohz_handler;[kernel.kallsyms]`tick_do_update_jiffies64 1
+OBME;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`__sysvec_apic_timer_interrupt;[kernel.kallsyms]`hrtimer_interrupt;[kernel.kallsyms]`__hrtimer_run_queues;[kernel.kallsyms]`tick_do_update_jiffies64 1
+OBME;[kernel.kallsyms]`asm_sysvec_apic_timer_interrupt;[kernel.kallsyms]`sysvec_apic_timer_interrupt;[kernel.kallsyms]`irq_exit_rcu;[kernel.kallsyms]`__irq_exit_rcu;[kernel.kallsyms]`handle_softirqs;[kernel.kallsyms]`run_timer_softirq;[kernel.kallsyms]`tmigr_handle_remote;[kernel.kallsyms]`tmigr_handle_remote_up;[kernel.kallsyms]`tmigr_handle_remote_cpu;[kernel.kallsyms]`timer_expire_remote;[kernel.kallsyms]`__run_timers;[kernel.kallsyms]`call_timer_fn;[kernel.kallsyms]`fq_flush_timeout;[kernel.kallsyms]`fq_ring_free_locked;[kernel.kallsyms]`free_iova_fast 1
+OBME;[kernel.kallsyms]`__irqentry_text_end 6
+OBME;libstdc++.so.6.0.35`free@plt 4
+OBME;libc.so.6`__mpn_construct_double 4
+OBME;libstdc++.so.6.0.35`std::_Rb_tree_rebalance_for_erase 4
+OBME;libc.so.6`_int_free_chunk;libc.so.6`systrim.constprop.0;libc.so.6`__default_morecore@GLIBC_2.2.5;libc.so.6`__sbrk;libc.so.6`__brk;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_brk;[kernel.kallsyms]`__do_sys_brk;[kernel.kallsyms]`do_vmi_align_munmap;[kernel.kallsyms]`vms_complete_munmap_vmas;[kernel.kallsyms]`unmap_region;[kernel.kallsyms]`unmap_vmas;[kernel.kallsyms]`unmap_single_vma;[kernel.kallsyms]`unmap_page_range;[kernel.kallsyms]`zap_pmd_range.isra.0;[kernel.kallsyms]`zap_pte_range;[kernel.kallsyms]`zap_present_ptes.constprop.0 1
+OBME;libc.so.6`_int_free_chunk;libc.so.6`systrim.constprop.0;libc.so.6`__default_morecore@GLIBC_2.2.5;libc.so.6`__sbrk;libc.so.6`__brk;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_brk;[kernel.kallsyms]`__do_sys_brk;[kernel.kallsyms]`do_vmi_align_munmap;[kernel.kallsyms]`vms_complete_munmap_vmas;[kernel.kallsyms]`unmap_region;[kernel.kallsyms]`unmap_vmas;[kernel.kallsyms]`unmap_single_vma;[kernel.kallsyms]`unmap_page_range;[kernel.kallsyms]`zap_pmd_range.isra.0;[kernel.kallsyms]`zap_pte_range;[kernel.kallsyms]`zap_present_ptes.constprop.0;[kernel.kallsyms]`lruvec_stat_mod_folio 1
+OBME;libc.so.6`_int_free_chunk;libc.so.6`systrim.constprop.0;libc.so.6`__default_morecore@GLIBC_2.2.5;libc.so.6`__sbrk;libc.so.6`__brk;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_brk;[kernel.kallsyms]`__do_sys_brk;[kernel.kallsyms]`do_vmi_align_munmap;[kernel.kallsyms]`vms_complete_munmap_vmas;[kernel.kallsyms]`unmap_region;[kernel.kallsyms]`unmap_vmas;[kernel.kallsyms]`unmap_single_vma;[kernel.kallsyms]`unmap_page_range;[kernel.kallsyms]`zap_pmd_range.isra.0;[kernel.kallsyms]`zap_pte_range;[kernel.kallsyms]`zap_present_ptes.constprop.0;[kernel.kallsyms]`folio_remove_rmap_ptes;[kernel.kallsyms]`__rcu_read_unlock 1
+OBME;libc.so.6`_int_free_chunk;libc.so.6`systrim.constprop.0;libc.so.6`__default_morecore@GLIBC_2.2.5;libc.so.6`__sbrk;libc.so.6`__brk;[kernel.kallsyms]`entry_SYSCALL_64_after_hwframe;[kernel.kallsyms]`do_syscall_64;[kernel.kallsyms]`x64_sys_call;[kernel.kallsyms]`__x64_sys_brk;[kernel.kallsyms]`__do_sys_brk;[kernel.kallsyms]`do_vmi_align_munmap;[kernel.kallsyms]`vms_complete_munmap_vmas;[kernel.kallsyms]`unmap_region;[kernel.kallsyms]`unmap_vmas;[kernel.kallsyms]`unmap_single_vma;[kernel.kallsyms]`unmap_page_range;[kernel.kallsyms]`zap_pmd_range.isra.0;[kernel.kallsyms]`zap_pte_range;[kernel.kallsyms]`tlb_flush_mmu;[kernel.kallsyms]`__tlb_batch_free_encoded_pages;[kernel.kallsyms]`free_pages_and_swap_cache;[kernel.kallsyms]`folios_put_refs;[kernel.kallsyms]`free_unref_folios;[kernel.kallsyms]`free_frozen_page_commit.isra.0;[kernel.kallsyms]`free_pcppages_bulk 1
+OBME;OBME`main 3
+OBME;libc.so.6`__isoc23_strtoul 3
+OBME;libc.so.6`__errno_location 3
+OBME;libc.so.6`__strlen_avx2 3
+OBME;OBME`OrderBook::MatchOrders 2
+OBME;libc.so.6`read 1
+OBME;libc.so.6`read;libc.so.6`__syscall_cancel 1
+OBME;OBME`vtable for std::basic_streambuf;libstdc++.so.6.0.35`std::locale::locale 1
+OBME;OBME`vtable for std::basic_streambuf;libstdc++.so.6.0.35`std::__cxx11::basic_string::_M_append 1
+OBME;libc.so.6`__syscall_cancel 2
+OBME;libstdc++.so.6.0.35`std::basic_filebuf::underflow 2
+OBME;libc.so.6`__memcpy_chk@plt 2
+OBME;libstdc++.so.6.0.35`std::_Rb_tree_increment 2
+OBME;[kernel.kallsyms]`srso_alias_safe_ret 2
+OBME;libc.so.6`strtod 1
+OBME;OBME`vtable for std::__cxx11::basic_stringstream;libstdc++.so.6.0.35`std::locale::locale 1
+OBME;libstdc++.so.6.0.35`malloc@plt 1
+OBME;libc.so.6`[unknown] 1
+OBME;libc.so.6`strlen@plt 1
+OBME;libstdc++.so.6.0.35`std::__basic_file::xsgetn 1
