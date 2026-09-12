@@ -96,3 +96,17 @@ TEST(OrderBookTest, GetBestAskOnEmptyOrderBook) {
 
   EXPECT_EQ(orderBook.GetBestAsk(), 0.0);
 }
+
+TEST(OrderBookTest, CancelOrderAfterFullyCanceled) {
+  OrderBook orderBook {};
+
+  Order order1 {0, Side::Ask, 10, 10 };
+
+  orderBook.AddOrder(std::make_shared<Order>(order1));
+
+  const CancelStatus status1 { orderBook.CancelOrder(0, 10) };
+  const CancelStatus status2 { orderBook.CancelOrder(0, 10) };
+
+  EXPECT_EQ(status1, CancelStatus::Success);
+  EXPECT_EQ(status2, CancelStatus::Fail);
+}

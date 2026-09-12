@@ -104,6 +104,7 @@ private:
   std::unordered_map<OrderId, std::shared_ptr<OrderEntry>> orders_;
 
   bool CanMatch(Side side, Price price);
+  std::map<Price, OrderPointers>& GetLevels(Side side);
 };
 
 struct TradeInfo

@@ -93,13 +93,8 @@ void OrderBook::MatchOrders()
     }
 
     // check if the entire price level is empty now
-    if (bids.empty()) {
-      bids_.erase(bidPrice);
-    }
-
-    if (asks.empty()) {
-      asks_.erase(askPrice);
-    }
+    if (bids.empty()) { bids_.erase(bidPrice); }
+    if (asks.empty()) { asks_.erase(askPrice); }
   }
 }
 
@@ -119,6 +114,7 @@ Price OrderBook::GetBestAsk() const
 // within the current orderbook
 bool OrderBook::CanMatch(const Side side, const Price price)
 {
+
   if (side == Side::Bid) {
     if (asks_.empty()) { return false; }  // cant match stock if there is none
 
