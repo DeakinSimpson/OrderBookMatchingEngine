@@ -71,6 +71,11 @@ enum class CancelStatus {
   Fail,
 };
 
+enum class ModifyStatus {
+  Success,
+  Fail,
+};
+
 // orderbook class that holds the asks and bids, also performs the order
 // matching
 class OrderBook
@@ -84,6 +89,7 @@ public:
   
   void AddOrder(const OrderPointer& order);
   CancelStatus CancelOrder(OrderId orderID, Quantity quantity);
+  ModifyStatus ModifyOrder(OrderId orderID, Quantity quantity);
   void MatchOrders();
 
   Price GetBestBid() const;

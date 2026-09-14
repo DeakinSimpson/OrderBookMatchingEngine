@@ -177,6 +177,20 @@ CancelStatus OrderBook::CancelOrder(
   return returnStatus;
 }
 
+ModifyStatus OrderBook::ModifyOrder(
+  const OrderId orderID,
+  const Quantity quantity)
+{
+  // if order is reducing its quantity
+    // reduce quantity
+    // keep same Price-Time Priority (stays in same spot in queue)
+  // if order is increasing its quantity
+    // increase quantity
+    // add back to queue as if its new order (Remove order, then add back)
+
+  return ModifyStatus::Success;
+}
+
 // --- Trade ---
 void Trade::MakeTrade(OrderBook& orderBook) const
 {
