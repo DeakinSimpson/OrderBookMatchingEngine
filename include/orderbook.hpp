@@ -89,7 +89,7 @@ public:
   
   void AddOrder(const OrderPointer& order);
   CancelStatus CancelOrder(OrderId orderID, Quantity quantity);
-  ModifyStatus ModifyOrder(OrderId orderID, Quantity quantity);
+  ModifyStatus ModifyOrder(OrderId orderID, Price price, Quantity quantity);
   void MatchOrders();
 
   Price GetBestBid() const;

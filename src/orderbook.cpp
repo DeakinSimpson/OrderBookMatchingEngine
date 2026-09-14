@@ -138,8 +138,8 @@ CancelStatus OrderBook::CancelOrder(
   if (!orders_.contains(orderID)) { return CancelStatus::Fail; }
 
   const auto entry { orders_.at(orderID) }; // copies pointers
-  const auto & order { entry->order_ };
-  const auto & iterator { entry->iterator_ };
+  const auto& order { entry->order_ };
+  const auto& iterator { entry->iterator_ };
 
   // if the cancel amount is less then the total amount we can fill and return
   if (quantity < order->GetQuantity()) {
@@ -177,16 +177,40 @@ CancelStatus OrderBook::CancelOrder(
   return returnStatus;
 }
 
+/* when a Modify Order comes in, the price and quantity is what the price and
+ * quantity is going to be after the modify is complete */
 ModifyStatus OrderBook::ModifyOrder(
   const OrderId orderID,
+  const Price price,
   const Quantity quantity)
 {
+  // cant modify order that does not exist
+  if (!orders_.contains(orderID)) { return ModifyStatus::Fail; }
+
+  // get the order and iterator from the orders_ list
+  const auto entry { orders_.at(orderID) };
+  const auto& order { entry->order_ };
+  const auto& iterator { entry->iterator_ };
+
   // if order is reducing its quantity
+  if (order->GetQuantity() > quantity && order->GetPrice() == price) {
     // reduce quantity
     // keep same Price-Time Priority (stays in same spot in queue)
-  // if order is increasing its quantity
-    // increase quantity
-    // add back to queue as if its new order (Remove order, then add back)
+    order->Fill(order->GetQuantity() - quantity);
+  } else
+  {
+    // save temp values that wont persist
+    const OrderId t_orderID { order->GetId() };
+    const Side t_side { order->GetSide() };
+
+    // cancel the order
+    CancelOrder(order->GetId(), order->GetQuantity());
+
+    // add the order to the orderbook
+    AddOrder(
+      std::make_shared<Order>(Order(t_orderID, t_side, price, quantity))
+    );
+  }
 
   return ModifyStatus::Success;
 }
