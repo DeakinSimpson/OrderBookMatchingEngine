@@ -188,9 +188,7 @@ ModifyStatus OrderBook::ModifyOrder(
   if (!orders_.contains(orderID)) { return ModifyStatus::Fail; }
 
   // get the order and iterator from the orders_ list
-  const auto entry { orders_.at(orderID) };
-  const auto& order { entry->order_ };
-  const auto& iterator { entry->iterator_ };
+  const auto& order { orders_.at(orderID)->order_ };
 
   // if order is reducing its quantity
   if (order->GetQuantity() > quantity && order->GetPrice() == price) {
@@ -222,6 +220,9 @@ void Trade::MakeTrade(OrderBook& orderBook) const
     orderBook.AddOrder(ToOrderPointer());
   } else if (tradeInfo_.tradeType == TradeType::Cancel) {
     orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
+  } else if (tradeInfo_.tradeType == TradeType::Modify) {
+    orderBook.ModifyOrder(
+      tradeInfo_.orderID, tradeInfo_.price, tradeInfo_.quantity);
   }
 }
 

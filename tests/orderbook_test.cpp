@@ -158,3 +158,11 @@ TEST(OrderBookTest, CancelOrderOverCancel) {
   // removes the order from the order book successfull
   EXPECT_EQ(orderbook.GetBestAsk(), 0);
 }
+
+TEST(OrderBookTest, ModifyOrderFailsIfNotInOrderBook) {
+  OrderBook orderbook {};
+
+  const ModifyStatus status { orderbook.ModifyOrder(0, 10, 10) };
+
+  EXPECT_EQ(status, ModifyStatus::Fail);
+}
