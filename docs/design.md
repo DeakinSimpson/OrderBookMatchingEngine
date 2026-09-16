@@ -46,3 +46,10 @@ I had then decided to move towards a std::list, the downside of using a list is 
 element at the end required the traversal across the entire list giving an O(n) for CancelOrder and
 later, ModifyOrder operations. This is however directly mitigated by the use of an iterator, giving
 us the O(1) CancelOrder and later ModifyOrder operations. 
+
+## ModifyOrder (v0.4.0)
+The ModifyOrder() function in the OrderBook class did not come with a large design change to any of
+part of the program. It was a straight forward implementation of the OrderType. It came with a similar
+design decision as the CancelOrder, where it returns a ModifyStatus enum, this is so that the status of
+the order can be tracked. These OrderStatus's are not failures in code (even though it is called Fail)
+but rather a common return when placing a Modify Order.
