@@ -43,8 +43,6 @@ To find the parented most up-to-date benchmarks as well as all previous benchmar
 For a history of design decisions and why they were made [view here](./docs/design.md)
 
 ## Current Limitations
-+ Cancel Orders Not Implemented
-+ Modify Orders Not Implemented
 + No Multithreading
 + No Memory Pooling
 + Program Ran In Memory ONLY
