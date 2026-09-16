@@ -6,8 +6,39 @@
 | 0.2.0 | - OrderPointer Structure | MatchOrders() | 170 |
 | 0.3.0 | - CancelOrder<br>- std::list instead of std::vector for orders_ | MatchOrders() | 257 |
 | 0.3.0 | - CancelOrder<br>- std::list instead of std::vector for orders_ | CancelOrders() | 426 |
+| 0.4.0 | - ModifyOrder Added | ModifyOrder() | 36064 |
 
 ## Raw Benchmark Data
+### v0.4.0
+```
+Run on (12 X 3712.04 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 512 KiB (x6)
+  L3 Unified 32768 KiB (x1)
+Load Average: 0.21, 0.47, 0.52
+------------------------------------------------------------------
+Benchmark                        Time             CPU   Iterations
+------------------------------------------------------------------
+BM_MATCHORDERS/10             1813 ns         1811 ns       384412
+BM_MATCHORDERS/100           14460 ns        14455 ns        49184
+BM_MATCHORDERS/1000         219211 ns       218986 ns         3142
+BM_MATCHORDERS/10000       1628616 ns      1628511 ns          427
+BM_MATCHORDERS/100000     22135169 ns     22132864 ns           32
+BM_MATCHORDERS/1000000   256022083 ns    256006551 ns            2
+BM_CANCELORDERS/10            1962 ns         1963 ns       357240
+BM_CANCELORDERS/100          17097 ns        17094 ns        41022
+BM_CANCELORDERS/1000        211513 ns       211503 ns         3295
+BM_CANCELORDERS/10000      2369167 ns      2368552 ns          296
+BM_CANCELORDERS/100000    31644401 ns     31639014 ns           22
+BM_CANCELORDERS/1000000  412319686 ns    412283287 ns            2
+BM_MODIFYORDERS/10            3547 ns         3550 ns       197351
+BM_MODIFYORDERS/100          31807 ns        31803 ns        22123
+BM_MODIFYORDERS/1000        770156 ns       770040 ns          911
+BM_MODIFYORDERS/10000     39776892 ns     39774996 ns           18
+BM_MODIFYORDERS/100000  3606814616 ns   3606448754 ns            1
+```
 ### v0.3.0
 ```
 Run on (12 X 4591.47 MHz CPU s)
