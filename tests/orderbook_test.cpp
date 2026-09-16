@@ -173,7 +173,7 @@ TEST(OrderBookTest, ModifyOrderSucceedsIfValid) {
   orderbook.AddOrder(std::make_shared<Order>(
     Order{0, Side::Ask, 10.0, 10}));
 
-  ModifyStatus status { orderbook.ModifyOrder(0, 10.0, 8) };
+  const ModifyStatus status { orderbook.ModifyOrder(0, 10.0, 8) };
 
   EXPECT_EQ(status, ModifyStatus::Success);
 }
