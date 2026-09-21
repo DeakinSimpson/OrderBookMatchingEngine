@@ -9,16 +9,16 @@
 #include <vector>
 
 enum class Side {
-  Bid,
-  Ask,
-  None,
+    Bid,
+    Ask,
+    None,
 };
 
 enum class TradeType {
-  Add,
-  Cancel,
-  Modify,
-  None,
+    Add,
+    Cancel,
+    Modify,
+    None,
 };
 
 using OrderId = uint64_t;
@@ -104,7 +104,7 @@ private:
   // TODO: experiment with different data structures and convert Order to
   // pointers
   std::map<Price, OrderPointers, std::less<Price>> asks_;  // highest ask at top
-  std::map<Price, OrderPointers, std::greater<Price>> bids_;     // lowest bid at top
+  std::map<Price, OrderPointers, std::greater<Price>> bids_;// lowest bid at top
   // keep track of orders by ID, to get their location and quickly modify
   // this is to reduce latency for future Cancel and Modify functions
   std::unordered_map<OrderId, std::shared_ptr<OrderEntry>> orders_;

@@ -110,24 +110,41 @@ Price OrderBook::GetBestAsk() const
   return asks_.begin()->second.front()->GetPrice();
 }
 
-// checks if a order was made on a side with a price wether it would match
-// within the current orderbook
+/**
+ * @param _side The order side that we are checking for a match
+ * @param price The price of the order that we are checking for a match
+ * @param side The Side:: that the order is from (opposite to _side)
+ *
+ * @return True if there is a match, false otherwise
+ */
+template <typename T>
+static bool CheckMatchCondition(const T& _side, const Price price, const Side side)
+{
+    if (_side.empty())
+    {
+        return false;
+    }
+
+    const auto& [levelPrice, _] = *_side.begin();
+
+    return (side == Side::Ask) ? (price <= levelPrice) : (price >= levelPrice);
+}
+
+/**
+ *
+ * @param side Side of price level check
+ * @param price The best price for the given side
+ * @return True if there is a match, false otherwise
+ */
 bool OrderBook::CanMatch(const Side side, const Price price)
 {
-
-  if (side == Side::Bid) {
-    if (asks_.empty()) { return false; }  // cant match stock if there is none
-
-    const auto& [levelPrice, _] { *asks_.begin() };
-    // return if the price they are bidding is less then the lowest ask
-    return price >= levelPrice;
-  } else {
-    // is there any bids?
-    if (bids_.empty()) { return false;}
-
-    const auto& [levelPrice, _] { *bids_.begin() };
-    return price <= levelPrice;
-  }
+    if (side == Side::Ask)
+    {
+        return CheckMatchCondition(bids_, price, side);
+    } else
+    {
+        return CheckMatchCondition(asks_, price, side);
+    }
 }
 
 CancelStatus OrderBook::CancelOrder(
