@@ -6,6 +6,10 @@
 
 // --- Order ---
 
+/**
+ *
+ * @param quantity The Amount that will be removed from the order
+ */
 void Order::Fill(const Quantity quantity)
 {
   if (quantity > quantity_) {
@@ -15,6 +19,10 @@ void Order::Fill(const Quantity quantity)
 }
 
 // --- OrderBook ---
+/**
+ *
+ * @param order The Order that will be Added to the orderbook
+ */
 void OrderBook::AddOrder(const OrderPointer& order)
 {
   if (orders_.contains(order->GetId())) { return; }
@@ -98,16 +106,26 @@ void OrderBook::MatchOrders()
   }
 }
 
+/**
+ *
+ * @return The Bid with the highest price
+ */
 Price OrderBook::GetBestBid() const
 {
-  if (bids_.empty()) { return 0; }
-  return bids_.begin()->second.front()->GetPrice();
+    if (bids_.empty()) { return 0; }
+
+    return bids_.begin()->second.front()->GetPrice();
 }
 
+/**
+ *
+ * @return The Ask with the lowest price
+ */
 Price OrderBook::GetBestAsk() const
 {
-  if (asks_.empty()) { return 0; }
-  return asks_.begin()->second.front()->GetPrice();
+    if (asks_.empty()) { return 0; }
+
+    return asks_.begin()->second.front()->GetPrice();
 }
 
 /**
@@ -147,6 +165,12 @@ bool OrderBook::CanMatch(const Side side, const Price price)
     }
 }
 
+/**
+ *
+ * @param orderID The ID of the order to be canceled
+ * @param quantity The Amount of the order to be canceled
+ * @return The status of CancelOrder(), Success, OverFill, Fail
+ */
 CancelStatus OrderBook::CancelOrder(
   const OrderId orderID,
   const Quantity quantity)
@@ -196,6 +220,13 @@ CancelStatus OrderBook::CancelOrder(
 
 /* when a Modify Order comes in, the price and quantity is what the price and
  * quantity is going to be after the modify is complete */
+/**
+ *
+ * @param orderID The ID of the order to be modified
+ * @param price The Price that the order will be after modification
+ * @param quantity The Quantity that the order will be after modification
+ * @return The Status of the order modification, Success or Fail
+ */
 ModifyStatus OrderBook::ModifyOrder(
   const OrderId orderID,
   const Price price,
@@ -231,6 +262,10 @@ ModifyStatus OrderBook::ModifyOrder(
 }
 
 // --- Trade ---
+/**
+ *
+ * @param orderBook The orderbook that the trade will be made in
+ */
 void Trade::MakeTrade(OrderBook& orderBook) const
 {
   if (tradeInfo_.tradeType == TradeType::Add){
@@ -243,6 +278,10 @@ void Trade::MakeTrade(OrderBook& orderBook) const
   }
 }
 
+/**
+ *
+ * @return A Pointer to the Order
+ */
 OrderPointer Trade::ToOrderPointer() const
 {
   return std::make_shared<Order>(Order{
