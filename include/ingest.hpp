@@ -40,6 +40,11 @@ public:
     FileIterator(const std::string& filepath)
         : fs{filepath}
     {
+        if (!fs.is_open())
+        {
+            throw std::runtime_error("Could not open file: " + filepath);
+        }
+
         // get the prefix to the file
         char prefix[8];
         fs.read(prefix, sizeof(prefix));

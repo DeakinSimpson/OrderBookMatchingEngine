@@ -26,6 +26,7 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/google/benchmark.git
         GIT_TAG v1.9.1
 )
+
 FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip)
@@ -43,6 +44,8 @@ add_executable(engine_bench
 )
 target_include_directories(engine_bench PRIVATE include)
 target_link_libraries(engine_bench PRIVATE benchmark::benchmark)
+target_compile_definitions(engine_bench PRIVATE
+        DATA_FILE="${CMAKE_SOURCE_DIR}/data/ingest/xnas-itch-20260831.mbo.dbn")
 
 # --- add google testing ---
 add_executable(engine_tests

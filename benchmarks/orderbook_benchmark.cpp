@@ -2,7 +2,36 @@
 // Created by DeakinSimpson on 9/5/26.
 //
 #include <benchmark/benchmark.h>
+
+#include "ingest.hpp"
 #include "orderbook.hpp"
+
+
+// benchmark for ingest speed
+static void BM_INGEST(benchmark::State& state)
+{
+    int64_t messages {};
+
+    for (auto _ : state)
+    {
+        FileIterator fi { DATA_FILE };
+        MboMessage msg;
+
+        while (fi.Next(msg))
+        {
+            // this loop does nothing with message, DoNotOptimize means the
+            // compiler wont compole away msg
+            benchmark::DoNotOptimize(msg);
+            ++messages;
+        }
+    }
+
+    state.SetItemsProcessed(messages); // items per second
+    state.SetBytesProcessed(static_cast<int64_t>(messages * sizeof(MboMessage))); // bytes per second
+}
+
+// run INGEST benchmark
+BENCHMARK(BM_INGEST)->Unit(benchmark::kMillisecond)->Iterations(5);
 
 static void BM_ADDORDERS(benchmark::State& state) {
     // get the number of orders as the range of the input state
@@ -184,16 +213,14 @@ BENCHMARK(BM_CANCELORDERS)
   -> Arg(100)
   -> Arg(1000)
   -> Arg(10000)
-  -> Arg(100000)
-  -> Arg(1000000);
+  -> Arg(100000);
 
 BENCHMARK(BM_MODIFYORDERS)
   -> Arg(10)
   -> Arg(100)
   -> Arg(1000)
   -> Arg(10000)
-  -> Arg(100000)
-  -> Arg(1000000);
+  -> Arg(100000);
 
 
 BENCHMARK_MAIN();
