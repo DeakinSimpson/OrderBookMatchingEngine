@@ -1,6 +1,7 @@
 //
 // Created by DeakinSimpson on 9/5/26.
 //
+#include <chrono>
 #include <benchmark/benchmark.h>
 
 #include "ingest.hpp"
@@ -58,6 +59,50 @@ static void BM_MARKET_REPLAY(benchmark::State& state)
     state.SetItemsProcessed(messages);
 }
 BENCHMARK(BM_MARKET_REPLAY)->Unit(benchmark::kMillisecond)->Iterations(5);
+
+static void BM_REPLAY_LATENCY(benchmark::State& state)
+{
+    using Clock = std::chrono::steady_clock;
+
+    std::vector<int64_t> timeSamples;
+    timeSamples.reserve(10'000'000); // reserve 10M samples
+
+    for (auto _ : state)
+    {
+        FileIterator fi { DATA_FILE };
+        OrderBook orderBook {};
+        MboMessage msg;
+
+        while (fi.Next(msg))
+        {
+            const auto start { Clock::now() };
+            fi.GetTradeInfo(msg).MakeTrade(orderBook);
+            const auto end { Clock::now() };
+
+            // push back time it took to make the trade in the orderbook
+            timeSamples.push_back((end - start).count());
+        }
+    }
+
+    std::ranges::sort(timeSamples);
+    const auto percentile = [&](const double percentile)
+    {
+        // get the index at the percentile
+        double sizeAsDouble { static_cast<double>(timeSamples.size() - 1) };
+        size_t index { static_cast<size_t>(percentile * sizeAsDouble) };
+
+        // return time sample as a double
+        return static_cast<double>(timeSamples[index]);
+    };
+
+    state.counters["p50_ns"]   = percentile(0.50);
+    state.counters["p90_ns"]   = percentile(0.90);
+    state.counters["p99_ns"]   = percentile(0.99);
+    state.counters["p99.9_ns"] = percentile(0.999);
+    state.counters["max_ns"]   = static_cast<double>(timeSamples.back());
+}
+
+BENCHMARK(BM_REPLAY_LATENCY)->Unit(benchmark::kMillisecond)->Iterations(1);
 
 static void BM_ADDORDERS(benchmark::State& state) {
     // get the number of orders as the range of the input state

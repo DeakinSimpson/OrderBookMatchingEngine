@@ -9,6 +9,85 @@
 | 0.4.0 | - ModifyOrder Added | ModifyOrder() | 36064 |
 
 ## Raw Benchmark Data
+
+### a0.5.0
+
+Update Add Order to use std::prev instead of std::next(orders.begin(), static_cast<ptrdiff_t>(orders.size()) - 1)
+Run on (12 X 4641.53 MHz CPU s)
+CPU Caches:
+L1 Data 32 KiB (x6)
+L1 Instruction 32 KiB (x6)
+L2 Unified 512 KiB (x6)
+L3 Unified 32768 KiB (x1)
+Load Average: 0.65, 0.63, 0.62
+-----------------------------------------------------------------------------------------
+Benchmark                               Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------
+BM_INGEST/iterations:5                210 ms          210 ms            5 bytes_per_second=1.80567Gi/s items_per_second=34.6218M/s
+BM_MARKET_REPLAY/iterations:5         970 ms          970 ms            5 items_per_second=7.5048M/s
+BM_REPLAY_LATENCY/iterations:1       1181 ms         1181 ms            1 max_ns=5.41024M p50_ns=100 p90_ns=181 p99.9_ns=641 p99_ns=381
+BM_ADDORDERS/10                      2430 ns         2430 ns       289253
+BM_ADDORDERS/100                    26594 ns        26591 ns        25816
+BM_ADDORDERS/1000                  279563 ns       279527 ns         2504
+BM_ADDORDERS/10000                3090342 ns      3090051 ns          225
+BM_ADDORDERS/100000              41678280 ns     41674959 ns           17
+BM_ADDORDERS/1000000            701069450 ns    700986701 ns            1
+BM_MATCHORDERS/10                    1792 ns         1789 ns       371911
+BM_MATCHORDERS/100                  14169 ns        14161 ns        49564
+BM_MATCHORDERS/1000                142802 ns       142786 ns         4943
+BM_MATCHORDERS/10000              1469797 ns      1469526 ns          476
+BM_MATCHORDERS/100000            21313247 ns     21310405 ns           33
+BM_MATCHORDERS/1000000          257331897 ns    257249210 ns            3
+BM_CANCELORDERS/10                   1983 ns         1984 ns       352870
+BM_CANCELORDERS/100                 16035 ns        16033 ns        43573
+BM_CANCELORDERS/1000               205043 ns       205001 ns         3427
+BM_CANCELORDERS/10000             2277761 ns      2277528 ns          308
+BM_CANCELORDERS/100000           31763725 ns     31761236 ns           22
+BM_MODIFYORDERS/10                   3714 ns         3716 ns       188123
+BM_MODIFYORDERS/100                 29579 ns        29573 ns        23788
+BM_MODIFYORDERS/1000               304491 ns       304473 ns         2260
+BM_MODIFYORDERS/10000             3203706 ns      3203472 ns          220
+BM_MODIFYORDERS/100000           43854075 ns     43848390 ns           16
+
+Initial
+```
+Run on (12 X 4641.65 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 512 KiB (x6)
+  L3 Unified 32768 KiB (x1)
+Load Average: 1.62, 0.81, 0.66
+-----------------------------------------------------------------------------------------
+Benchmark                               Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------
+BM_INGEST/iterations:5                208 ms          207 ms            5 bytes_per_second=1.82981Gi/s items_per_second=35.0846M/s
+BM_MARKET_REPLAY/iterations:5        1745 ms         1745 ms            5 items_per_second=4.17073M/s
+BM_REPLAY_LATENCY/iterations:1       2007 ms         2007 ms            1 max_ns=8.74082M p50_ns=101 p90_ns=240 p99.9_ns=26.54k p99_ns=1.233k
+BM_ADDORDERS/10                      2415 ns         2414 ns       291425
+BM_ADDORDERS/100                    26758 ns        26755 ns        26090
+BM_ADDORDERS/1000                  277916 ns       277837 ns         2501
+BM_ADDORDERS/10000                3082417 ns      3082071 ns          228
+BM_ADDORDERS/100000              42278786 ns     42275672 ns           17
+BM_ADDORDERS/1000000            684512515 ns    684440228 ns            1
+BM_MATCHORDERS/10                    1798 ns         1794 ns       377294
+BM_MATCHORDERS/100                  14158 ns        14152 ns        50584
+BM_MATCHORDERS/1000                140836 ns       140815 ns         4997
+BM_MATCHORDERS/10000              1467512 ns      1467364 ns          474
+BM_MATCHORDERS/100000            22378672 ns     22376483 ns           31
+BM_MATCHORDERS/1000000          259685533 ns    259628630 ns            3
+BM_CANCELORDERS/10                   1965 ns         1964 ns       357784
+BM_CANCELORDERS/100                 16336 ns        16329 ns        42859
+BM_CANCELORDERS/1000               206568 ns       206508 ns         3416
+BM_CANCELORDERS/10000             2291810 ns      2291348 ns          306
+BM_CANCELORDERS/100000           33921875 ns     33919482 ns           20
+BM_MODIFYORDERS/10                   3711 ns         3717 ns       189127
+BM_MODIFYORDERS/100                 30519 ns        30514 ns        23199
+BM_MODIFYORDERS/1000               623501 ns       623347 ns         1126
+BM_MODIFYORDERS/10000            24983420 ns     24978286 ns           28
+BM_MODIFYORDERS/100000         2012970437 ns   2012798638 ns            1
+```
+
 ### v0.4.0
 ```
 Run on (12 X 3712.04 MHz CPU s)
