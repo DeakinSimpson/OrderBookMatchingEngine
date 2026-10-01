@@ -46,7 +46,7 @@ static void BM_MARKET_REPLAY(benchmark::State& state)
     {
         FileIterator fi { DATA_FILE };
         MboMessage msg;
-        OrderBook orderbook {};
+        OrderBook orderbook {1000000};
 
         while (fi.Next(msg))
         {
@@ -70,7 +70,7 @@ static void BM_REPLAY_LATENCY(benchmark::State& state)
     for (auto _ : state)
     {
         FileIterator fi { DATA_FILE };
-        OrderBook orderBook {};
+        OrderBook orderBook {1000000};
         MboMessage msg;
 
         while (fi.Next(msg))

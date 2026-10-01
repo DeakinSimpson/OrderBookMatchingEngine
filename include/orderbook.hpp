@@ -81,11 +81,11 @@ enum class ModifyStatus {
 class OrderBook
 {
 public:
-  OrderBook() 
+  OrderBook(const size_t expectedOrders = 0)
       : asks_{}
       , bids_{}
       , orders_{}
-  {  }
+  { orders_.reserve(expectedOrders); }
   
   void AddOrder(const OrderPointer& order);
   CancelStatus CancelOrder(OrderId orderID, Quantity quantity);

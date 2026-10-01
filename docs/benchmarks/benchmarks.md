@@ -10,6 +10,47 @@
 
 ## Raw Benchmark Data
 
+### a0.5.1
+
+Orderbook now reserves orders
+```
+Run on (12 X 4641.65 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 512 KiB (x6)
+  L3 Unified 32768 KiB (x1)
+Load Average: 0.48, 0.96, 0.87
+-----------------------------------------------------------------------------------------
+Benchmark                               Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------
+BM_INGEST/iterations:5                208 ms          208 ms            5 bytes_per_second=1.82798Gi/s items_per_second=35.0496M/s
+BM_MARKET_REPLAY/iterations:5         837 ms          837 ms            5 items_per_second=8.69173M/s
+BM_REPLAY_LATENCY/iterations:1       1073 ms         1073 ms            1 max_ns=257.478k p50_ns=81 p90_ns=161 p99.9_ns=631 p99_ns=380
+BM_ADDORDERS/10                      2446 ns         2446 ns       285187
+BM_ADDORDERS/100                    27606 ns        27595 ns        25119
+BM_ADDORDERS/1000                  288603 ns       288537 ns         2416
+BM_ADDORDERS/10000                3043699 ns      3043407 ns          231
+BM_ADDORDERS/100000              40966083 ns     40962363 ns           17
+BM_ADDORDERS/1000000            703293195 ns    703195868 ns            1
+BM_MATCHORDERS/10                    1853 ns         1852 ns       377770
+BM_MATCHORDERS/100                  14471 ns        14465 ns        48603
+BM_MATCHORDERS/1000                142016 ns       142005 ns         4934
+BM_MATCHORDERS/10000              1449917 ns      1449789 ns          483
+BM_MATCHORDERS/100000            20384338 ns     20382389 ns           34
+BM_MATCHORDERS/1000000          283227882 ns    283205808 ns            3
+BM_CANCELORDERS/10                   1964 ns         1963 ns       357637
+BM_CANCELORDERS/100                 16342 ns        16341 ns        42671
+BM_CANCELORDERS/1000               202073 ns       202043 ns         3438
+BM_CANCELORDERS/10000             2252883 ns      2252271 ns          309
+BM_CANCELORDERS/100000           35047359 ns     35043473 ns           20
+BM_MODIFYORDERS/10                   3614 ns         3618 ns       193638
+BM_MODIFYORDERS/100                 29671 ns        29667 ns        23305
+BM_MODIFYORDERS/1000               303070 ns       302972 ns         2313
+BM_MODIFYORDERS/10000             3191723 ns      3191539 ns          220
+BM_MODIFYORDERS/100000           44051661 ns     44045889 ns           16
+```
+
 ### a0.5.0
 
 Update Add Order to use std::prev instead of std::next(orders.begin(), static_cast<ptrdiff_t>(orders.size()) - 1)
