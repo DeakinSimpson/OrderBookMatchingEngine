@@ -6,9 +6,9 @@
 
 TEST(OrderBookTest, PriceTimePriority) {
   OrderBook orderBook {};
-  Order order1 { 0, Side::Ask, 101.0, 10 };
-  Order order2 { 1, Side::Ask, 100.0, 10 };
-  Order order3 { 2, Side::Bid, 101.0, 10 };
+  Order order1 { 0, Side::Ask, 101, 10 };
+  Order order2 { 1, Side::Ask, 100, 10 };
+  Order order3 { 2, Side::Bid, 101, 10 };
 
   orderBook.AddOrder(std::make_shared<Order>(order1));
   orderBook.AddOrder(std::make_shared<Order>(order2));
@@ -21,8 +21,8 @@ TEST(OrderBookTest, PriceTimePriority) {
 
 TEST(OrderBookTest, DontMatchIfBestAskNotMet) {
   OrderBook orderBook {};
-  Order order1 { 0, Side::Ask, 100.0, 10 };
-  Order order2 { 0, Side::Bid, 99.0, 10 };
+  Order order1 { 0, Side::Ask, 100, 10 };
+  Order order2 { 0, Side::Bid, 99, 10 };
 
   orderBook.AddOrder(std::make_shared<Order>(order1));
   orderBook.AddOrder(std::make_shared<Order>(order2));
@@ -34,8 +34,8 @@ TEST(OrderBookTest, DontMatchIfBestAskNotMet) {
 
 TEST(OrderBookTest, AskWithHigherQuantityKept) {
   OrderBook orderBook {};
-  Order order1 { 0, Side::Ask, 100.0, 10 };
-  Order order2 { 1, Side::Bid, 100.0, 15 };
+  Order order1 { 0, Side::Ask, 100, 10 };
+  Order order2 { 1, Side::Bid, 100, 15 };
 
   orderBook.AddOrder(std::make_shared<Order>(order1));
   orderBook.AddOrder(std::make_shared<Order>(order2));
@@ -46,55 +46,55 @@ TEST(OrderBookTest, AskWithHigherQuantityKept) {
 }
 
 TEST(OrderBookTest, BidWithHigherQuantityKept) {  OrderBook orderBook {};
-  Order order1 { 0, Side::Ask, 100.0, 15 };
-  Order order2 { 1, Side::Bid, 100.0, 10 };
+  Order order1 { 0, Side::Ask, 100, 15 };
+  Order order2 { 1, Side::Bid, 100, 10 };
 
   orderBook.AddOrder(std::make_shared<Order>(order1));
   orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
-  EXPECT_EQ(orderBook.GetBestAsk(), 100.0);
+  EXPECT_EQ(orderBook.GetBestAsk(), 100);
 
 }
 
 TEST(OrderBookTest, AskDeletedWhenFilled) {
   OrderBook orderBook {};
-  Order order1 { 0, Side::Ask, 100.0, 10 };
-  Order order2 { 1, Side::Bid, 100.0, 15 };
+  Order order1 { 0, Side::Ask, 100, 10 };
+  Order order2 { 1, Side::Bid, 100, 15 };
 
   orderBook.AddOrder(std::make_shared<Order>(order1));
   orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
-  EXPECT_EQ(orderBook.GetBestAsk(), 0.0);
+  EXPECT_EQ(orderBook.GetBestAsk(), 0);
 
 }
 
 TEST(OrderBookTest, BidDeletedWhenFilled) {
   OrderBook orderBook {};
-  Order order1 { 0, Side::Ask, 100.0, 15 };
-  Order order2 { 1, Side::Bid, 100.0, 10 };
+  Order order1 { 0, Side::Ask, 100, 15 };
+  Order order2 { 1, Side::Bid, 100, 10 };
 
   orderBook.AddOrder(std::make_shared<Order>(order1));
   orderBook.AddOrder(std::make_shared<Order>(order2));
 
   orderBook.MatchOrders();
 
-  EXPECT_EQ(orderBook.GetBestBid(), 0.0);
+  EXPECT_EQ(orderBook.GetBestBid(), 0);
 }
 
 TEST(OrderBookTest, GetBestBidOnEmptyOrderBook) {
   OrderBook orderBook {};
 
-  EXPECT_EQ(orderBook.GetBestBid(), 0.0);
+  EXPECT_EQ(orderBook.GetBestBid(), 0);
 }
 
 TEST(OrderBookTest, GetBestAskOnEmptyOrderBook) {
   OrderBook orderBook {};
 
-  EXPECT_EQ(orderBook.GetBestAsk(), 0.0);
+  EXPECT_EQ(orderBook.GetBestAsk(), 0);
 }
 
 TEST(OrderBookTest, CancelOrderAfterFullyCanceled) {
@@ -171,7 +171,7 @@ TEST(OrderBookTest, ModifyOrderSucceedsIfValid) {
   OrderBook orderbook {};
 
   orderbook.AddOrder(std::make_shared<Order>(
-    Order{0, Side::Ask, 10.0, 10}));
+    Order{0, Side::Ask, 10, 10}));
 
   const ModifyStatus status { orderbook.ModifyOrder(0, 10.0, 8) };
 

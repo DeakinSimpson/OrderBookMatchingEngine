@@ -22,7 +22,7 @@ enum class TradeType {
 };
 
 using OrderId = uint64_t;
-using Price = double;
+using Price = uint64_t;
 using Quantity = uint32_t;  // cant have negative stock
 
 class Order

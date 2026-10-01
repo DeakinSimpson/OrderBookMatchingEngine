@@ -4,50 +4,62 @@
 
 #include "ingest.hpp"
 
-TradeInfo FileIterator::GetTradeInfo() {
-  // get the next line
-  std::string line;
-  if (!std::getline(fs, line)) {
-    return { 0, Side::None, 0, 0, TradeType::None };
-  }
+bool FileIterator::Next(MboMessage &out)
+{
+    constexpr uint8_t RTYPE_MBO { 0xA0 };
+    constexpr size_t HEADER_SIZE { sizeof(RecordHeader) };
+    constexpr size_t MESSAGE_SIZE { sizeof(MboMessage) - HEADER_SIZE };
 
-  // convert the line string to a string stream
-  std::stringstream lineStream(line);
-  std::string cell;
+    // read the header into out.header
+    while (fs.read(reinterpret_cast<char*>(&out.header), HEADER_SIZE))
+    {
+        // check if the order is a MBO order
+        if (out.header.rtype != RTYPE_MBO)
+        {
+            // jump the headers length - the header that we have passed
+            fs.seekg(out.header.length * 4 - static_cast<long int>(HEADER_SIZE), std::ios::cur);
+            continue;
+        }
 
-  std::getline(lineStream, cell, ','); // skip ts_event
-  // uint64_t ts_recv { std::stoull(cell) };
-  std::getline(lineStream, cell, ','); // skip ts_event
-  std::getline(lineStream, cell, ','); // skip rtype
-  std::getline(lineStream, cell, ','); // skip publisher_id
-  std::getline(lineStream, cell, ','); // skip instument_id
-  std::getline(lineStream, cell, ',');
-  char action { cell[0] };
-  std::getline(lineStream, cell, ',');
-  char side { cell[0] };
-  std::getline(lineStream, cell, ',');
-  double price { std::stod(cell) };
-  std::getline(lineStream, cell, ',');
-  uint32_t size { static_cast<uint32_t>(std::stoul(cell)) };
-  std::getline(lineStream, cell, ','); // skip channel_id
-  std::getline(lineStream, cell, ',');
-  uint64_t order_id { std::stoull(cell) };
-  std::getline(lineStream, cell, ','); // skip flags
-  std::getline(lineStream, cell, ','); // skip ts_in_delta
-  std::getline(lineStream, cell, ','); // skip sequence
+        // read from end of head to message size into out
+        fs.read(reinterpret_cast<char*>(&out) + HEADER_SIZE, MESSAGE_SIZE);
+        return true;
+    }
 
-  Side side_ = [side]() {
-    if (side == 'A') { return Side::Ask; }
-    if (side == 'B') { return Side::Bid; }
-    return Side::None;
-  }(); // adding () immediatly executes the lambda
+    // EOF
+    return false;
+}
+static Side ToSide(const char c)
+{
+    switch (c)
+    {
+        case 'A': return Side::Ask;
+        case 'B': return Side::Bid;
+        default:  return Side::None;
+    }
+}
 
-  TradeType tradeType_ = [action]() {
-    if (action == 'A') return TradeType::Add;
-    if (action == 'C') return TradeType::Cancel;
-    if (action == 'M') return TradeType::Modify;
-    return TradeType::None;
-  }();
+static TradeType ToTradeType(const char c)
+{
+    switch (c)
+    {
+        case 'A': return TradeType::Add;
+        case 'C': return TradeType::Cancel;
+        case 'M': return TradeType::Modify;
+        default:  return TradeType::None;
+    }
+}
 
-  return { order_id, side_, price, size, tradeType_ };
+
+Trade FileIterator::GetTradeInfo(const MboMessage &msg)
+{
+    return Trade{
+        TradeInfo{
+            msg.order_id,
+            ToSide(msg.side),
+            msg.price,
+            msg.size,
+            ToTradeType(msg.action)
+        }
+    };
 }
