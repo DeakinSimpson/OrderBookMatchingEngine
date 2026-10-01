@@ -36,6 +36,29 @@ static void BM_INGEST(benchmark::State& state)
 // run INGEST benchmark
 BENCHMARK(BM_INGEST)->Unit(benchmark::kMillisecond)->Iterations(5);
 
+// benchmark for replay speed
+static void BM_MARKET_REPLAY(benchmark::State& state)
+{
+    int64_t messages {};
+
+    for (auto _ : state)
+    {
+        FileIterator fi { DATA_FILE };
+        MboMessage msg;
+        OrderBook orderbook {};
+
+        while (fi.Next(msg))
+        {
+            fi.GetTradeInfo(msg).MakeTrade(orderbook);
+            ++messages;
+        }
+    }
+
+    // items per second
+    state.SetItemsProcessed(messages);
+}
+BENCHMARK(BM_MARKET_REPLAY)->Unit(benchmark::kMillisecond)->Iterations(5);
+
 static void BM_ADDORDERS(benchmark::State& state) {
     // get the number of orders as the range of the input state
     const int numOrders { static_cast<int>(state.range(0)) };
