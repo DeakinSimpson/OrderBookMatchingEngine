@@ -26,8 +26,11 @@ static void BM_INGEST(benchmark::State& state)
         }
     }
 
-    state.SetItemsProcessed(messages); // items per second
-    state.SetBytesProcessed(static_cast<int64_t>(messages * sizeof(MboMessage))); // bytes per second
+    // items per second
+    state.SetItemsProcessed(messages);
+
+    // bytes per second
+    state.SetBytesProcessed(static_cast<int64_t>(messages * sizeof(MboMessage)));
 }
 
 // run INGEST benchmark
