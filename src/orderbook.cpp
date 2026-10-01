@@ -12,11 +12,12 @@
  */
 void Order::Fill(const Quantity quantity)
 {
-    if (quantity > quantity_) {
+    if (quantity > quantity_)
+    {
         std::cerr << "Cant Fill Order for More than its Quantity" << std::endl;
         return;
     }
-  quantity_ -= quantity;
+    quantity_ -= quantity;
 }
 
 // --- OrderBook ---
@@ -24,83 +25,91 @@ void Order::Fill(const Quantity quantity)
  *
  * @param order The Order that will be Added to the orderbook
  */
-void OrderBook::AddOrder(const OrderPointer& order)
+void OrderBook::AddOrder(const OrderPointer &order)
 {
-  if (orders_.contains(order->GetId())) { return; }
+    if (orders_.contains(order->GetId())) { return; }
 
-  if (order->GetSide() == Side::Ask) {
-    /*
-     * 1. Get the price of the order
-     * 2. get the orders vector for that price level
-     * 3. push back the new order (FIFO)
-     * 4. get the iterator of the last element (the one we just inserted)
-     * 5. add the order ID and the iterator tot he orders_ hashtable
-     */
-    auto& orders { asks_[order->GetPrice()] };
-    orders.push_back(order);
+    if (order->GetSide() == Side::Ask)
+    {
+        /*
+         * 1. Get the price of the order
+         * 2. get the orders vector for that price level
+         * 3. push back the new order (FIFO)
+         * 4. get the iterator of the last element (the one we just inserted)
+         * 5. add the order ID and the iterator tot he orders_ hashtable
+         */
+        auto &orders{asks_[order->GetPrice()]};
+        orders.push_back(order);
 
-    const OrderPointers::iterator iterator { std::prev(orders.end()) };
+        const OrderPointers::iterator iterator{std::prev(orders.end())};
 
-    orders_.insert({
-      order->GetId(),
-      std::make_shared<OrderEntry>(OrderEntry{order, iterator})
-    });
-  } else {
-    // same as above for bids_
-    auto& orders { bids_[order->GetPrice()] };
-    orders.push_back(order);
+        orders_.insert({
+            order->GetId(),
+            std::make_shared<OrderEntry>(OrderEntry{order, iterator})
+        });
+    } else
+    {
+        // same as above for bids_
+        auto &orders{bids_[order->GetPrice()]};
+        orders.push_back(order);
 
-    OrderPointers::iterator iterator { std::prev(orders.end()) };
+        OrderPointers::iterator iterator{std::prev(orders.end())};
 
-    orders_.insert({
-      order->GetId(),
-      std::make_shared<OrderEntry>(OrderEntry{order, iterator})
-    });
-  }
+        orders_.insert({
+            order->GetId(),
+            std::make_shared<OrderEntry>(OrderEntry{order, iterator})
+        });
+    }
 }
 
 void OrderBook::MatchOrders()
 {
-  // loop through each bid and ask Price
-  while (true) {
-    // if there are no bids or asks then there is nothing to match
-    if (bids_.empty() || asks_.empty())
-    { break; }
+    // loop through each bid and ask Price
+    while (true)
+    {
+        // if there are no bids or asks then there is nothing to match
+        if (bids_.empty() || asks_.empty())
+        {
+            break;
+        }
 
-    auto& [askPrice, asks] { *asks_.begin() };
-    auto& [bidPrice, bids] { *bids_.begin() };
+        auto &[askPrice, asks]{*asks_.begin()};
+        auto &[bidPrice, bids]{*bids_.begin()};
 
-    // if the best ask is higher then the best bid no orders can match
-    if (bidPrice < askPrice) { break; }
+        // if the best ask is higher then the best bid no orders can match
+        if (bidPrice < askPrice) { break; }
 
-    // loop through each bid and ask and try to match at this level
-    while (!asks.empty() && !bids.empty()) {
-      // FIFO, get fist value of vector
-      auto& bid { bids.front() };
-      auto& ask { asks.front() };
+        // loop through each bid and ask and try to match at this level
+        while (!asks.empty() && !bids.empty())
+        {
+            // FIFO, get fist value of vector
+            auto &bid{bids.front()};
+            auto &ask{asks.front()};
 
-      // get the min quantity, cant fill a quantity larger then the min
-      Quantity quantity { std::min(bid->GetQuantity(), ask->GetQuantity())};
+            // get the min quantity, cant fill a quantity larger then the min
+            Quantity quantity{std::min(bid->GetQuantity(), ask->GetQuantity())};
 
-      bid->Fill(quantity);
-      ask->Fill(quantity);
+            bid->Fill(quantity);
+            ask->Fill(quantity);
 
-      // if there is no more quantity remove it from the vector
-      if (bid->GetQuantity() == 0) {
-        orders_.erase(bid->GetId());
-        bids.erase(bids.begin());
-      }
+            // if there is no more quantity remove it from the vector
+            if (bid->GetQuantity() == 0)
+            {
+                orders_.erase(bid->GetId());
+                bids.erase(bids.begin());
+            }
 
-      if (ask->GetQuantity() == 0) {
-        orders_.erase(ask->GetId());
-        asks.erase(asks.begin());
-      }
+            if (ask->GetQuantity() == 0)
+            {
+                orders_.erase(ask->GetId());
+                asks.erase(asks.begin());
+            }
+        }
+
+        // check if the entire price level is empty now
+        if (bids.empty()) { bids_.erase(bidPrice); }
+        if (asks.empty()) { asks_.erase(askPrice); }
     }
-
-    // check if the entire price level is empty now
-    if (bids.empty()) { bids_.erase(bidPrice); }
-    if (asks.empty()) { asks_.erase(askPrice); }
-  }
 }
 
 /**
@@ -132,15 +141,15 @@ Price OrderBook::GetBestAsk() const
  *
  * @return True if there is a match, false otherwise
  */
-template <typename T>
-static bool CheckMatchCondition(const T& _side, const Price price, const Side side)
+template<typename T>
+static bool CheckMatchCondition(const T &_side, const Price price, const Side side)
 {
     if (_side.empty())
     {
         return false;
     }
 
-    const auto& [levelPrice, _] = *_side.begin();
+    const auto &[levelPrice, _] = *_side.begin();
 
     return (side == Side::Ask) ? (price <= levelPrice) : (price >= levelPrice);
 }
@@ -169,50 +178,51 @@ bool OrderBook::CanMatch(const Side side, const Price price)
  * @return The status of CancelOrder(), Success, OverFill, Fail
  */
 CancelStatus OrderBook::CancelOrder(
-  const OrderId orderID,
-  const Quantity quantity)
+    const OrderId orderID,
+    const Quantity quantity)
 {
-  // cant cancel order that does not exist
-  if (!orders_.contains(orderID)) { return CancelStatus::Fail; }
+    // cant cancel order that does not exist
+    if (!orders_.contains(orderID)) { return CancelStatus::Fail; }
 
-  const auto entry { orders_.at(orderID) }; // copies pointers
-  const auto& order { entry->order_ };
-  const auto& iterator { entry->iterator_ };
+    const auto entry{orders_.at(orderID)}; // copies pointers
+    const auto &order{entry->order_};
+    const auto &iterator{entry->iterator_};
 
-  // if the cancel amount is less then the total amount we can fill and return
-  if (quantity < order->GetQuantity()) {
-    order->Fill(quantity);
-    return CancelStatus::Success;
-  }
+    // if the cancel amount is less then the total amount we can fill and return
+    if (quantity < order->GetQuantity())
+    {
+        order->Fill(quantity);
+        return CancelStatus::Success;
+    }
 
-  /*
-   * Get the return status before removing the item (cant get overfill if gone)
-   */
-  CancelStatus returnStatus = (quantity == order->GetQuantity())
-    ? CancelStatus::Success
-    : CancelStatus::OverFill;
+    /*
+     * Get the return status before removing the item (cant get overfill if gone)
+     */
+    CancelStatus returnStatus = (quantity == order->GetQuantity())
+                                    ? CancelStatus::Success
+                                    : CancelStatus::OverFill;
 
-  orders_.erase(orderID);
+    orders_.erase(orderID);
 
-  /*
-   * Remove from Sides list, then if the list is empty, remove price level
-   */
-  Price price { order->GetPrice() };
-  if (order->GetSide() == Side::Ask)
-  {
-    auto& orders { asks_.at(price) };
-    orders.erase(iterator);
+    /*
+     * Remove from Sides list, then if the list is empty, remove price level
+     */
+    Price price{order->GetPrice()};
+    if (order->GetSide() == Side::Ask)
+    {
+        auto &orders{asks_.at(price)};
+        orders.erase(iterator);
 
-    if (orders.empty()) { asks_.erase(price); }
-  } else
-  {
-    auto& orders { bids_.at(price) };
-    orders.erase(iterator);
+        if (orders.empty()) { asks_.erase(price); }
+    } else
+    {
+        auto &orders{bids_.at(price)};
+        orders.erase(iterator);
 
-    if (orders.empty()) { bids_.erase(price); }
-  }
+        if (orders.empty()) { bids_.erase(price); }
+    }
 
-  return returnStatus;
+    return returnStatus;
 }
 
 /* when a Modify Order comes in, the price and quantity is what the price and
@@ -225,37 +235,38 @@ CancelStatus OrderBook::CancelOrder(
  * @return The Status of the order modification, Success or Fail
  */
 ModifyStatus OrderBook::ModifyOrder(
-  const OrderId orderID,
-  const Price price,
-  const Quantity quantity)
+    const OrderId orderID,
+    const Price price,
+    const Quantity quantity)
 {
-  // cant modify order that does not exist
-  if (!orders_.contains(orderID)) { return ModifyStatus::Fail; }
+    // cant modify order that does not exist
+    if (!orders_.contains(orderID)) { return ModifyStatus::Fail; }
 
-  // get the order and iterator from the orders_ list
-  const auto& order { orders_.at(orderID)->order_ };
+    // get the order and iterator from the orders_ list
+    const auto &order{orders_.at(orderID)->order_};
 
-  // if order is reducing its quantity
-  if (order->GetQuantity() >= quantity && order->GetPrice() == price) {
-    // reduce quantity
-    // keep same Price-Time Priority (stays in same spot in queue)
-    order->Fill(order->GetQuantity() - quantity);
-  } else
-  {
-    // save temp values that wont persist
-    const OrderId t_orderID { order->GetId() };
-    const Side t_side { order->GetSide() };
+    // if order is reducing its quantity
+    if (order->GetQuantity() >= quantity && order->GetPrice() == price)
+    {
+        // reduce quantity
+        // keep same Price-Time Priority (stays in same spot in queue)
+        order->Fill(order->GetQuantity() - quantity);
+    } else
+    {
+        // save temp values that wont persist
+        const OrderId t_orderID{order->GetId()};
+        const Side t_side{order->GetSide()};
 
-    // cancel the order
-    CancelOrder(order->GetId(), order->GetQuantity());
+        // cancel the order
+        CancelOrder(order->GetId(), order->GetQuantity());
 
-    // add the order to the orderbook
-    AddOrder(
-      std::make_shared<Order>(Order(t_orderID, t_side, price, quantity))
-    );
-  }
+        // add the order to the orderbook
+        AddOrder(
+            std::make_shared<Order>(Order(t_orderID, t_side, price, quantity))
+        );
+    }
 
-  return ModifyStatus::Success;
+    return ModifyStatus::Success;
 }
 
 // --- Trade ---
@@ -263,16 +274,19 @@ ModifyStatus OrderBook::ModifyOrder(
  *
  * @param orderBook The orderbook that the trade will be made in
  */
-void Trade::MakeTrade(OrderBook& orderBook) const
+void Trade::MakeTrade(OrderBook &orderBook) const
 {
-  if (tradeInfo_.tradeType == TradeType::Add){
-    orderBook.AddOrder(ToOrderPointer());
-  } else if (tradeInfo_.tradeType == TradeType::Cancel) {
-    orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
-  } else if (tradeInfo_.tradeType == TradeType::Modify) {
-    orderBook.ModifyOrder(
-      tradeInfo_.orderID, tradeInfo_.price, tradeInfo_.quantity);
-  }
+    if (tradeInfo_.tradeType == TradeType::Add)
+    {
+        orderBook.AddOrder(ToOrderPointer());
+    } else if (tradeInfo_.tradeType == TradeType::Cancel)
+    {
+        orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
+    } else if (tradeInfo_.tradeType == TradeType::Modify)
+    {
+        orderBook.ModifyOrder(
+            tradeInfo_.orderID, tradeInfo_.price, tradeInfo_.quantity);
+    }
 }
 
 /**
@@ -281,10 +295,10 @@ void Trade::MakeTrade(OrderBook& orderBook) const
  */
 OrderPointer Trade::ToOrderPointer() const
 {
-  return std::make_shared<Order>(Order{
-    tradeInfo_.orderID,
-    tradeInfo_.side,
-    tradeInfo_.price,
-    tradeInfo_.quantity
-  });
+    return std::make_shared<Order>(Order{
+        tradeInfo_.orderID,
+        tradeInfo_.side,
+        tradeInfo_.price,
+        tradeInfo_.quantity
+    });
 }

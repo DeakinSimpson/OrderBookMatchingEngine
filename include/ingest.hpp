@@ -37,7 +37,7 @@ class FileIterator
     std::ifstream fs;
 
 public:
-    FileIterator(const std::string& filepath)
+    FileIterator(const std::string &filepath)
         : fs{filepath}
     {
         if (!fs.is_open())
@@ -51,7 +51,7 @@ public:
 
         // read the length of the metadata [0] is version
         const auto metadataLength
-            { std::bit_cast<std::array<uint32_t, 2>>(prefix)[1] };
+                {std::bit_cast<std::array<uint32_t, 2> >(prefix)[1]};
 
         // start at end of metadata
         fs.seekg(metadataLength, std::ios::cur);
@@ -59,7 +59,7 @@ public:
 
     bool IsEOF() { return fs.eof(); }
 
-    bool Next(MboMessage& out);
+    bool Next(MboMessage &out);
 
-    Trade GetTradeInfo(const MboMessage& msg);
+    Trade GetTradeInfo(const MboMessage &msg);
 };
