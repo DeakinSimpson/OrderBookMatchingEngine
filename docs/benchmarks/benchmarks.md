@@ -1,4 +1,11 @@
 # Benchmarks
+## MBO Replay Latency
+| Version | Improvement | p50 ns | p90 ns | p99 ns | p99.9 ns | max ns |
+| --- | --- | --- | --- | --- | --- | --- |
+| v0.5.0 | Hashmap Reservation | 81 | 161 | 380 | 631 | 257478 
+|    a0.5.1     |      std::prev       |    100    |    181    |    381    |    641      |   5410240 |
+| a0.5.0 |  | 101 | 240 | 1233 | 26540 | 8740820 |
+
 ## Benchmark Data by Version
 | Version | Improvement |  Type | Average Time (ns) |
 | --- | --- | --- | --- |
@@ -7,10 +14,19 @@
 | 0.3.0 | - CancelOrder<br>- std::list instead of std::vector for orders_ | MatchOrders() | 257 |
 | 0.3.0 | - CancelOrder<br>- std::list instead of std::vector for orders_ | CancelOrders() | 426 |
 | 0.4.0 | - ModifyOrder Added | ModifyOrder() | 36064 |
+| 0.5.0 | - std::prev<br>- reserve()<br>- No double hashmap calls | MatchOrders() | 283 |
+| 0.5.0 | - std::prev<br>- reserve()<br>- No double hashmap calls | CancelOrders() | 350 |
+| 0.5.0 | - std::prev<br>- reserve()<br>- No double hashmap calls | ModifyOrders() | 440 |
+| 0.5.0 | - std::prev<br>- reserve()<br>- No double hashmap calls | AddOrder() | 703 |
+
+## DBN MBO Replay Throughput
+| Version | Improvement | MPS (Million Messages per second) |
+| --- | ---  | ---  |
+| v0.5.0 | Hashmap Reservation | 8.69173 |
+
 
 ## Raw Benchmark Data
-
-### a0.5.1
+### v0.5.0
 
 Orderbook now reserves orders
 ```
@@ -51,9 +67,11 @@ BM_MODIFYORDERS/10000             3191723 ns      3191539 ns          220
 BM_MODIFYORDERS/100000           44051661 ns     44045889 ns           16
 ```
 
-### a0.5.0
+### a0.5.1
+
 
 Update Add Order to use std::prev instead of std::next(orders.begin(), static_cast<ptrdiff_t>(orders.size()) - 1)
+```
 Run on (12 X 4641.53 MHz CPU s)
 CPU Caches:
 L1 Data 32 KiB (x6)
@@ -89,7 +107,9 @@ BM_MODIFYORDERS/100                 29579 ns        29573 ns        23788
 BM_MODIFYORDERS/1000               304491 ns       304473 ns         2260
 BM_MODIFYORDERS/10000             3203706 ns      3203472 ns          220
 BM_MODIFYORDERS/100000           43854075 ns     43848390 ns           16
+```
 
+## a0.5.0
 Initial
 ```
 Run on (12 X 4641.65 MHz CPU s)
