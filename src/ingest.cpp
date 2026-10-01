@@ -50,7 +50,6 @@ static TradeType ToTradeType(const char c)
     }
 }
 
-
 Trade FileIterator::GetTradeInfo(const MboMessage &msg)
 {
     return Trade{

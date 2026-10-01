@@ -12,9 +12,10 @@
  */
 void Order::Fill(const Quantity quantity)
 {
-  if (quantity > quantity_) {
-    std::cerr << "Cant Fill Order for More than its Quantity" << std::endl;
-  }
+    if (quantity > quantity_) {
+        std::cerr << "Cant Fill Order for More than its Quantity" << std::endl;
+        return;
+    }
   quantity_ -= quantity;
 }
 
@@ -239,7 +240,7 @@ ModifyStatus OrderBook::ModifyOrder(
   const auto& order { orders_.at(orderID)->order_ };
 
   // if order is reducing its quantity
-  if (order->GetQuantity() > quantity && order->GetPrice() == price) {
+  if (order->GetQuantity() >= quantity && order->GetPrice() == price) {
     // reduce quantity
     // keep same Price-Time Priority (stays in same spot in queue)
     order->Fill(order->GetQuantity() - quantity);
