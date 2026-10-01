@@ -53,3 +53,16 @@ part of the program. It was a straight forward implementation of the OrderType. 
 design decision as the CancelOrder, where it returns a ModifyStatus enum, this is so that the status of
 the order can be tracked. These OrderStatus's are not failures in code (even though it is called Fail)
 but rather a common return when placing a Modify Order.
+
+## Performance and Cleanup (v0.5.0)
+The key performance improvements that were made were, changing AddOrder to use
+std::prev() instead of std::next(), this was because for every single AddOrder()
+we were traversing from .start() to .end() - 1. This was causing O(N) insertion,
+moving to std::prev means that we not have the O(1) AddOrder().
+
+The next performance improvement was using .reserver() on the orders_ in orderbook,
+this means that there is less rehashes occurring when the hashmap inevitably
+gets full.
+
+The final improvement that was made was retrieving the iterator one time from 
+the hasmap instead of getting the iterator twice, this halves the hashmap calls.
