@@ -4,6 +4,36 @@
 #include <benchmark/benchmark.h>
 #include "orderbook.hpp"
 
+static void BM_ADDORDERS(benchmark::State& state) {
+    // get the number of orders as the range of the input state
+    const int numOrders { static_cast<int>(state.range(0)) };
+
+    // loop through from 0-maxrange of the input state
+    for (auto _ : state) {
+        OrderBook BMOrderBook {};
+
+        // create bids from 100 -> 100 + numOrders -1
+        for (int i {}; i < numOrders; ++i) {
+            BMOrderBook.AddOrder(std::make_shared<Order>(Order{
+              static_cast<OrderId>(i),
+              Side::Bid,
+              static_cast<Price>(100 + i),
+              10
+            }));
+        }
+
+        // create asks from 100 -> 100 + numOrders -1
+        for (int i {}; i < numOrders; ++i) {
+            BMOrderBook.AddOrder(std::make_shared<Order>(Order{
+              static_cast<OrderId>(numOrders + i),
+              Side::Ask,
+              static_cast<Price>(100 + i),
+              10
+            }));
+        }
+    }
+}
+
 /*
  * Benchmark to test the MatchOrders() function
  */
@@ -133,6 +163,14 @@ static void BM_MODIFYORDERS(benchmark::State& state) {
 }
 
 // test different benchmark ranges
+BENCHMARK(BM_ADDORDERS)
+  -> Arg(10)
+  -> Arg(100)
+  -> Arg(1000)
+  -> Arg(10000)
+  -> Arg(100000)
+  -> Arg(1000000);
+
 BENCHMARK(BM_MATCHORDERS)
   -> Arg(10)
   -> Arg(100)

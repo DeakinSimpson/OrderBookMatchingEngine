@@ -39,9 +39,7 @@ void OrderBook::AddOrder(const OrderPointer& order)
     auto& orders { asks_[order->GetPrice()] };
     orders.push_back(order);
 
-    const OrderPointers::iterator iterator {
-      std::next(orders.begin(), static_cast<ptrdiff_t>(orders.size() - 1))
-    };
+    const OrderPointers::iterator iterator { std::prev(orders.end()) };
 
     orders_.insert({
       order->GetId(),
