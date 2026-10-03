@@ -1,21 +1,12 @@
 #pragma once
 
-#include <cstdint>
-#include <iostream>
 #include <list>
 #include <map>
 #include <memory>
+#include <queue>
 #include <unordered_map>
 #include "order.hpp"
-
-/*
- * Original thought was to use std::vector as it has better cache locality,
- * and O(1) random access whereas list has O(n), however because vector
- * invalidates iterators where there is a insertion or deletion i have chosen
- * to use list instead
- */
-using OrderPointer = std::shared_ptr<Order>;
-using OrderPointers = std::list<OrderPointer>;
+#include "pricelevel.hpp"
 
 /*
  * We need a CancelStatus because a cancel order failing is not a failure in
@@ -69,8 +60,8 @@ private:
 
     // TODO: experiment with different data structures and convert Order to
     // pointers
-    std::map<Price, OrderPointers, std::less<Price> > asks_; // highest ask at top
-    std::map<Price, OrderPointers, std::greater<Price> > bids_; // lowest bid at top
+    std::map<Price, PriceLevel, std::less<Price> > asks_; // highest ask at top
+    std::map<Price, PriceLevel, std::greater<Price> > bids_; // lowest bid at top
     // keep track of orders by ID, to get their location and quickly modify
     // this is to reduce latency for future Cancel and Modify functions
     std::unordered_map<OrderId, std::shared_ptr<OrderEntry> > orders_;

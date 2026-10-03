@@ -4,4 +4,28 @@
 
 #pragma once
 
+#include "order.hpp"
 
+class PriceLevel
+{
+    Price price_ {};
+    OrderPointers order_pointers_;
+
+public:
+
+    PriceLevel() = default;
+    PriceLevel(Price price) : price_ { price } {  }
+
+    bool operator==(const PriceLevel &) const = default;
+    auto operator<=>(const PriceLevel &) const = default;
+
+    [[nodiscard]] Price GetPrice() const { return price_; }
+    [[nodiscard]] OrderPointer GetFront() const;
+    [[nodiscard]] bool IsEmpty() const { return order_pointers_.empty(); }
+
+    void PopFront();
+    void Erase(const OrderPointers::iterator& it);
+
+    OrderPointers::iterator AddOrder(const OrderPointer& orderPointer);
+    void CancelOrder(const OrderPointers::iterator& it);
+};

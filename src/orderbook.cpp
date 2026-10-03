@@ -21,26 +21,22 @@ void OrderBook::AddOrder(const OrderPointer &order)
          * 4. get the iterator of the last element (the one we just inserted)
          * 5. add the order ID and the iterator tot he orders_ hashtable
          */
-        auto &orders{asks_[order->GetPrice()]};
-        orders.push_back(order);
-
-        const OrderPointers::iterator iterator{std::prev(orders.end())};
+        auto& price_level { asks_[order->GetPrice()] };
+        auto it { price_level.AddOrder(order) };
 
         orders_.insert({
             order->GetId(),
-            std::make_shared<OrderEntry>(OrderEntry{order, iterator})
+            std::make_shared<OrderEntry>(OrderEntry{order, it})
         });
     } else
     {
         // same as above for bids_
-        auto &orders{bids_[order->GetPrice()]};
-        orders.push_back(order);
-
-        OrderPointers::iterator iterator{std::prev(orders.end())};
+        auto& price_level { bids_[order->GetPrice()] };
+        auto it { price_level.AddOrder(order) };
 
         orders_.insert({
             order->GetId(),
-            std::make_shared<OrderEntry>(OrderEntry{order, iterator})
+            std::make_shared<OrderEntry>(OrderEntry{order, it})
         });
     }
 }
@@ -63,11 +59,11 @@ void OrderBook::MatchOrders()
         if (bidPrice < askPrice) { break; }
 
         // loop through each bid and ask and try to match at this level
-        while (!asks.empty() && !bids.empty())
+        while (!asks.IsEmpty() && !bids.IsEmpty())
         {
             // FIFO, get fist value of vector
-            auto &bid{bids.front()};
-            auto &ask{asks.front()};
+            auto bid{bids.GetFront()};
+            auto ask{asks.GetFront()};
 
             // get the min quantity, cant fill a quantity larger then the min
             Quantity quantity{std::min(bid->GetQuantity(), ask->GetQuantity())};
@@ -79,19 +75,19 @@ void OrderBook::MatchOrders()
             if (bid->GetQuantity() == 0)
             {
                 orders_.erase(bid->GetId());
-                bids.erase(bids.begin());
+                bids.PopFront();
             }
 
             if (ask->GetQuantity() == 0)
             {
                 orders_.erase(ask->GetId());
-                asks.erase(asks.begin());
+                asks.PopFront();
             }
         }
 
         // check if the entire price level is empty now
-        if (bids.empty()) { bids_.erase(bidPrice); }
-        if (asks.empty()) { asks_.erase(askPrice); }
+        if (bids.IsEmpty()) { bids_.erase(bidPrice); }
+        if (asks.IsEmpty()) { asks_.erase(askPrice); }
     }
 }
 
@@ -103,7 +99,7 @@ Price OrderBook::GetBestBid() const
 {
     if (bids_.empty()) { return 0; }
 
-    return bids_.begin()->second.front()->GetPrice();
+    return bids_.begin()->second.GetFront()->GetPrice();
 }
 
 /**
@@ -114,7 +110,7 @@ Price OrderBook::GetBestAsk() const
 {
     if (asks_.empty()) { return 0; }
 
-    return asks_.begin()->second.front()->GetPrice();
+    return asks_.begin()->second.GetFront()->GetPrice();
 }
 
 /**
@@ -191,18 +187,19 @@ CancelStatus OrderBook::CancelOrder(
      * Remove from Sides list, then if the list is empty, remove price level
      */
     Price price{order->GetPrice()};
+
     if (order->GetSide() == Side::Ask)
     {
         auto &orders{asks_.at(price)};
-        orders.erase(iterator);
+        orders.Erase(iterator);
 
-        if (orders.empty()) { asks_.erase(price); }
+        if (orders.IsEmpty()) { asks_.erase(price); }
     } else
     {
         auto &orders{bids_.at(price)};
-        orders.erase(iterator);
+        orders.Erase(iterator);
 
-        if (orders.empty()) { bids_.erase(price); }
+        if (orders.IsEmpty()) { bids_.erase(price); }
     }
 
     return returnStatus;

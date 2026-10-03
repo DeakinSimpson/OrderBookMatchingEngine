@@ -5,6 +5,8 @@
 #pragma once
 
 #include <cstdint>
+#include <list>
+#include <memory>
 
 enum class Side
 {
@@ -24,6 +26,17 @@ enum class TradeType
 using OrderId = uint64_t;
 using Price = uint64_t;
 using Quantity = uint32_t; // cant have negative stock
+
+class Order; // forward declare
+
+/*
+ * Original thought was to use std::vector as it has better cache locality,
+ * and O(1) random access whereas list has O(n), however because vector
+ * invalidates iterators where there is a insertion or deletion i have chosen
+ * to use list instead
+ */
+using OrderPointer = std::shared_ptr<Order>;
+using OrderPointers = std::list<OrderPointer>;
 
 class Order
 {
