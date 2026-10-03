@@ -11,11 +11,6 @@ OrderPointers::iterator PriceLevel::AddOrder(const OrderPointer& orderPointer)
     return std::prev(order_pointers_.end());
 }
 
-void PriceLevel::CancelOrder(const OrderPointers::iterator& it)
-{
-    order_pointers_.erase(it);
-}
-
 OrderPointer PriceLevel::GetFront() const
 {
     return order_pointers_.front();
@@ -26,7 +21,7 @@ void PriceLevel::PopFront()
     order_pointers_.erase(order_pointers_.begin());
 }
 
-void PriceLevel::Erase(const OrderPointers::iterator &it)
+void PriceLevel::Erase(const OrderEntry& orderEntry)
 {
-    order_pointers_.erase(it);
+    order_pointers_.erase(orderEntry.iterator_);
 }

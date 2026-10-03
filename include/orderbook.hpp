@@ -26,6 +26,8 @@ enum class ModifyStatus
     Fail,
 };
 
+
+
 // orderbook class that holds the asks and bids, also performs the order
 // matching
 class OrderBook
@@ -52,12 +54,6 @@ public:
     Price GetBestAsk() const;
 
 private:
-    struct OrderEntry
-    {
-        OrderPointer order_{};
-        OrderPointers::iterator iterator_;
-    };
-
     // TODO: experiment with different data structures and convert Order to
     // pointers
     std::map<Price, PriceLevel, std::less<Price> > asks_; // highest ask at top

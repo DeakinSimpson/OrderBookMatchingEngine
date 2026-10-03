@@ -157,7 +157,6 @@ CancelStatus OrderBook::CancelOrder(
 
     const auto entry{orders_.at(orderID)}; // copies pointers
     const auto &order{entry->order_};
-    const auto &iterator{entry->iterator_};
 
     // if the cancel amount is less then the total amount we can fill and return
     if (quantity < order->GetQuantity())
@@ -183,13 +182,13 @@ CancelStatus OrderBook::CancelOrder(
     if (order->GetSide() == Side::Ask)
     {
         auto &orders{asks_.at(price)};
-        orders.Erase(iterator);
+        orders.Erase(*entry);
 
         if (orders.IsEmpty()) { asks_.erase(price); }
     } else
     {
         auto &orders{bids_.at(price)};
-        orders.Erase(iterator);
+        orders.Erase(*entry);
 
         if (orders.IsEmpty()) { bids_.erase(price); }
     }

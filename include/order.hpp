@@ -38,6 +38,12 @@ class Order; // forward declare
 using OrderPointer = std::shared_ptr<Order>;
 using OrderPointers = std::list<OrderPointer>;
 
+struct OrderEntry
+{
+    OrderPointer order_{};
+    OrderPointers::iterator iterator_;
+};
+
 class Order
 {
 public:
