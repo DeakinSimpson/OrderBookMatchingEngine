@@ -4,6 +4,18 @@
 
 #include "orderbook.hpp"
 
+template<typename T>
+void OrderBook::AddOrderToSide(T& side, const OrderPointer &order)
+{
+    auto& price_level { side[order->GetPrice()] };
+    auto it { price_level.AddOrder(order) };
+
+    orders_.insert({
+        order->GetId(),
+        std::make_shared<OrderEntry>(OrderEntry{order, it})
+    });
+}
+
 /**
  *
  * @param order The Order that will be Added to the orderbook
@@ -14,30 +26,10 @@ void OrderBook::AddOrder(const OrderPointer &order)
 
     if (order->GetSide() == Side::Ask)
     {
-        /*
-         * 1. Get the price of the order
-         * 2. get the orders vector for that price level
-         * 3. push back the new order (FIFO)
-         * 4. get the iterator of the last element (the one we just inserted)
-         * 5. add the order ID and the iterator tot he orders_ hashtable
-         */
-        auto& price_level { asks_[order->GetPrice()] };
-        auto it { price_level.AddOrder(order) };
-
-        orders_.insert({
-            order->GetId(),
-            std::make_shared<OrderEntry>(OrderEntry{order, it})
-        });
+        AddOrderToSide(asks_, order);
     } else
     {
-        // same as above for bids_
-        auto& price_level { bids_[order->GetPrice()] };
-        auto it { price_level.AddOrder(order) };
-
-        orders_.insert({
-            order->GetId(),
-            std::make_shared<OrderEntry>(OrderEntry{order, it})
-        });
+        AddOrderToSide(bids_, order);
     }
 }
 
