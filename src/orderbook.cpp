@@ -58,7 +58,8 @@ void OrderBook::MatchOrders()
             auto ask{asks.GetFront()};
 
             // get the min quantity, cant fill a quantity larger then the min
-            Quantity quantity{std::min(bid->GetQuantity(), ask->GetQuantity())};
+            Quantity quantity
+                {std::min(bid->GetQuantity(), ask->GetQuantity())};
 
             bid->Fill(quantity);
             ask->Fill(quantity);
@@ -113,7 +114,10 @@ Price OrderBook::GetBestAsk() const
  * @return True if there is a match, false otherwise
  */
 template<typename T>
-static bool CheckMatchCondition(const T &_side, const Price price, const Side side)
+static bool CheckMatchCondition(
+    const T &_side,
+    const Price price,
+    const Side side)
 {
     if (_side.empty())
     {
@@ -166,7 +170,7 @@ CancelStatus OrderBook::CancelOrder(
     }
 
     /*
-     * Get the return status before removing the item (cant get overfill if gone)
+     * Get return status before removing the item (cant get overfill if gone)
      */
     CancelStatus returnStatus = (quantity == order->GetQuantity())
                                     ? CancelStatus::Success
