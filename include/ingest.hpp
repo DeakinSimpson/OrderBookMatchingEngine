@@ -3,10 +3,10 @@
 #include <cstdint>
 #include <fstream>
 #include <ios>
-#include <limits>
 #include <sstream>
 #include <string>
 #include "orderbook.hpp"
+#include "trade.h"
 
 struct RecordHeader
 {

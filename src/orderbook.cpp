@@ -4,23 +4,6 @@
 
 #include "orderbook.hpp"
 
-// --- Order ---
-
-/**
- *
- * @param quantity The Amount that will be removed from the order
- */
-void Order::Fill(const Quantity quantity)
-{
-    if (quantity > quantity_)
-    {
-        std::cerr << "Cant Fill Order for More than its Quantity" << std::endl;
-        return;
-    }
-    quantity_ -= quantity;
-}
-
-// --- OrderBook ---
 /**
  *
  * @param order The Order that will be Added to the orderbook
@@ -267,38 +250,4 @@ ModifyStatus OrderBook::ModifyOrder(
     }
 
     return ModifyStatus::Success;
-}
-
-// --- Trade ---
-/**
- *
- * @param orderBook The orderbook that the trade will be made in
- */
-void Trade::MakeTrade(OrderBook &orderBook) const
-{
-    if (tradeInfo_.tradeType == TradeType::Add)
-    {
-        orderBook.AddOrder(ToOrderPointer());
-    } else if (tradeInfo_.tradeType == TradeType::Cancel)
-    {
-        orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
-    } else if (tradeInfo_.tradeType == TradeType::Modify)
-    {
-        orderBook.ModifyOrder(
-            tradeInfo_.orderID, tradeInfo_.price, tradeInfo_.quantity);
-    }
-}
-
-/**
- *
- * @return A Pointer to the Order
- */
-OrderPointer Trade::ToOrderPointer() const
-{
-    return std::make_shared<Order>(Order{
-        tradeInfo_.orderID,
-        tradeInfo_.side,
-        tradeInfo_.price,
-        tradeInfo_.quantity
-    });
 }

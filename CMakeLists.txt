@@ -9,6 +9,9 @@ add_executable(OBME
     src/main.cpp
     src/ingest.cpp
     src/orderbook.cpp
+        src/order.cpp
+        src/trade.cpp
+        src/pricelevel.cpp
 )
 
 target_include_directories(OBME PRIVATE include)
@@ -41,6 +44,9 @@ add_executable(engine_bench
         benchmarks/orderbook_benchmark.cpp
         src/ingest.cpp
         src/orderbook.cpp
+        src/order.cpp
+        src/trade.cpp
+        src/pricelevel.cpp
 )
 target_include_directories(engine_bench PRIVATE include)
 target_link_libraries(engine_bench PRIVATE benchmark::benchmark)
@@ -52,6 +58,9 @@ add_executable(engine_tests
         tests/orderbook_test.cpp
         src/orderbook.cpp
         src/ingest.cpp
+        src/order.cpp
+        src/trade.cpp
+        src/pricelevel.cpp
 )
 target_include_directories(engine_tests PRIVATE include)
 target_link_libraries(engine_tests gtest_main)
