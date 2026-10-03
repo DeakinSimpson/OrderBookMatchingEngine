@@ -60,7 +60,7 @@ private:
     std::map<Price, PriceLevel, std::greater<Price> > bids_; // lowest bid at top
     // keep track of orders by ID, to get their location and quickly modify
     // this is to reduce latency for future Cancel and Modify functions
-    std::unordered_map<OrderId, std::shared_ptr<OrderEntry>> orders_;
+    std::unordered_map<OrderId, OrderEntryPointer> orders_;
 
     bool CanMatch(Side side, Price price);
 

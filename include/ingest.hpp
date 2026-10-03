@@ -6,7 +6,7 @@
 #include <sstream>
 #include <string>
 #include "orderbook.hpp"
-#include "trade.h"
+#include "trade.hpp"
 
 struct RecordHeader
 {

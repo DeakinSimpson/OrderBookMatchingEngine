@@ -24,7 +24,7 @@ public:
     [[nodiscard]] bool IsEmpty() const { return order_pointers_.empty(); }
 
     void PopFront();
-    void Erase(const OrderEntry& it);
+    void Erase(const OrderEntryPointer& it);
 
-    OrderPointers::iterator AddOrder(const OrderPointer& orderPointer);
+    OrderEntryPointer AddOrder(const OrderPointer& orderPointer);
 };

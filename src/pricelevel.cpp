@@ -4,11 +4,13 @@
 
 #include "pricelevel.hpp"
 
-OrderPointers::iterator PriceLevel::AddOrder(const OrderPointer& orderPointer)
+OrderEntryPointer PriceLevel::AddOrder(const OrderPointer& orderPointer)
 {
     order_pointers_.push_back(orderPointer);
 
-    return std::prev(order_pointers_.end());
+    return {
+        std::make_shared<OrderEntry>(orderPointer,std::prev(order_pointers_.end()))
+    };
 }
 
 OrderPointer PriceLevel::GetFront() const
@@ -21,7 +23,7 @@ void PriceLevel::PopFront()
     order_pointers_.erase(order_pointers_.begin());
 }
 
-void PriceLevel::Erase(const OrderEntry& orderEntry)
+void PriceLevel::Erase(const OrderEntryPointer& orderEntry)
 {
-    order_pointers_.erase(orderEntry.iterator_);
+    order_pointers_.erase(orderEntry->iterator_);
 }

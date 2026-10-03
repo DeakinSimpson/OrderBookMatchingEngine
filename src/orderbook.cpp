@@ -8,12 +8,9 @@ template<typename T>
 void OrderBook::AddOrderToSide(T& side, const OrderPointer &order)
 {
     auto& price_level { side[order->GetPrice()] };
-    auto it { price_level.AddOrder(order) };
+    auto entry { price_level.AddOrder(order) };
 
-    orders_.insert({
-        order->GetId(),
-        std::make_shared<OrderEntry>(OrderEntry{order, it})
-    });
+    orders_.insert({ order->GetId(), entry });
 }
 
 /**
@@ -186,13 +183,13 @@ CancelStatus OrderBook::CancelOrder(
     if (order->GetSide() == Side::Ask)
     {
         auto &orders{asks_.at(price)};
-        orders.Erase(*entry);
+        orders.Erase(entry);
 
         if (orders.IsEmpty()) { asks_.erase(price); }
     } else
     {
         auto &orders{bids_.at(price)};
-        orders.Erase(*entry);
+        orders.Erase(entry);
 
         if (orders.IsEmpty()) { bids_.erase(price); }
     }

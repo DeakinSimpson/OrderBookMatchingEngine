@@ -3,7 +3,7 @@
 //
 
 #include "ingest.hpp"
-#include "trade.h"
+#include "trade.hpp"
 
 bool FileIterator::Next(MboMessage &out)
 {

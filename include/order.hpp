@@ -44,6 +44,8 @@ struct OrderEntry
     OrderPointers::iterator iterator_;
 };
 
+using OrderEntryPointer = std::shared_ptr<OrderEntry>;
+
 class Order
 {
 public:

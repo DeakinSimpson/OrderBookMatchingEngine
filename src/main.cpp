@@ -1,6 +1,6 @@
 #include "orderbook.hpp"
 #include "ingest.hpp"
-#include "trade.h"
+#include "trade.hpp"
 
 int main(int argc, char *argv[])
 {

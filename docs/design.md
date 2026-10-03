@@ -66,3 +66,15 @@ gets full.
 
 The final improvement that was made was retrieving the iterator one time from 
 the hasmap instead of getting the iterator twice, this halves the hashmap calls.
+
+## Price Levels (v0.6.0)
+This branch gave no performance improvements, it focused on separating the 
+classes into their own header and source files to help with modularity as well
+as just improve the coding experience for me as the project has grown to much
+larger. I abstracted away the OrderPointers to a class called PriceLevels, this
+brings no benefit at the moment and just increases lines of code for no real
+improvement. However I am planning to rewrite the storage method of the orders 
+in the future and test different data structures and how it affects latency. 
+Therefore i have created this abstraction so that the code in the orderbook 
+shouldnt need to be changed and rather it relies on the abstraction to PriceLevel
+in order to handle the lifecycle of a order.
