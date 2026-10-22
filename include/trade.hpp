@@ -21,7 +21,9 @@ class Trade
     TradeInfo tradeInfo_;
 
 public:
-    explicit Trade(const TradeInfo &tradeInfo) : tradeInfo_{tradeInfo}
+    Trade() = default;
+
+    Trade(const TradeInfo &tradeInfo) : tradeInfo_{tradeInfo}
     {
     }
 

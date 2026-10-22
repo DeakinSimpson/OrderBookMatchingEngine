@@ -37,7 +37,7 @@ class FileIterator
     std::ifstream fs;
 
 public:
-    FileIterator(const std::string &filepath)
+    FileIterator(const std::string& filepath)
         : fs{filepath}
     {
         if (!fs.is_open())

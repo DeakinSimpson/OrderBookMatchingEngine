@@ -8,9 +8,8 @@ OrderEntryPointer PriceLevel::AddOrder(const OrderPointer& orderPointer)
 {
     order_pointers_.push_back(orderPointer);
 
-    return {
-        std::make_shared<OrderEntry>(orderPointer,std::prev(order_pointers_.end()))
-    };
+    return
+        std::make_shared<OrderEntry>(orderPointer,std::prev(order_pointers_.end()));
 }
 
 OrderPointer PriceLevel::GetFront() const

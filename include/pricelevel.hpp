@@ -9,7 +9,7 @@
 class PriceLevel
 {
     Price price_ {};
-    OrderPointers order_pointers_;
+    OrderPointers order_pointers_ {};
 
 public:
 
