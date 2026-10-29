@@ -7,7 +7,6 @@
 #include <map>
 #include <atomic>
 #include <stdexcept>
-#include <stop_token>
 #include <thread>
 
 #include "order.hpp"
@@ -28,29 +27,45 @@ public:
     Terminal(const std::size_t queueSize, std::atomic<bool>& ingestComplete)
         : bids_ { }, asks_ { }, queue_{queueSize}
         , ingestComplete_{ingestComplete}
-        , thread_ { [this](std::stop_token st) { Thread(st); } }
+        , thread_ { [this]() { Thread(); } }
     {  };
 
-    void Thread(std::stop_token st)
+
+
+    void AddOrder(Price price, Quantity quantity, Side side, bool isAddOrder = true)
     {
+        queue_.push(TerminalPacket{price, quantity, side, isAddOrder});
+    }
+
+private:
+    std::map<Price, Quantity> bids_;
+    std::map<Price, Quantity> asks_;
+    TSC::Queue<TerminalPacket> queue_;
+    std::atomic<bool>& ingestComplete_;
+    int ordersProcessed {};
+    std::jthread thread_;
+
+    void Thread()
+    {
+        using clock = std::chrono::steady_clock;
+        constexpr auto refresh = std::chrono::milliseconds(100);   // 10 frames/sec
+        auto nextPrint = clock::now();
+
         try
         {
-            while (!st.stop_requested())
+            for (;;)
             {
                 if (ProcessOrder())
                 {
-                    if (ordersProcessed == 0) { PrintToTerminal(); }
-
-                    ++ordersProcessed;
-                    ordersProcessed %= ORDERS_PROCESSED_BEFORE_TERMINAL_DISPLAY;
+                    if (++ordersProcessed % 1024 == 0 && clock::now() >= nextPrint)
+                    {
+                        PrintToTerminal();
+                        nextPrint = clock::now() + refresh;
+                    }
                 }
                 else if (ingestComplete_.load(std::memory_order_acquire))
                 {
                     break;
-                }
-                else
-                {
-                    std::this_thread::yield();
                 }
             }
             while (ProcessOrder()) {}
@@ -60,11 +75,6 @@ public:
         {
             std::cerr << "Terminal thread error: " << e.what() << '\n';
         }
-    }
-
-    void AddOrder(Price price, Quantity quantity, Side side, bool isAddOrder = true)
-    {
-        queue_.push(TerminalPacket{price, quantity, side, isAddOrder});
     }
 
     bool ProcessOrder()
@@ -95,6 +105,8 @@ public:
 
     void PrintToTerminal()
     {
+        ClearScreen();
+
         std::cout << "___BIDS___" << std::endl;
         for (auto [price, quantity] : bids_)
         {
@@ -109,11 +121,8 @@ public:
         }
     }
 
-private:
-    std::map<Price, Quantity> bids_;
-    std::map<Price, Quantity> asks_;
-    TSC::Queue<TerminalPacket> queue_;
-    std::atomic<bool>& ingestComplete_;
-    int ordersProcessed {};
-    std::jthread thread_;
+    void ClearScreen()
+    {
+        std::cout << "\033[2J\033[H" << std::flush;
+    }
 };
