@@ -10,7 +10,7 @@
 #include <memory>
 #include <atomic>
 
-static constexpr unsigned int CPU_CACHE_WIDTH { 64 };
+
 
 namespace TSC
 {
@@ -58,6 +58,7 @@ namespace TSC
          * so instead I verified that my CPU cache lines are in fact 64 bytes
          * thus i am using 64 bytes as the width
          */
+        static constexpr unsigned int CPU_CACHE_WIDTH { 64 };
         static constexpr auto hardware_destructive_interference_size
             { size_type{CPU_CACHE_WIDTH} };
 

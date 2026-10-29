@@ -19,7 +19,9 @@ OrderPointer PriceLevel::GetFront() const
 
 void PriceLevel::PopFront()
 {
-    order_pointers_.erase(order_pointers_.begin());
+    const auto it { order_pointers_.begin() };
+    total_quantity_ -= (**it).GetQuantity();
+    order_pointers_.erase(it);
 }
 
 void PriceLevel::Erase(const OrderEntryPointer& orderEntry)

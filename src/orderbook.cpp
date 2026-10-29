@@ -4,6 +4,8 @@
 
 #include "orderbook.hpp"
 
+#include <iostream>
+
 template<typename T>
 void OrderBook::AddOrderToSide(T& side, const OrderPointer &order)
 {

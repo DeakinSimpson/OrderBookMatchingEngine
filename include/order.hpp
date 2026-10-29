@@ -52,9 +52,9 @@ public:
     Order(const OrderId id, const Side side, Price const price,
           const Quantity quantity)
         : id_{id}
-    , side_{side}
-    , price_{price}
-    , quantity_{quantity}
+        , side_{side}
+        , price_{price}
+        , quantity_{quantity}
     {  };
 
     // [[nodiscard]] means that we cant call this as a no return function

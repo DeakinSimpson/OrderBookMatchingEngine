@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include "order.hpp"
 #include "pricelevel.hpp"
+#include "Terminal.hpp"
 
 /*
  * We need a CancelStatus because a cancel order failing is not a failure in
@@ -33,10 +34,12 @@ enum class ModifyStatus
 class OrderBook
 {
 public:
-    OrderBook(const size_t expectedOrders = 0)
+    OrderBook(const size_t expectedOrders = 0, std::optional<std::reference_wrapper<Terminal>> terminal = std::nullopt)
         : asks_{}
-          , bids_{}
-          , orders_{}
+        , bids_{}
+        , orders_{}
+        , terminal_ { std::move(terminal) }
+
     {
         orders_.reserve(expectedOrders);
     }
@@ -61,6 +64,8 @@ private:
     // keep track of orders by ID, to get their location and quickly modify
     // this is to reduce latency for future Cancel and Modify functions
     std::unordered_map<OrderId, OrderEntryPointer> orders_;
+
+    std::optional<std::reference_wrapper<Terminal>> terminal_;
 
     bool CanMatch(Side side, Price price);
 

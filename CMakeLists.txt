@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.23)
 
 project(OBME)
 
-set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(OBME 
@@ -12,6 +12,8 @@ add_executable(OBME
         src/order.cpp
         src/trade.cpp
         src/pricelevel.cpp
+        include/Terminal.hpp
+        src/Terminal.cpp
 )
 
 target_include_directories(OBME PRIVATE include)
@@ -47,6 +49,8 @@ add_executable(engine_bench
         src/order.cpp
         src/trade.cpp
         src/pricelevel.cpp
+        include/Terminal.hpp
+        src/Terminal.cpp
 )
 target_include_directories(engine_bench PRIVATE include)
 target_link_libraries(engine_bench PRIVATE benchmark::benchmark)
@@ -61,6 +65,8 @@ add_executable(engine_tests
         src/order.cpp
         src/trade.cpp
         src/pricelevel.cpp
+        include/Terminal.hpp
+        src/Terminal.cpp
 )
 target_include_directories(engine_tests PRIVATE include)
 target_link_libraries(engine_tests gtest_main)

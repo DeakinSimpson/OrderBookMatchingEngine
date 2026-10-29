@@ -4,11 +4,14 @@
 
 #pragma once
 
+#include <atomic>
+
 #include "order.hpp"
 
 class PriceLevel
 {
     Price price_ {};
+    Quantity total_quantity_ {};
     OrderPointers order_pointers_ {};
 
 public:
