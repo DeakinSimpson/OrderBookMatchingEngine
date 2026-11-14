@@ -10,30 +10,23 @@ void Terminal::Thread()
     constexpr auto refresh = std::chrono::milliseconds(100);   // 10 frames/sec
     auto nextPrint = clock::now();
 
-    try
+    for (;;)
     {
-        for (;;)
+        if (ProcessOrder())
         {
-            if (ProcessOrder())
+            if (++ordersProcessed % 1024 == 0 && clock::now() >= nextPrint)
             {
-                if (++ordersProcessed % 1024 == 0 && clock::now() >= nextPrint)
-                {
-                    PrintToTerminal();
-                    nextPrint = clock::now() + refresh;
-                }
-            }
-            else if (ingestComplete_.load(std::memory_order_acquire))
-            {
-                break;
+                PrintToTerminal();
+                nextPrint = clock::now() + refresh;
             }
         }
-        while (ProcessOrder()) {}
-        PrintToTerminal();
+        else if (ingestComplete_.load(std::memory_order_acquire))
+        {
+            break;
+        }
     }
-    catch (const std::exception& e)
-    {
-        std::cerr << "Terminal thread error: " << e.what() << '\n';
-    }
+    while (ProcessOrder()) {}
+    PrintToTerminal();
 }
 
 bool Terminal::ProcessOrder()
@@ -48,7 +41,7 @@ bool Terminal::ProcessOrder()
 
     if (terminalPacket.isAddOrder)
     {
-        side[terminalPacket.price] += terminalPacket.quantity;
+        AddOrderToSide(terminalPacket, side);
     }
     else
     {
@@ -56,10 +49,35 @@ bool Terminal::ProcessOrder()
         {
             throw std::invalid_argument("CANT remove more items then exist");
         }
-        side[terminalPacket.price] -= terminalPacket.quantity;
+
+        AddOrderToSide(terminalPacket, side);
     }
 
     return true;
+}
+
+void Terminal::AddOrderToSide(TerminalPacket &terminalPacket, auto &side)
+{
+    Price bucket {};
+    for (const auto& priceLevel : buckets_)
+    {
+        if (terminalPacket.price > priceLevel)
+        {
+            bucket = priceLevel;
+        }
+        else
+        {
+            break;
+        }
+    }
+    if (terminalPacket.isAddOrder)
+    {
+        side[bucket] += terminalPacket.quantity;
+    }
+    else
+    {
+        side[bucket] -= terminalPacket.quantity;
+    }
 }
 
 void Terminal::PrintToTerminal()
