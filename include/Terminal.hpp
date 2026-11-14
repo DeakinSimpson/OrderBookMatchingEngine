@@ -110,16 +110,26 @@ private:
         std::cout << "___BIDS___" << std::endl;
         for (auto [price, quantity] : bids_)
         {
-            std::cout << "$" << price << ": " << quantity << std::endl;
+            std::cout << "$" << Price_lltod(price) << ": " << quantity << std::endl;
         }
 
 
         std::cout << "___ASKS___" << std::endl;
         for (auto [price, quantity] : asks_)
         {
-            std::cout << "$" << price << ": " << quantity << std::endl;
+            std::cout << "$" << Price_lltod(price)  << ": " << quantity << std::endl;
         }
     }
+
+    double Price_lltod(uint64_t price)
+    {
+        return static_cast<double>(price) / 1e9;
+    }
+
+    // void PrintBuckets(auto& side, std::vector<Price> buckets = { })
+    // {
+    //
+    // }
 
     void ClearScreen()
     {
