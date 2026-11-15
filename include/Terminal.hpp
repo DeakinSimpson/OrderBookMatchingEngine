@@ -35,6 +35,8 @@ static inline const std::vector<Price> DEFAULT_PRICE_LEVELS
     500000000000
 };
 
+static inline const int DEFAULT_BAR_WIDTH { 40 };
+
 constexpr int ORDERS_PROCESSED_BEFORE_TERMINAL_DISPLAY { 1000 };
 
 class Terminal
@@ -72,9 +74,9 @@ private:
     Quantity maxBidQuantity_ { 0 };
     Quantity maxAskQuantity_ { 0 };
 
-    void Thread();
+    void Thread(const int barWidth = DEFAULT_BAR_WIDTH);
     bool ProcessOrder();
-    void PrintToTerminal();
+    void PrintToTerminal(const int barWidth);
     void AddOrderToSide(TerminalPacket& terminalPacket, auto& side);
     void DrawBar(const float progress, const int charWidth, const bool isBid);
 
