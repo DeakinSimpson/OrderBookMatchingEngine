@@ -83,17 +83,23 @@ void Terminal::AddOrderToSide(TerminalPacket &terminalPacket, auto &side)
 void Terminal::PrintToTerminal()
 {
     ClearScreen();
-
-    std::cout << "___BIDS___" << std::endl;
-    for (auto [price, quantity] : bids_)
-    {
-        std::cout << "$" << Price_lltod(price) << ": " << quantity << std::endl;
-    }
-
+    const auto numBuckets { buckets_.size() };
 
     std::cout << "___ASKS___" << std::endl;
-    for (auto [price, quantity] : asks_)
+    for (auto i { numBuckets }; i-- > 0; )
     {
-        std::cout << "$" << Price_lltod(price)  << ": " << quantity << std::endl;
+        if (asks_[buckets_[i]] > 0)
+        {
+            std::cout << "$" << Price_lltod(buckets_[i])  << ": " << asks_[buckets_[i]] << std::endl;
+        }
+    }
+
+    std::cout << "___BIDS___" << std::endl;
+    for (auto i { numBuckets}; i-- > 0; )
+    {
+        if (bids_[buckets_[i]] > 0)
+        {
+            std::cout << "$" << Price_lltod(buckets_[i])  << ": " << bids_[buckets_[i]] << std::endl;
+        }
     }
 }
