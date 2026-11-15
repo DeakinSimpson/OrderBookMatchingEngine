@@ -85,6 +85,7 @@ private:
     void PrintToTerminal(const int barWidth);
     void AddOrderToSide(TerminalPacket& terminalPacket, auto& side);
     void DrawBar(const float progress, const int charWidth, const bool isBid);
+    Price FindBucket(const Price price);
 
     double Price_lltod(uint64_t price)
     {

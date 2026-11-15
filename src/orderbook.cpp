@@ -13,6 +13,12 @@ void OrderBook::AddOrderToSide(T& side, const OrderPointer &order)
     auto entry { price_level.AddOrder(order) };
 
     orders_.insert({ order->GetId(), entry });
+
+    if (terminal_.has_value())
+    {
+        terminal_->get().AddOrder(order->GetPrice(), order->GetQuantity(),
+            order->GetSide(), true);
+    }
 }
 
 /**
@@ -62,6 +68,13 @@ void OrderBook::MatchOrders()
 
             bid->Fill(quantity);
             ask->Fill(quantity);
+
+            /* Push the fills to the terminal */
+            if (terminal_.has_value())
+            {
+                terminal_->get().AddOrder(bidPrice, quantity, Side::Bid, false);
+                terminal_->get().AddOrder(askPrice, quantity, Side::Ask, false);
+            }
 
             // if there is no more quantity remove it from the vector
             if (bid->GetQuantity() == 0)
@@ -161,6 +174,14 @@ CancelStatus OrderBook::CancelOrder(
     const auto entry{orders_.at(orderID)}; // copies pointers
     const auto &order{entry->order_};
 
+    /* Send to terminal */
+    if (terminal_.has_value())
+    {
+        terminal_->get().AddOrder(order->GetPrice(),
+            std::min(quantity, order->GetQuantity()),
+            order->GetSide(), false);
+    }
+
     // if the cancel amount is less then the total amount we can fill and return
     if (quantity < order->GetQuantity())
     {
@@ -219,13 +240,23 @@ ModifyStatus OrderBook::ModifyOrder(
     // get the order and iterator from the orders_ list
     const auto &order{orders_.at(orderID)->order_};
 
-    // if order is reducing its quantity
+    /*
+     * If the new quantity is < current quantity, reduce the orders quantity by
+     * the difference
+     */
     if (order->GetQuantity() >= quantity && order->GetPrice() == price)
     {
+        /* Remove Order from Terminal */
+        if (terminal_.has_value())
+        {
+            terminal_->get().AddOrder(order->GetPrice(), order->GetQuantity() - quantity, order->GetSide(), false);
+        }
+
         // reduce quantity
         // keep same Price-Time Priority (stays in same spot in queue)
         order->Fill(order->GetQuantity() - quantity);
-    } else
+    }
+    else
     {
         // save temp values that wont persist
         const OrderId t_orderID{order->GetId()};

@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
         {
             trade.MakeTrade(orderBook);
             orderBook.MatchOrders();
-            terminal.AddOrder(trade.GetTradeInfo().price, trade.GetTradeInfo().quantity, trade.GetTradeInfo().side);
+            //terminal.AddOrder(trade.GetTradeInfo().price, trade.GetTradeInfo().quantity, trade.GetTradeInfo().side);
             continue;
         }
         if (ingestComplete.load(std::memory_order_acquire))

@@ -52,7 +52,7 @@ bool Terminal::ProcessOrder()
     }
     else
     {
-        if (side[terminalPacket.price] < terminalPacket.quantity)
+        if (side[FindBucket(terminalPacket.price)] < terminalPacket.quantity)
         {
             throw std::invalid_argument("CANT remove more items then exist");
         }
@@ -66,18 +66,7 @@ bool Terminal::ProcessOrder()
 void Terminal::AddOrderToSide(TerminalPacket &terminalPacket, auto &side)
 {
     /* Get the bucket that the terminalPacket corresponds too */
-    Price bucket {};
-    for (const auto& priceLevel : buckets_)
-    {
-        if (terminalPacket.price > priceLevel)
-        {
-            bucket = priceLevel;
-        }
-        else
-        {
-            break;
-        }
-    }
+    Price bucket  { FindBucket(terminalPacket.price) };
 
     /* Add the quantity to the bucket */
     if (terminalPacket.isAddOrder)
@@ -98,6 +87,25 @@ void Terminal::AddOrderToSide(TerminalPacket &terminalPacket, auto &side)
     {
         maxAskQuantity_ = side[bucket];
     }
+}
+
+Price Terminal::FindBucket(const Price price)
+{
+    /* Get the bucket that the terminalPacket corresponds too */
+    Price bucket {};
+    for (const auto& priceLevel : buckets_)
+    {
+        if (price > priceLevel)
+        {
+            bucket = priceLevel;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return bucket;
 }
 
 void Terminal::PrintToTerminal(const int barWidth)
