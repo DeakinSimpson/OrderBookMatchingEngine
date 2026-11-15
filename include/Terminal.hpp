@@ -12,7 +12,7 @@
 #include "order.hpp"
 #include "SPSC_Queue.hpp"
 
-static const std::vector<Price> DEFAULT_PRICE_LEVELS
+static inline const std::vector<Price> DEFAULT_PRICE_LEVELS
 {
     0,
     100000000000,
@@ -69,11 +69,14 @@ private:
     std::atomic<bool>& ingestComplete_;
     int ordersProcessed {};
     std::jthread thread_;
+    Quantity maxBidQuantity_ { 0 };
+    Quantity maxAskQuantity_ { 0 };
 
     void Thread();
     bool ProcessOrder();
     void PrintToTerminal();
     void AddOrderToSide(TerminalPacket& terminalPacket, auto& side);
+    void DrawBar(const float progress, const int charWidth, const bool isBid);
 
     double Price_lltod(uint64_t price)
     {
@@ -84,11 +87,6 @@ private:
     Price Price_dtoll(double price)
     {
         return static_cast<Price>(price * 1e9);
-    }
-
-    void PrintBuckets(auto& side)
-    {
-
     }
 
     void ClearScreen()

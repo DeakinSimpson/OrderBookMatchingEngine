@@ -31,6 +31,7 @@ void Terminal::Thread()
 
 bool Terminal::ProcessOrder()
 {
+    /* Get the terminalPacket from the terminalPacket queue */
     TerminalPacket terminalPacket;
     if (!queue_.pop(terminalPacket))
     {
@@ -39,6 +40,7 @@ bool Terminal::ProcessOrder()
 
     auto& side { (terminalPacket.side == Side::Ask) ? asks_ : bids_ };
 
+    /* Add order to the corresponding bucket */
     if (terminalPacket.isAddOrder)
     {
         AddOrderToSide(terminalPacket, side);
@@ -58,6 +60,7 @@ bool Terminal::ProcessOrder()
 
 void Terminal::AddOrderToSide(TerminalPacket &terminalPacket, auto &side)
 {
+    /* Get the bucket that the terminalPacket corresponds too */
     Price bucket {};
     for (const auto& priceLevel : buckets_)
     {
@@ -70,6 +73,8 @@ void Terminal::AddOrderToSide(TerminalPacket &terminalPacket, auto &side)
             break;
         }
     }
+
+    /* Add the quantity to the bucket */
     if (terminalPacket.isAddOrder)
     {
         side[bucket] += terminalPacket.quantity;
@@ -77,6 +82,16 @@ void Terminal::AddOrderToSide(TerminalPacket &terminalPacket, auto &side)
     else
     {
         side[bucket] -= terminalPacket.quantity;
+    }
+
+    /* Check if the bucket is now larger then the current max */
+    if (side[bucket] > maxBidQuantity_ && terminalPacket.side == Side::Bid)
+    {
+        maxBidQuantity_ = side[bucket];
+    }
+    else if (side[bucket] > maxAskQuantity_ && terminalPacket.side == Side::Ask)
+    {
+        maxAskQuantity_ = side[bucket];
     }
 }
 
@@ -99,7 +114,31 @@ void Terminal::PrintToTerminal()
     {
         if (bids_[buckets_[i]] > 0)
         {
-            std::cout << "$" << Price_lltod(buckets_[i])  << ": " << bids_[buckets_[i]] << std::endl;
+            std::cout << "$" << Price_lltod(buckets_[i])  << ": " << bids_[buckets_[i]];
+            DrawBar(static_cast<float>(bids_[buckets_[i]]) /
+                static_cast<float>(maxBidQuantity_), 20, true);
+            std::cout << std::endl;
         }
     }
+}
+
+void Terminal::DrawBar(const float progress, const int charWidth, const bool isBid)
+{
+    std::string color { (isBid) ? "\033[32m" : "\033[91m" };
+
+    int edge { static_cast<int>(progress * (float)charWidth) };
+
+    for (int i {}; i < charWidth; ++i)
+    {
+        if (i < edge)
+        {
+            std::cout << color << "█";
+        }
+        else
+        {
+            std::cout << color << "░";
+        }
+    }
+
+    std::cout << "\033[0m";
 }
