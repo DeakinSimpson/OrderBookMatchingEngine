@@ -12,32 +12,37 @@
 #include "order.hpp"
 #include "SPSC_Queue.hpp"
 
-static inline const std::vector<Price> DEFAULT_PRICE_LEVELS
+/* Default values */
+namespace TerminalDefault
 {
-    0,
-    100000000000,
-    150000000000,
-    200000000000,
-    210000000000,
-    215000000000,
-    216000000000,
-    217000000000,
-    218000000000,
-    219000000000,
-    220000000000,
-    230000000000,
-    240000000000,
-    250000000000,
-    300000000000,
-    350000000000,
-    400000000000,
-    450000000000,
-    500000000000
-};
+    const std::vector<Price> DEFAULT_PRICE_LEVELS
+    {
+        0,
+        100000000000,
+        150000000000,
+        200000000000,
+        210000000000,
+        215000000000,
+        216000000000,
+        217000000000,
+        218000000000,
+        219000000000,
+        220000000000,
+        230000000000,
+        240000000000,
+        250000000000,
+        300000000000,
+        350000000000,
+        400000000000,
+        450000000000,
+        500000000000
+    };
 
-static inline const int DEFAULT_BAR_WIDTH { 40 };
-
-constexpr int ORDERS_PROCESSED_BEFORE_TERMINAL_DISPLAY { 1000 };
+    constexpr int DEFAULT_BAR_WIDTH { 40 };
+    constexpr int ordersProcessed { 1 };
+    constexpr int priceCharWidth { 3 };
+    constexpr int quantityCharWidth { 10 };
+}
 
 class Terminal
 {
@@ -50,7 +55,7 @@ class Terminal
     };
 public:
     Terminal(const std::size_t queueSize, std::atomic<bool>& ingestComplete,
-        const std::vector<Price>& buckets = DEFAULT_PRICE_LEVELS)
+        const std::vector<Price>& buckets = TerminalDefault::DEFAULT_PRICE_LEVELS)
         : bids_ { }, asks_ { }, buckets_ { buckets }, queue_{queueSize}
         , ingestComplete_{ingestComplete}
         , thread_ { [this]() { Thread(); } }
@@ -74,7 +79,7 @@ private:
     Quantity maxBidQuantity_ { 0 };
     Quantity maxAskQuantity_ { 0 };
 
-    void Thread(const int barWidth = DEFAULT_BAR_WIDTH);
+    void Thread(const int barWidth = TerminalDefault::DEFAULT_BAR_WIDTH);
     bool ProcessOrder();
     void PrintToTerminal(const int barWidth);
     void AddOrderToSide(TerminalPacket& terminalPacket, auto& side);

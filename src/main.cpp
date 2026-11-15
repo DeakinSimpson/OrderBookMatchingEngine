@@ -12,7 +12,10 @@ void IngestThread(TSC::Queue<Trade> &trades, const std::string& filepath, std::a
     MboMessage msg;
     while (fileIterator.Next(msg))
     {
-        trades.push(fileIterator.GetTradeInfo(msg));
+        Trade trade { fileIterator.GetTradeInfo(msg) };
+
+        /* Spinning is fine here as it should almost instantly be free */
+        while (!trades.push(trade)) { ; }
     }
 
     isComplete.store(true);

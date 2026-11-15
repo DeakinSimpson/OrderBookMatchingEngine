@@ -4,17 +4,19 @@
 
 #include "Terminal.hpp"
 
+#include <iomanip>
+
 void Terminal::Thread(const int barWidth)
 {
     using clock = std::chrono::steady_clock;
     constexpr auto refresh = std::chrono::milliseconds(100);   // 10 frames/sec
     auto nextPrint = clock::now();
-
     for (;;)
     {
         if (ProcessOrder())
         {
-            if (++ordersProcessed % 1024 == 0 && clock::now() >= nextPrint)
+            if (++ordersProcessed % TerminalDefault::ordersProcessed == 0
+                && clock::now() >= nextPrint)
             {
                 PrintToTerminal(barWidth);
                 nextPrint = clock::now() + refresh;
@@ -100,24 +102,39 @@ void Terminal::PrintToTerminal(const int barWidth)
     ClearScreen();
     const auto numBuckets { buckets_.size() };
 
-    std::cout << "___ASKS___" << std::endl;
+    std::cout << std::setw(TerminalDefault::priceCharWidth
+        + TerminalDefault::quantityCharWidth
+        + TerminalDefault::DEFAULT_BAR_WIDTH + 3) << "";
+    std::cout << "______ASKS______" << std::endl;
     for (auto i { numBuckets }; i-- > 0; )
     {
         if (asks_[buckets_[i]] > 0)
         {
+            std::cout << std::setw(TerminalDefault::priceCharWidth
+                + TerminalDefault::quantityCharWidth + 3) << "";
             DrawBar(static_cast<float>(asks_[buckets_[i]]) /
                     static_cast<float>(maxAskQuantity_), barWidth, false);
-            std::cout << "$" << Price_lltod(buckets_[i])  << ": " << asks_[buckets_[i]];
+            std::cout << "$" << std::right
+                << std::setw(TerminalDefault::priceCharWidth)
+                << Price_lltod(buckets_[i])  << ": ";
+            std::cout << std::left
+                << std::setw(TerminalDefault::quantityCharWidth)
+                << asks_[buckets_[i]];
             std::cout << std::endl;
         }
     }
 
-    std::cout << "___BIDS___" << std::endl;
+    std::cout << "______BIDS______" << std::endl;
     for (auto i { numBuckets}; i-- > 0; )
     {
         if (bids_[buckets_[i]] > 0)
         {
-            std::cout << "$" << Price_lltod(buckets_[i])  << ": " << bids_[buckets_[i]];
+            std::cout << "$" << std::right
+                << std::setw(TerminalDefault::priceCharWidth)
+                << Price_lltod(buckets_[i])  << ": ";
+            std::cout << std::left
+                << std::setw(TerminalDefault::quantityCharWidth)
+                << bids_[buckets_[i]];
             DrawBar(static_cast<float>(bids_[buckets_[i]]) /
                 static_cast<float>(maxBidQuantity_), barWidth, true);
             std::cout << std::endl;
