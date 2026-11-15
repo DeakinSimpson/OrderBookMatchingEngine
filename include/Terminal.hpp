@@ -38,11 +38,11 @@ namespace TerminalDefault
         500000000000
     };
 
-    constexpr int DEFAULT_BAR_WIDTH { 40 };
+    constexpr int DEFAULT_BAR_WIDTH { 100 };
     constexpr int ordersProcessed { 1 };
     constexpr int priceCharWidth { 3 };
     constexpr int quantityCharWidth { 10 };
-    constexpr int refreshRate { 165 };
+    constexpr int refreshRate { 1000 / 60 };
 }
 
 class Terminal
@@ -55,10 +55,10 @@ class Terminal
         bool isAddOrder;
     };
 public:
-    Terminal(const std::size_t queueSize, std::atomic<bool>& ingestComplete,
+    Terminal(const std::size_t queueSize, std::atomic<bool>& orderbookComplete,
         const std::vector<Price>& buckets = TerminalDefault::DEFAULT_PRICE_LEVELS)
         : bids_ { }, asks_ { }, buckets_ { buckets }, queue_{queueSize}
-        , ingestComplete_{ingestComplete}
+        , orderbookComplete_{orderbookComplete}
         , thread_ { [this]() { Thread(); } }
     {  };
 
@@ -70,15 +70,15 @@ public:
     }
 
 private:
-    std::map<Price, Quantity> bids_;
-    std::map<Price, Quantity> asks_;
-    std::vector<Price> buckets_;
-    TSC::Queue<TerminalPacket> queue_;
-    std::atomic<bool>& ingestComplete_;
-    int ordersProcessed {};
-    std::jthread thread_;
-    Quantity maxBidQuantity_ { 0 };
-    Quantity maxAskQuantity_ { 0 };
+    std::map<Price, Quantity>   bids_;
+    std::map<Price, Quantity>   asks_;
+    std::vector<Price>          buckets_;
+    TSC::Queue<TerminalPacket>  queue_;
+    std::atomic<bool>&          orderbookComplete_;
+    int                         ordersProcessed {};
+    std::jthread                thread_;
+    Quantity                    maxBidQuantity_ { 0 };
+    Quantity                    maxAskQuantity_ { 0 };
 
     void Thread(const int barWidth = TerminalDefault::DEFAULT_BAR_WIDTH);
     bool ProcessOrder();

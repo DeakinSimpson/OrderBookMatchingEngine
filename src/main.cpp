@@ -25,7 +25,8 @@ int main(int argc, char *argv[])
 {
     std::vector<std::string_view> args(argv + 1, argv + argc);
     std::atomic<bool> ingestComplete { false };
-    Terminal terminal { 1048576, ingestComplete };
+    std::atomic<bool> orderbookComplete { false };
+    Terminal terminal { 1048576, orderbookComplete };
     OrderBook orderBook{ 1048576 , terminal};
     TSC::Queue<Trade> trades { 1048576 };
 
@@ -55,6 +56,8 @@ int main(int argc, char *argv[])
             break;
         }
     }
+
+    orderbookComplete.store(true, std::memory_order::release);
 
     return 0;
 }

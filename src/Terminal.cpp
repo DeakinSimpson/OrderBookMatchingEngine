@@ -16,14 +16,14 @@ void Terminal::Thread(const int barWidth)
     {
         if (ProcessOrder())
         {
-            if (++ordersProcessed % TerminalDefault::ordersProcessed == 0
+            if (ordersProcessed % TerminalDefault::ordersProcessed == 0
                 && clock::now() >= nextPrint)
             {
                 PrintToTerminal(barWidth);
                 nextPrint = clock::now() + refresh;
             }
         }
-        else if (ingestComplete_.load(std::memory_order_acquire))
+        else if (orderbookComplete_.load(std::memory_order_acquire))
         {
             break;
         }
@@ -40,6 +40,8 @@ bool Terminal::ProcessOrder()
     {
         return false;
     }
+
+    ++ordersProcessed;
 
     auto& side { (terminalPacket.side == Side::Ask) ? asks_ : bids_ };
 
