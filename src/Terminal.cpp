@@ -9,7 +9,8 @@
 void Terminal::Thread(const int barWidth)
 {
     using clock = std::chrono::steady_clock;
-    constexpr auto refresh = std::chrono::milliseconds(100);   // 10 frames/sec
+    constexpr auto refresh =
+        std::chrono::milliseconds(TerminalDefault::refreshRate);
     auto nextPrint = clock::now();
     for (;;)
     {
@@ -101,6 +102,7 @@ void Terminal::PrintToTerminal(const int barWidth)
 {
     ClearScreen();
     const auto numBuckets { buckets_.size() };
+    std::cout << "Total Trades Processed: " << ordersProcessed << std::endl;
 
     std::cout << std::setw(TerminalDefault::priceCharWidth
         + TerminalDefault::quantityCharWidth

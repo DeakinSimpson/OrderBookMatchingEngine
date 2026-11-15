@@ -42,6 +42,7 @@ namespace TerminalDefault
     constexpr int ordersProcessed { 1 };
     constexpr int priceCharWidth { 3 };
     constexpr int quantityCharWidth { 10 };
+    constexpr int refreshRate { 165 };
 }
 
 class Terminal
