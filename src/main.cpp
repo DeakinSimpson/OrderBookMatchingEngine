@@ -5,18 +5,53 @@
 #include "SPSC_Queue.hpp"
 #include "Terminal.hpp"
 
+inline static constexpr int D_QUEUE_SIZE { 16777216 };
+
+
 int main(int argc, char *argv[])
 {
+    bool isSynthetic { false };
+
+    /* get args */
     std::vector<std::string_view> args(argv + 1, argv + argc);
+    std::string filepath;
+
+    if (argc == 1)
+    {
+        isSynthetic = true;
+    }
+    else if (argc == 2)
+    {
+        filepath = std::string(args.at(0));
+    } else
+    {
+        throw(std::invalid_argument("Incorrect Args provided, exiting"));
+    }
+
+    /* create atomics for threads */
     std::atomic<bool> ingestComplete { false };
     std::atomic<bool> orderbookComplete { false };
-    Terminal terminal { 1048576, orderbookComplete };
-    OrderBook orderBook{ 1048576 , terminal};
-    TSC::Queue<Trade> trades { 1048576 };
-    const std::string filepath { std::string(args.at(0)) };
-    FileIterator fileIterator { filepath, trades, ingestComplete };
 
+    /* create orderbook and the terminal attached */
+    Terminal terminal { D_QUEUE_SIZE, orderbookComplete };
+    OrderBook orderBook{ D_QUEUE_SIZE , terminal};
 
+    /* create ingest Queue and its pointers to the ingest methods */
+    TSC::Queue<Trade> trades { D_QUEUE_SIZE };
+    std::unique_ptr<FileIterator> fileIterator;
+
+    /* create the ingest thread, either real mbo data or synthetic data */
+    if (isSynthetic)
+    {
+
+    }
+    else
+    {
+        fileIterator = std::make_unique<FileIterator>
+            (filepath, trades, ingestComplete);
+    }
+
+    /* the main orderbook loop */
     Trade trade;
     for (;;)
     {
@@ -39,6 +74,7 @@ int main(int argc, char *argv[])
         }
     }
 
+    /* set the orderbook to cleared for the terminal */
     orderbookComplete.store(true, std::memory_order::release);
 
     return 0;

@@ -62,8 +62,6 @@ public:
         , thread_ { [this]() { Thread(); } }
     {  };
 
-
-
     void AddOrder(Price price, Quantity quantity, Side side, bool isAddOrder = true)
     {
         queue_.push(TerminalPacket{price, quantity, side, isAddOrder});
