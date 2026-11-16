@@ -14,11 +14,8 @@ int main(int argc, char *argv[])
     OrderBook orderBook{ 1048576 , terminal};
     TSC::Queue<Trade> trades { 1048576 };
     const std::string filepath { std::string(args.at(0)) };
-    FileIterator fileIterator { filepath };
+    FileIterator fileIterator { filepath, trades, ingestComplete };
 
-    std::jthread ingestThread([&]() {
-        fileIterator.Thread(trades, ingestComplete);
-    });
 
     Trade trade;
     for (;;)

@@ -35,9 +35,12 @@ struct MboMessage
 class FileIterator
 {
     std::ifstream fs;
+    std::jthread ingestThread_ {};
 
 public:
-    FileIterator(const std::string& filepath)
+    FileIterator(const std::string& filepath, TSC::Queue<Trade>& trades,
+        std::atomic<bool>& ingestComplete)
+
         : fs{filepath}
     {
         if (!fs.is_open())
@@ -55,6 +58,10 @@ public:
 
         // start at end of metadata
         fs.seekg(metadataLength, std::ios::cur);
+
+        /* initialise the ingest thread */
+        ingestThread_ = std::jthread([this, &trades, &ingestComplete]()
+            {Thread(trades, ingestComplete);});
     }
 
     // the code that will be run on the ingest thread
