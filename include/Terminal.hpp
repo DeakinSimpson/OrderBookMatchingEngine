@@ -69,6 +69,8 @@ public:
         queue_.push(TerminalPacket{price, quantity, side, isAddOrder});
     }
 
+    void IncrementTradesMatched() { ++tradesMatched_; }
+
 private:
     std::map<Price, Quantity>   bids_;
     std::map<Price, Quantity>   asks_;
@@ -79,6 +81,7 @@ private:
     std::jthread                thread_;
     Quantity                    maxBidQuantity_ { 0 };
     Quantity                    maxAskQuantity_ { 0 };
+    uint64_t                    tradesMatched_ { 0 };
 
     void Thread(const int barWidth = TerminalDefault::DEFAULT_BAR_WIDTH);
     bool ProcessOrder();

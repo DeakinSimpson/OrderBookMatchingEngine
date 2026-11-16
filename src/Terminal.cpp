@@ -112,7 +112,8 @@ void Terminal::PrintToTerminal(const int barWidth)
 {
     ClearScreen();
     const auto numBuckets { buckets_.size() };
-    std::cout << "Total Trades Processed: " << ordersProcessed << std::endl;
+    std::cout << "Total Trades Processed: " << ordersProcessed;
+    std::cout << " | Total Trades Matched: " << tradesMatched_ << std::endl;
 
     std::cout << std::setw(TerminalDefault::priceCharWidth
         + TerminalDefault::quantityCharWidth

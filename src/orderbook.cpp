@@ -74,6 +74,7 @@ void OrderBook::MatchOrders()
             {
                 terminal_->get().AddOrder(bidPrice, quantity, Side::Bid, false);
                 terminal_->get().AddOrder(askPrice, quantity, Side::Ask, false);
+                terminal_->get().IncrementTradesMatched();
             }
 
             // if there is no more quantity remove it from the vector
