@@ -78,3 +78,12 @@ in the future and test different data structures and how it affects latency.
 Therefore i have created this abstraction so that the code in the orderbook 
 shouldnt need to be changed and rather it relies on the abstraction to PriceLevel
 in order to handle the lifecycle of a order.
+
+## Terminal Display (v0.7.0)
+This branch gave no performance improvements, instead it is used to give a visual
+of what the orderbook looks like as the orders are being processed. This likely
+has a small latency affect, however this is not an issue because the terminal
+would likely be turned off in a production environment. Not to mention that if
+this were the case there would be no reason not to split the orderbook into one
+that displays the data (at a higher latency) and an orderbook that keeps a low
+latency snapshot of the current market data.
