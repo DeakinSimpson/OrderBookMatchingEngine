@@ -5,22 +5,6 @@
 #include "SPSC_Queue.hpp"
 #include "Terminal.hpp"
 
-// the code that will be run on the ingest thread
-void IngestThread(TSC::Queue<Trade> &trades, const std::string& filepath, std::atomic<bool>& isComplete)
-{
-    FileIterator fileIterator { filepath };
-    MboMessage msg;
-    while (fileIterator.Next(msg))
-    {
-        Trade trade { fileIterator.GetTradeInfo(msg) };
-
-        /* Spinning is fine here as it should almost instantly be free */
-        while (!trades.push(trade)) { ; }
-    }
-
-    isComplete.store(true);
-}
-
 int main(int argc, char *argv[])
 {
     std::vector<std::string_view> args(argv + 1, argv + argc);
@@ -29,10 +13,11 @@ int main(int argc, char *argv[])
     Terminal terminal { 1048576, orderbookComplete };
     OrderBook orderBook{ 1048576 , terminal};
     TSC::Queue<Trade> trades { 1048576 };
-
+    const std::string filepath { std::string(args.at(0)) };
+    FileIterator fileIterator { filepath };
 
     std::jthread ingestThread([&]() {
-        IngestThread(trades, std::string(args.at(0)), ingestComplete);
+        fileIterator.Thread(trades, ingestComplete);
     });
 
     Trade trade;

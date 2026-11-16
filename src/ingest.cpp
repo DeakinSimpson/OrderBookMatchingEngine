@@ -64,3 +64,18 @@ Trade FileIterator::GetTradeInfo(const MboMessage &msg)
         }
     };
 }
+
+void FileIterator::Thread(TSC::Queue<Trade> &trades, std::atomic<bool> &isComplete)
+{
+
+    MboMessage msg;
+    while (Next(msg))
+    {
+        Trade trade { GetTradeInfo(msg) };
+
+        /* Spinning is fine here as it should almost instantly be free */
+        while (!trades.push(trade)) { ; }
+    }
+
+    isComplete.store(true);
+}

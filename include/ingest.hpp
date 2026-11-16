@@ -57,6 +57,9 @@ public:
         fs.seekg(metadataLength, std::ios::cur);
     }
 
+    // the code that will be run on the ingest thread
+    void Thread(TSC::Queue<Trade> &trades, std::atomic<bool>& isComplete);
+
     bool IsEOF() { return fs.eof(); }
 
     bool Next(MboMessage &out);
