@@ -87,3 +87,10 @@ would likely be turned off in a production environment. Not to mention that if
 this were the case there would be no reason not to split the orderbook into one
 that displays the data (at a higher latency) and an orderbook that keeps a low
 latency snapshot of the current market data.
+
+## Synthetic Ingest (v0.8.0)
+This branch gave no performance improvements, it was used to create a synetic 
+ingest thread. This is good as it allows for orderbook crosses to happen with
+input data, thus allowing the MatchOrder() function to be used with actual 
+packets. This also allows the this engine to be run without downloading GBs of
+market data, so this is very usefull for running across devices.
