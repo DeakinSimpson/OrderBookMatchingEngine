@@ -92,5 +92,5 @@ latency snapshot of the current market data.
 This branch gave no performance improvements, it was used to create a synetic 
 ingest thread. This is good as it allows for orderbook crosses to happen with
 input data, thus allowing the MatchOrder() function to be used with actual 
-packets. This also allows the this engine to be run without downloading GBs of
-market data, so this is very usefull for running across devices.
+packets. This also allows this engine to be run without downloading GBs of
+market data, so this is very useful for running across devices.
