@@ -95,7 +95,7 @@ Price Terminal::FindBucket(const Price price)
     Price bucket {};
     for (const auto& priceLevel : buckets_)
     {
-        if (price > priceLevel)
+        if (price >= priceLevel)
         {
             bucket = priceLevel;
         }

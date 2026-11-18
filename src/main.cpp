@@ -6,16 +6,16 @@
 #include "Terminal.hpp"
 
 inline static constexpr int D_QUEUE_SIZE { 16777216 };
-
+inline static constexpr int D_SINGEST_TRADES { 1'000'000 };
 
 int main(int argc, char *argv[])
 {
-    bool isSynthetic { false };
-
     /* get args */
     std::vector<std::string_view> args(argv + 1, argv + argc);
     std::string filepath;
 
+    /* check if the main loop will use real data or syntheric data */
+    bool isSynthetic { false };
     if (argc == 1)
     {
         isSynthetic = true;
@@ -39,11 +39,13 @@ int main(int argc, char *argv[])
     /* create ingest Queue and its pointers to the ingest methods */
     TSC::Queue<Trade> trades { D_QUEUE_SIZE };
     std::unique_ptr<FileIterator> fileIterator;
+    std::unique_ptr<SyntheticIngest> synthetic_ingest;
 
     /* create the ingest thread, either real mbo data or synthetic data */
     if (isSynthetic)
     {
-
+        synthetic_ingest = std::make_unique<SyntheticIngest>
+            (D_SINGEST_TRADES, trades, ingestComplete);
     }
     else
     {
@@ -55,12 +57,11 @@ int main(int argc, char *argv[])
     Trade trade;
     for (;;)
     {
-        // pop is already a try pop with [[nodiscard]] ommitted
+        // pop is already a try pop with [[nodiscard]] omitted
         if (trades.pop(trade))
         {
             trade.MakeTrade(orderBook);
             orderBook.MatchOrders();
-            //terminal.AddOrder(trade.GetTradeInfo().price, trade.GetTradeInfo().quantity, trade.GetTradeInfo().side);
             continue;
         }
         if (ingestComplete.load(std::memory_order_acquire))

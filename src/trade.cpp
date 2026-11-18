@@ -10,16 +10,19 @@
  */
 void Trade::MakeTrade(OrderBook &orderBook) const
 {
-    if (tradeInfo_.tradeType == TradeType::Add)
+    switch (tradeInfo_.tradeType)
     {
-        orderBook.AddOrder(ToOrderPointer());
-    } else if (tradeInfo_.tradeType == TradeType::Cancel)
-    {
-        orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
-    } else if (tradeInfo_.tradeType == TradeType::Modify)
-    {
-        orderBook.ModifyOrder(
-            tradeInfo_.orderID, tradeInfo_.price, tradeInfo_.quantity);
+        case TradeType::Add:
+            orderBook.AddOrder(ToOrderPointer());
+            break;
+        case TradeType::Cancel:
+            orderBook.CancelOrder(tradeInfo_.orderID, tradeInfo_.quantity);
+            break;
+        case TradeType::Modify:
+            orderBook.ModifyOrder(
+                tradeInfo_.orderID, tradeInfo_.price, tradeInfo_.quantity);
+            break;
+        default: break;
     }
 }
 
