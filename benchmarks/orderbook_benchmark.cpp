@@ -7,102 +7,181 @@
 #include "ingest.hpp"
 #include "orderbook.hpp"
 
-
-// benchmark for ingest speed
-static void BM_INGEST(benchmark::State& state)
-{
-    int64_t messages {};
-
-    for (auto _ : state)
-    {
-        FileIterator fi { DATA_FILE };
-        MboMessage msg;
-
-        while (fi.Next(msg))
-        {
-            // this loop does nothing with message, DoNotOptimize means the
-            // compiler wont compole away msg
-            benchmark::DoNotOptimize(msg);
-            ++messages;
-        }
-    }
-
-    // items per second
-    state.SetItemsProcessed(messages);
-
-    // bytes per second
-    state.SetBytesProcessed(static_cast<int64_t>(messages * sizeof(MboMessage)));
-}
-
-// run INGEST benchmark
-BENCHMARK(BM_INGEST)->Unit(benchmark::kMillisecond)->Iterations(5);
+static constexpr int SYNTHETIC_TRADES { 10'000'000 };
 
 // benchmark for replay speed
-static void BM_MARKET_REPLAY(benchmark::State& state)
+static void BM_SYNTHETIC_PROCESSING(benchmark::State& state)
 {
     int64_t messages {};
 
     for (auto _ : state)
     {
-        FileIterator fi { DATA_FILE };
-        MboMessage msg;
-        OrderBook orderbook {1000000};
+        std::atomic<bool> ingestComplete { false };
+        std::atomic<bool> orderbookComplete { false };
+        TSC::Queue<Trade> trades { SYNTHETIC_TRADES };
+        SyntheticIngest synthetic_ingest { SYNTHETIC_TRADES, trades, ingestComplete };
+        OrderBook orderbook {SYNTHETIC_TRADES};
 
-        while (fi.Next(msg))
+        Trade trade;
+        for (;;)
         {
-            fi.GetTradeInfo(msg).MakeTrade(orderbook);
-            ++messages;
+            // pop is already a try pop with [[nodiscard]] omitted
+            if (trades.pop(trade))
+            {
+                trade.MakeTrade(orderbook);
+                orderbook.MatchOrders();
+                ++ messages;
+                continue;
+            }
+            if (ingestComplete.load(std::memory_order_acquire))
+            {
+                while (trades.pop(trade))
+                {
+                    trade.MakeTrade(orderbook);
+                    orderbook.MatchOrders();
+                    ++messages;
+                }
+                break;
+            }
         }
+
+        /* set the orderbook to cleared for the terminal */
+        orderbookComplete.store(true, std::memory_order::release);
     }
 
     // items per second
     state.SetItemsProcessed(messages);
 }
-BENCHMARK(BM_MARKET_REPLAY)->Unit(benchmark::kMillisecond)->Iterations(5);
 
-static void BM_REPLAY_LATENCY(benchmark::State& state)
+static void BM_SYNTHETIC_LATENCY(benchmark::State& state)
 {
-    using Clock = std::chrono::steady_clock;
+  using Clock = std::chrono::steady_clock;
+  std::vector<int64_t> timeSamples;
+  timeSamples.reserve(SYNTHETIC_TRADES); // reserve 10M samples
 
-    std::vector<int64_t> timeSamples;
-    timeSamples.reserve(10'000'000); // reserve 10M samples
+  for (auto _ : state)
+  {
+    std::atomic<bool> ingestComplete { false };
+    std::atomic<bool> orderbookComplete { false };
+    TSC::Queue<Trade> trades { SYNTHETIC_TRADES };
+    SyntheticIngest synthetic_ingest { SYNTHETIC_TRADES, trades, ingestComplete };
+    OrderBook orderbook {SYNTHETIC_TRADES};
 
-    for (auto _ : state)
+    Trade trade;
+    for (;;)
     {
-        FileIterator fi { DATA_FILE };
-        OrderBook orderBook {1000000};
-        MboMessage msg;
-
-        while (fi.Next(msg))
+      // pop is already a try pop with [[nodiscard]] omitted
+      if (trades.pop(trade))
+      {
+        const auto start { Clock::now() };
+        trade.MakeTrade(orderbook);
+        const auto end { Clock::now() };
+        orderbook.MatchOrders();
+        timeSamples.push_back((end - start).count());
+        continue;
+      }
+      if (ingestComplete.load(std::memory_order_acquire))
+      {
+        while (trades.pop(trade))
         {
-            const auto start { Clock::now() };
-            fi.GetTradeInfo(msg).MakeTrade(orderBook);
-            const auto end { Clock::now() };
-
-            // push back time it took to make the trade in the orderbook
-            timeSamples.push_back((end - start).count());
+          const auto start { Clock::now() };
+          trade.MakeTrade(orderbook);
+          const auto end { Clock::now() };
+          orderbook.MatchOrders();
+          timeSamples.push_back((end - start).count());
         }
+        break;
+      }
     }
 
-    std::ranges::sort(timeSamples);
-    const auto percentile = [&](const double percentile)
-    {
-        // get the index at the percentile
-        double sizeAsDouble { static_cast<double>(timeSamples.size() - 1) };
-        size_t index { static_cast<size_t>(percentile * sizeAsDouble) };
+    /* set the orderbook to cleared for the terminal */
+    orderbookComplete.store(true, std::memory_order::release);
+  }
 
-        // return time sample as a double
-        return static_cast<double>(timeSamples[index]);
-    };
+  std::ranges::sort(timeSamples);
+  const auto percentile = [&](const double percentile)
+  {
+    // get the index at the percentile
+    double sizeAsDouble { static_cast<double>(timeSamples.size() - 1) };
+    size_t index { static_cast<size_t>(percentile * sizeAsDouble) };
 
-    state.counters["p50_ns"]   = percentile(0.50);
-    state.counters["p90_ns"]   = percentile(0.90);
-    state.counters["p99_ns"]   = percentile(0.99);
-    state.counters["p99.9_ns"] = percentile(0.999);
-    state.counters["max_ns"]   = static_cast<double>(timeSamples.back());
+    // return time sample as a double
+    return static_cast<double>(timeSamples[index]);
+  };
+
+  state.counters["p50_ns"]   = percentile(0.50);
+  state.counters["p90_ns"]   = percentile(0.90);
+  state.counters["p99_ns"]   = percentile(0.99);
+  state.counters["p99.9_ns"] = percentile(0.999);
+  state.counters["max_ns"]   = static_cast<double>(timeSamples.back());
 }
 
-BENCHMARK(BM_REPLAY_LATENCY)->Unit(benchmark::kMillisecond)->Iterations(1);
+BENCHMARK(BM_SYNTHETIC_LATENCY)->Unit(benchmark::kMillisecond)->Iterations(1);
+
+static void BM_SYNTHETIC_LATENCY_INCLUDE_MATCH(benchmark::State& state)
+{
+  using Clock = std::chrono::steady_clock;
+  std::vector<int64_t> timeSamples;
+  timeSamples.reserve(SYNTHETIC_TRADES); // reserve 10M samples
+
+  for (auto _ : state)
+  {
+    std::atomic<bool> ingestComplete { false };
+    std::atomic<bool> orderbookComplete { false };
+    TSC::Queue<Trade> trades { SYNTHETIC_TRADES };
+    SyntheticIngest synthetic_ingest { SYNTHETIC_TRADES, trades, ingestComplete };
+    OrderBook orderbook {SYNTHETIC_TRADES};
+
+    Trade trade;
+    for (;;)
+    {
+      // pop is already a try pop with [[nodiscard]] omitted
+      if (trades.pop(trade))
+      {
+        const auto start { Clock::now() };
+        trade.MakeTrade(orderbook);
+        orderbook.MatchOrders();
+        const auto end { Clock::now() };
+        timeSamples.push_back((end - start).count());
+        continue;
+      }
+      if (ingestComplete.load(std::memory_order_acquire))
+      {
+        while (trades.pop(trade))
+        {
+          const auto start { Clock::now() };
+          trade.MakeTrade(orderbook);
+          orderbook.MatchOrders();
+          const auto end { Clock::now() };
+          timeSamples.push_back((end - start).count());
+        }
+        break;
+      }
+    }
+
+    /* set the orderbook to cleared for the terminal */
+    orderbookComplete.store(true, std::memory_order::release);
+  }
+
+  std::ranges::sort(timeSamples);
+  const auto percentile = [&](const double percentile)
+  {
+    // get the index at the percentile
+    double sizeAsDouble { static_cast<double>(timeSamples.size() - 1) };
+    size_t index { static_cast<size_t>(percentile * sizeAsDouble) };
+
+    // return time sample as a double
+    return static_cast<double>(timeSamples[index]);
+  };
+
+  state.counters["p50_ns"]   = percentile(0.50);
+  state.counters["p90_ns"]   = percentile(0.90);
+  state.counters["p99_ns"]   = percentile(0.99);
+  state.counters["p99.9_ns"] = percentile(0.999);
+  state.counters["max_ns"]   = static_cast<double>(timeSamples.back());
+}
+
+BENCHMARK(BM_SYNTHETIC_LATENCY_INCLUDE_MATCH)->Unit(benchmark::kMillisecond)->Iterations(1);
 
 static void BM_ADDORDERS(benchmark::State& state) {
     // get the number of orders as the range of the input state
